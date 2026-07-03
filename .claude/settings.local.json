@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(php -l config/uac.php)",
+      "Bash(php -l config/i18n.php)",
+      "Bash(php -l app/Support/helpers.php)",
+      "Bash(php -l app/Http/Middleware/SetLocale.php)",
+      "Bash(php -l bootstrap/app.php)",
+      "Bash(php -l config/ui.php)",
+      "Bash(composer dump-autoload *)",
+      "Bash(npm run *)"
+    ]
+  }
+}

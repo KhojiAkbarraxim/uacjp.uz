@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UAC Kanto - The Hub of Scholarly Excellence</title>
+<!-- Fonts & Icons -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Config -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#ffffff",
+                        "outline": "#737780",
+                        "error-container": "#ffdad6",
+                        "on-background": "#191c1e",
+                        "surface-variant": "#e0e3e6",
+                        "on-tertiary-container": "#4f3e00",
+                        "on-error-container": "#93000a",
+                        "outline-variant": "#c3c6d1",
+                        "secondary": "#1b6d24",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed-dim": "#e9c349",
+                        "surface-container-low": "#f2f4f7",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-container": "#799dd6",
+                        "on-surface-variant": "#43474f",
+                        "surface-bright": "#f7f9fc",
+                        "surface-container": "#eceef1",
+                        "surface-tint": "#3a5f94",
+                        "surface-container-highest": "#e0e3e6",
+                        "tertiary-fixed": "#ffe088",
+                        "inverse-primary": "#a7c8ff",
+                        "on-secondary-fixed-variant": "#005312",
+                        "tertiary": "#735c00",
+                        "secondary-fixed-dim": "#88d982",
+                        "background": "#f7f9fc",
+                        "on-surface": "#191c1e",
+                        "inverse-surface": "#2d3133",
+                        "surface-container-high": "#e6e8eb",
+                        "primary": "#001e40",
+                        "on-primary-fixed": "#001b3c",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed-variant": "#1f477b",
+                        "on-tertiary-fixed": "#241a00",
+                        "inverse-on-surface": "#eff1f4",
+                        "primary-fixed": "#d5e3ff",
+                        "primary-fixed-dim": "#a7c8ff",
+                        "on-tertiary-fixed-variant": "#574500",
+                        "surface-dim": "#d8dadd",
+                        "on-secondary-fixed": "#002204",
+                        "secondary-container": "#a0f399",
+                        "surface": "#f7f9fc",
+                        "primary-container": "#003366",
+                        "tertiary-container": "#cca830",
+                        "secondary-fixed": "#a3f69c",
+                        "error": "#ba1a1a",
+                        "on-secondary-container": "#217128",
+                        "on-secondary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-lg": "32px",
+                        "gutter": "16px",
+                        "stack-md": "16px",
+                        "unit": "4px",
+                        "container-margin": "20px",
+                        "stack-sm": "8px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Playfair Display"],
+                        "display-lg": ["Playfair Display"],
+                        "headline-lg-mobile": ["Playfair Display"],
+                        "headline-md": ["Playfair Display"],
+                        "label-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "display-lg": ["40px", { "lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "600" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "16px", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .scholar-shadow {
+            box-shadow: 0 4px 16px rgba(0, 30, 64, 0.06);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen pt-16">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-surface dark:bg-on-background border-b border-outline-variant/10 dark:border-outline-variant/5 shadow-sm dark:shadow-none flex justify-between items-center px-container-margin py-stack-md h-16 w-full max-w-7xl mx-auto">
+<button class="text-primary dark:text-primary-fixed cursor-pointer active:opacity-70 transition-all">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed tracking-tight">UAC JAPAN</span>
+<button class="text-primary dark:text-primary-fixed font-label-md text-label-md cursor-pointer active:opacity-70 transition-all hover:text-primary dark:hover:text-primary-fixed transition-colors">
+            JOIN
+        </button>
+</header>
+<main class="pb-stack-lg">
+<!-- Hero Section -->
+<section class="relative w-full aspect-[4/3] flex items-end justify-start p-container-margin bg-surface-variant overflow-hidden mb-stack-lg">
+<div class="absolute inset-0 bg-gradient-to-t from-primary/90 to-transparent z-10"></div>
+<img alt="Tokyo skyline at dusk" class="absolute inset-0 w-full h-full object-cover z-0" data-alt="A sweeping, majestic view of the Tokyo skyline at dusk, captured in a high-end, modern architectural photography style. The scene is illuminated by soft, natural evening light that highlights the structural details of modern academic and corporate towers. The mood is ambitious and prestigious, perfectly aligning with a scholarly excellence theme. The color palette emphasizes deep academic blues and subtle warm gold tones in the city lights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgVDl4v_Ejbp3PGjfvqZYjIc8SwJQgy9VeAYRSXSByMZ9APDMgzHIUdUp8gv6FJ4PUwS5dJ7ABmZJUApIAy2tW8YJnwRkgw_ATVe48Cdf53_cykrSxdTH_UIQwTIVFB0koX0v5VzEBII_4T36v8uq3-H7QvA_eLh6v05qny1ZDfa5quwFDN_fd9OJHvTTotF_BWbQC_OS8Cjp6LbtmaXn8VyIbXd9vV4ahzrh2vQuVomMGnSruivURtH_Gikd7dG4gcmvOkQkDIzAp"/>
+<div class="relative z-20 text-on-primary">
+<span class="inline-block bg-surface-container-lowest text-primary font-label-sm text-label-sm px-2 py-1 rounded-sm mb-stack-sm">Regional Chapter</span>
+<h1 class="font-display-lg text-display-lg text-on-primary mb-stack-sm leading-tight">UAC Kanto</h1>
+<p class="font-body-lg text-body-lg text-primary-fixed-dim">The Hub of Scholarly Excellence in Tokyo &amp; Surrounding Areas</p>
+</div>
+</section>
+<!-- About Mission -->
+<section class="px-container-margin mb-stack-lg py-stack-lg border-l-2 border-secondary ml-container-margin bg-surface-container-lowest scholar-shadow rounded-lg p-container-margin">
+<div class="flex items-center gap-2 mb-stack-sm text-primary">
+<span class="material-symbols-outlined">school</span>
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile">Our Mission</h2>
+</div>
+<p class="font-body-md text-body-md text-on-surface-variant">
+                The Kanto chapter connects leading Uzbek scholars, researchers, and students across Tokyo, Yokohama, and surrounding prefectures. We foster a collaborative environment that bridges Japanese technological innovation with academic rigor, creating pathways for high-impact research and cross-cultural dialogue.
+            </p>
+</section>
+<!-- Universities Grid -->
+<section class="px-container-margin mb-stack-lg">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-primary mb-stack-md">Partner Institutions</h2>
+<div class="grid grid-cols-2 gap-gutter">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest p-stack-md rounded-lg scholar-shadow flex flex-col items-center justify-center text-center">
+<div class="w-16 h-16 bg-surface-variant rounded-full mb-stack-sm flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" style="font-size: 32px;">account_balance</span>
+</div>
+<span class="font-label-md text-label-md text-primary">The University of Tokyo</span>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest p-stack-md rounded-lg scholar-shadow flex flex-col items-center justify-center text-center">
+<div class="w-16 h-16 bg-surface-variant rounded-full mb-stack-sm flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" style="font-size: 32px;">account_balance</span>
+</div>
+<span class="font-label-md text-label-md text-primary">Waseda University</span>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest p-stack-md rounded-lg scholar-shadow flex flex-col items-center justify-center text-center">
+<div class="w-16 h-16 bg-surface-variant rounded-full mb-stack-sm flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" style="font-size: 32px;">account_balance</span>
+</div>
+<span class="font-label-md text-label-md text-primary">Keio University</span>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-container-lowest p-stack-md rounded-lg scholar-shadow flex flex-col items-center justify-center text-center">
+<div class="w-16 h-16 bg-surface-variant rounded-full mb-stack-sm flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" style="font-size: 32px;">account_balance</span>
+</div>
+<span class="font-label-md text-label-md text-primary">Tokyo Tech</span>
+</div>
+</div>
+</section>
+<!-- Regional Secretaries -->
+<section class="px-container-margin mb-stack-lg bg-surface-bright py-stack-lg rounded-xl">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-primary mb-stack-md">Kanto Leadership</h2>
+<div class="flex flex-col gap-stack-md">
+<!-- Profile 1 -->
+<div class="flex gap-gutter items-center bg-surface-container-lowest p-stack-md rounded-lg scholar-shadow">
+<img alt="Secretary Portrait" class="w-16 h-16 rounded-full object-cover shadow-sm" data-alt="A professional headshot of a distinguished male academic scholar, representing the prestigious Kanto chapter. He is wearing modern, minimalist corporate attire. The background is a clean, well-lit university environment in soft focus. The lighting is natural and bright, emphasizing a trusted, excellent, and approachable demeanor, perfectly suited for an academic networking context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCG_wj7iAgq8DFIvxFppNkgZtniVC7Rsg5SS_AmOEAS-sJQNm5EN0mecqIVO-281PrH1wWeqKK6Un9U63mCs7wsocvCc3odXY-pFJvvuWrFMs438sLBdbQmM42HJYQCqBZIAcDCVQ2ToXqrPbTny73Jbuo42MfdUHgIFy1dJaNLpqxcqQwFL7HB1w2nefACpGMKmwvnJG8M9Gs7L8e04pwfU8any8_dyC2_CJYn8t7UJOILlYGOhUai8O1yf4Stn3x_xSqR6RFAAX5T"/>
+<div>
+<h3 class="font-label-md text-label-md text-primary font-bold">Dr. Alisher Vokhidov</h3>
+<p class="font-label-sm text-label-sm text-outline">Regional Secretary</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Research Fellow, UTokyo</p>
+</div>
+</div>
+<!-- Profile 2 -->
+<div class="flex gap-gutter items-center bg-surface-container-lowest p-stack-md rounded-lg scholar-shadow">
+<img alt="Secretary Portrait" class="w-16 h-16 rounded-full object-cover shadow-sm" data-alt="A professional headshot of a female academic researcher, serving as a regional coordinator. She is dressed in modern, sophisticated business casual wear. The setting is a minimalist, contemporary office space with soft, ambient lighting. The mood conveys intellect, approachability, and professional authority, matching the clean and high-contrast modern corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuASoTFh9H4WR7GeIXEgxCYnVfXYmQjbeDH4ordWJJv2KfMQT5w3QjFupdU1pbVPENT_DyHf3-FAXw_vQ8LBM3W9Nz31-xCUbtviQuWhaL9Wfo3c5NsTW1K5dAsQ37lf7zCGvvJCpERAubMdma09Xy4ELuo-x4k46__o_tkjRipo6cfiVk0but6nQyo8mCdXLWukVq873KKxNxO9aLKm3bPtfpZbpNaC89teBnp9hPw8rQzPXaKXb2ZxQmSS50FkQ9NzdnjX8ksLz3ep"/>
+<div>
+<h3 class="font-label-md text-label-md text-primary font-bold">Malika Rustamova</h3>
+<p class="font-label-sm text-label-sm text-outline">Events Coordinator</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant mt-1">Ph.D. Candidate, Waseda</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Photo Gallery (Bento Layout) -->
+<section class="px-container-margin mb-stack-lg">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-primary mb-stack-md">Recent Gatherings</h2>
+<div class="grid grid-cols-2 grid-rows-2 gap-unit h-[300px]">
+<div class="col-span-2 row-span-1 rounded-lg overflow-hidden">
+<img alt="Academic conference in Tokyo" class="w-full h-full object-cover" data-alt="A wide angle, professional photograph of a modern academic conference taking place in a sleek, well-lit hall in Tokyo. Diverse scholars are engaged in intellectual discussion. The scene features bright white lighting and a minimalist architectural setting, conveying a sense of rigorous scholarly collaboration and high-level networking within a corporate academic framework." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzmB-bxGLewTqzhvkG1QH9hlbW4Ibz5ElZpzliKVxx3_1xuw8tgdP5DemwWVFNipiRwy2bDvK3MUWLjizEbesjZpBlfmXEQqSMJsZzZ9vzvsBIcNHu24BhRUa4w6JacXBw58xl2zuax18zyzb-6qBgW4RFBsjYl8TByPKl8cFgncu_q0Y7nlFDS9Ny8mDmqrTsWi-lAJg0aLeWYeD36jWylQ06XutlCaksmBr4jZcVkgFk1nV9LOW9yynFDTLfPNbeoMhMcnCB5jqT"/>
+</div>
+<div class="col-span-1 row-span-1 rounded-lg overflow-hidden">
+<img alt="Students studying" class="w-full h-full object-cover" data-alt="A close-up, high-quality image of young researchers studying together around a modern, minimalist white table. Laptops and academic papers are visible. The lighting is soft and natural, emphasizing focus and cross-cultural bridge-building. The aesthetic is clean, modern corporate, utilizing deep blues and slate grays in the environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAb49QbOdYtCG9y8j15OShb8JRA3stMOT8v1E1jgI5Ly8CnhLgvw48c12Tg2odjx7JdXOyxq2h7R5FrM8jNSyd3v_WdobsP9YyKbuonir_WT70WaW85M0bBJ8Zg5_UjXtvVnx6lxjl98yhOMh2d9DuLm2KRKzYZrhUvOPbdTe9rf_dGhqXmHFiHAs_W3jJJFHjInpAw55UakpC_LatG2rB-uZLAQOOxELhP7Ep8z0nVzyO0TMhe4bfHtveMsfmKOiwQsefdNh3i1A6r"/>
+</div>
+<div class="col-span-1 row-span-1 rounded-lg overflow-hidden bg-primary flex flex-col items-center justify-center text-on-primary">
+<span class="material-symbols-outlined mb-2" style="font-size: 32px;">photo_library</span>
+<span class="font-label-sm text-label-sm">View All</span>
+</div>
+</div>
+</section>
+<!-- Contact Form -->
+<section class="px-container-margin mb-stack-lg">
+<div class="bg-surface-container-lowest rounded-xl p-container-margin scholar-shadow">
+<h2 class="font-headline-lg-mobile text-headline-lg-mobile text-primary mb-stack-sm">Contact Kanto Chapter</h2>
+<p class="font-body-md text-body-md text-on-surface-variant mb-stack-md">Reach out for local collaborations or inquiries.</p>
+<form class="flex flex-col gap-stack-md">
+<div>
+<label class="font-label-sm text-label-sm text-on-surface-variant mb-1 block">Name</label>
+<input class="w-full border border-outline-variant/50 rounded-lg p-3 text-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" placeholder="Your Name" type="text"/>
+</div>
+<div>
+<label class="font-label-sm text-label-sm text-on-surface-variant mb-1 block">Email</label>
+<input class="w-full border border-outline-variant/50 rounded-lg p-3 text-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" placeholder="your.email@example.com" type="email"/>
+</div>
+<div>
+<label class="font-label-sm text-label-sm text-on-surface-variant mb-1 block">Message</label>
+<textarea class="w-full border border-outline-variant/50 rounded-lg p-3 text-body-md focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-all" placeholder="How can we help?" rows="4"></textarea>
+</div>
+<button class="w-full bg-primary text-on-primary font-label-md text-label-md py-4 rounded-lg flex items-center justify-center gap-2 hover:bg-primary-container transition-colors" type="button">
+<span>Send Message</span>
+<span class="material-symbols-outlined text-[18px]">send</span>
+</button>
+</form>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full bg-primary dark:bg-on-background border-t border-outline-variant/20 py-stack-lg px-container-margin grid grid-cols-1 md:grid-cols-4 gap-gutter max-w-7xl mx-auto">
+<div class="font-headline-md text-headline-md text-on-primary mb-stack-md">UAC JAPAN</div>
+<div class="flex flex-col gap-stack-sm">
+<a class="font-body-md text-body-md text-surface-variant dark:text-outline-variant hover:text-secondary-fixed transition-colors underline-offset-4 hover:underline" href="#">Quick Links</a>
+<a class="font-body-md text-body-md text-tertiary-fixed font-bold hover:text-secondary-fixed transition-colors underline-offset-4 hover:underline" href="#">Regional Info</a>
+<a class="font-body-md text-body-md text-surface-variant dark:text-outline-variant hover:text-secondary-fixed transition-colors underline-offset-4 hover:underline" href="#">Privacy Policy</a>
+<a class="font-body-md text-body-md text-surface-variant dark:text-outline-variant hover:text-secondary-fixed transition-colors underline-offset-4 hover:underline" href="#">Terms</a>
+</div>
+<div class="mt-stack-md text-on-primary/60 font-label-sm text-label-sm">
+            © 2024 Uzbek Academic Club in Japan. All rights reserved.
+        </div>
+</footer>
+</body></html>

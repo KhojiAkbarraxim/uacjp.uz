@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UAC Japan</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-primary": "#ffffff",
+                      "outline": "#737780",
+                      "error-container": "#ffdad6",
+                      "on-background": "#191c1e",
+                      "surface-variant": "#e0e3e6",
+                      "on-tertiary-container": "#4f3e00",
+                      "on-error-container": "#93000a",
+                      "outline-variant": "#c3c6d1",
+                      "secondary": "#1b6d24",
+                      "surface-container-lowest": "#ffffff",
+                      "tertiary-fixed-dim": "#e9c349",
+                      "surface-container-low": "#f2f4f7",
+                      "on-tertiary": "#ffffff",
+                      "on-primary-container": "#799dd6",
+                      "on-surface-variant": "#43474f",
+                      "surface-bright": "#f7f9fc",
+                      "surface-container": "#eceef1",
+                      "surface-tint": "#3a5f94",
+                      "surface-container-highest": "#e0e3e6",
+                      "tertiary-fixed": "#ffe088",
+                      "inverse-primary": "#a7c8ff",
+                      "on-secondary-fixed-variant": "#005312",
+                      "tertiary": "#735c00",
+                      "secondary-fixed-dim": "#88d982",
+                      "background": "#f7f9fc",
+                      "on-surface": "#191c1e",
+                      "inverse-surface": "#2d3133",
+                      "surface-container-high": "#e6e8eb",
+                      "primary": "#001e40",
+                      "on-primary-fixed": "#001b3c",
+                      "on-error": "#ffffff",
+                      "on-primary-fixed-variant": "#1f477b",
+                      "on-tertiary-fixed": "#241a00",
+                      "inverse-on-surface": "#eff1f4",
+                      "primary-fixed": "#d5e3ff",
+                      "primary-fixed-dim": "#a7c8ff",
+                      "on-tertiary-fixed-variant": "#574500",
+                      "surface-dim": "#d8dadd",
+                      "on-secondary-fixed": "#002204",
+                      "secondary-container": "#a0f399",
+                      "surface": "#f7f9fc",
+                      "primary-container": "#003366",
+                      "tertiary-container": "#cca830",
+                      "secondary-fixed": "#a3f69c",
+                      "error": "#ba1a1a",
+                      "on-secondary-container": "#217128",
+                      "on-secondary": "#ffffff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "stack-lg": "32px",
+                      "gutter": "16px",
+                      "stack-md": "16px",
+                      "unit": "4px",
+                      "container-margin": "20px",
+                      "stack-sm": "8px"
+              },
+              "fontFamily": {
+                      "body-md": ["Inter"],
+                      "headline-lg": ["Playfair Display"],
+                      "display-lg": ["Playfair Display"],
+                      "headline-lg-mobile": ["Playfair Display"],
+                      "headline-md": ["Playfair Display"],
+                      "label-md": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "label-sm": ["Inter"]
+              },
+              "fontSize": {
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                      "display-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        .academic-shadow {
+            box-shadow: 0 4px 16px -4px rgba(0, 30, 64, 0.08);
+        }
+      </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body-md min-h-screen pt-16 pb-24 md:pb-0">
+<!-- TopAppBar (Mobile & Web) -->
+<header class="fixed top-0 w-full z-50 bg-surface dark:bg-on-background border-b border-outline-variant/10 shadow-sm">
+<div class="flex justify-between items-center px-container-margin py-stack-md h-16 w-full max-w-7xl mx-auto">
+<button class="material-symbols-outlined text-primary cursor-pointer active:opacity-70 transition-all hover:text-primary transition-colors">menu</button>
+<span class="font-headline-md text-headline-md font-bold text-primary tracking-tight">UAC JAPAN</span>
+<button class="font-label-md text-label-md text-primary font-bold cursor-pointer active:opacity-70 transition-all hover:text-primary transition-colors">JOIN</button>
+</div>
+</header>
+<main class="w-full max-w-7xl mx-auto">
+<!-- Hero Section -->
+<section class="px-container-margin pt-stack-lg pb-stack-lg md:pt-16 md:pb-16 text-center">
+<div class="inline-block bg-surface-container px-4 py-2 rounded-full mb-stack-md border-l-2 border-secondary">
+<span class="font-label-sm text-label-sm text-secondary">Est. 2024</span>
+</div>
+<h1 class="font-display-lg text-display-lg md:text-display-lg text-primary mb-stack-md">
+                Uzbek Academic Club in Japan
+            </h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto mb-stack-lg">
+                Connecting Uzbek Scholars Across Japan. Empowering Uzbek students and researchers through networking, collaboration, and academic excellence.
+            </p>
+<div class="flex flex-col sm:flex-row justify-center gap-gutter">
+<button class="bg-primary text-on-primary font-label-md text-label-md py-3 px-6 rounded-lg hover:bg-primary-container transition-colors shadow-sm w-full sm:w-auto border-t-2 border-tertiary-container">
+                    Join the Club
+                </button>
+<button class="border border-secondary text-secondary font-label-md text-label-md py-3 px-6 rounded-lg hover:bg-secondary/5 transition-colors w-full sm:w-auto">
+                    Partner with Us
+                </button>
+</div>
+</section>
+<!-- Image Banner -->
+<div class="w-full h-48 md:h-80 bg-surface-variant mb-stack-lg bg-cover bg-center" data-alt="A bright, modern university campus courtyard in Japan during early spring, showing diverse students walking and collaborating. The scene is shot from a slight high angle, bathed in soft, high-key natural sunlight reflecting off clean, minimalist concrete and glass buildings. A subtle academic deep blue and scholar green color palette is naturally integrated through student clothing and foliage, evoking a prestigious, forward-thinking academic environment." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAbv6qV14kztXAtKMggBXuUDVUkXhn67x9Sf5vJkCEfm4yoWacLkEheFpza9tvTvBEQ6XIu5dwRoYAAMU6Bd5jy3cT3XVbJ4hLiUMJdU6VzCrpFYnCNsnbv7eFn_PFJfH-V4nkWab0yiF9svzzdfR03n86NdIXkTfN3cXRD21WCL_B55e4Tg9TelE_DzKpDsr2Wq1oLYnLC94vNJIXHzi5JZDe-5RBU1Il0wFC-Sm-WShmqWpcNHG1eRBEJgp18g4zDj77ocv0cgNtm');">
+</div>
+<!-- Regional Clubs (Bento Grid Style) -->
+<section class="px-container-margin py-stack-lg">
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-primary mb-stack-md text-center">Regional Clubs</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Kanto -->
+<div class="bg-surface-container-lowest rounded-lg p-stack-md academic-shadow border-l-2 border-secondary relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-4xl text-primary">location_city</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-unit">UAC Kanto</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-stack-md">Tokyo, Yokohama, Chiba, Saitama.</p>
+<div class="flex flex-wrap gap-2">
+<span class="bg-surface-container text-primary font-label-sm text-label-sm px-2 py-1 rounded">Active</span>
+<span class="bg-surface-container text-primary font-label-sm text-label-sm px-2 py-1 rounded">200+ Members</span>
+</div>
+</div>
+<!-- Kansai -->
+<div class="bg-surface-container-lowest rounded-lg p-stack-md academic-shadow border-l-2 border-secondary relative overflow-hidden group">
+<div class="absolute top-0 right-0 p-3 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-4xl text-primary">temple_buddhist</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-unit">UAC Kansai</h3>
+<p class="font-body-md text-body-md text-on-surface-variant mb-stack-md">Osaka, Kyoto, Kobe, Nara.</p>
+<div class="flex flex-wrap gap-2">
+<span class="bg-surface-container text-primary font-label-sm text-label-sm px-2 py-1 rounded">Active</span>
+<span class="bg-surface-container text-primary font-label-sm text-label-sm px-2 py-1 rounded">150+ Members</span>
+</div>
+</div>
+<!-- Chubu -->
+<div class="bg-surface-container-lowest rounded-lg p-stack-md border border-outline-variant/20 relative overflow-hidden opacity-75">
+<div class="absolute inset-0 bg-surface-variant/10 backdrop-blur-[1px] flex items-center justify-center z-10">
+<span class="bg-surface text-primary font-label-md text-label-md px-4 py-2 rounded-full border border-outline-variant/20 shadow-sm">Coming Soon</span>
+</div>
+<h3 class="font-headline-md text-headline-md text-outline mb-unit">UAC Chubu</h3>
+<p class="font-body-md text-body-md text-outline-variant mb-stack-md">Nagoya, Shizuoka, Gifu.</p>
+<div class="flex flex-wrap gap-2">
+<span class="bg-surface-container text-outline font-label-sm text-label-sm px-2 py-1 rounded">Planning Phase</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Latest News -->
+<section class="px-container-margin py-stack-lg bg-surface-bright mt-stack-lg">
+<div class="flex justify-between items-center mb-stack-md">
+<h2 class="font-headline-lg-mobile md:font-headline-lg text-primary">Latest News</h2>
+<a class="font-label-md text-label-md text-secondary flex items-center gap-1 hover:underline underline-offset-4" href="#">View All <span class="material-symbols-outlined text-sm">arrow_forward</span></a>
+</div>
+<div class="flex flex-col gap-gutter">
+<div class="bg-surface-container-lowest p-stack-md rounded-lg academic-shadow flex gap-stack-md items-start">
+<div class="bg-primary-container/10 p-3 rounded-lg text-primary">
+<span class="material-symbols-outlined">event</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-outline mb-1 block">October 15, 2024</span>
+<h4 class="font-headline-md text-body-lg text-primary font-semibold mb-1">Annual Scholar Symposium Registration Open</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">Join us in Tokyo for a day of academic exchange and networking.</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-stack-md rounded-lg academic-shadow flex gap-stack-md items-start">
+<div class="bg-primary-container/10 p-3 rounded-lg text-primary">
+<span class="material-symbols-outlined">newspaper</span>
+</div>
+<div>
+<span class="font-label-sm text-label-sm text-outline mb-1 block">September 28, 2024</span>
+<h4 class="font-headline-md text-body-lg text-primary font-semibold mb-1">New Research Grant Partnership Announced</h4>
+<p class="font-body-md text-body-md text-on-surface-variant">UAC Japan partners with leading foundations to support STEM research.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Partners -->
+<section class="px-container-margin py-stack-lg text-center">
+<h2 class="font-headline-md text-primary mb-stack-lg">Our Partners &amp; Sponsors</h2>
+<div class="flex flex-wrap justify-center items-center gap-stack-lg opacity-60 grayscale hover:grayscale-0 transition-all duration-300">
+<!-- Placeholders for logos -->
+<div class="h-12 w-32 bg-surface-variant rounded flex items-center justify-center font-label-md text-on-surface-variant">Logo 1</div>
+<div class="h-12 w-32 bg-surface-variant rounded flex items-center justify-center font-label-md text-on-surface-variant">Logo 2</div>
+<div class="h-12 w-32 bg-surface-variant rounded flex items-center justify-center font-label-md text-on-surface-variant">Logo 3</div>
+<div class="h-12 w-32 bg-surface-variant rounded flex items-center justify-center font-label-md text-on-surface-variant">Logo 4</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full bg-primary text-on-primary">
+<div class="w-full py-stack-lg px-container-margin grid grid-cols-1 md:grid-cols-4 gap-gutter max-w-7xl mx-auto border-t border-outline-variant/20">
+<div class="col-span-1 md:col-span-1">
+<span class="font-headline-md text-headline-md text-on-primary block mb-stack-sm">UAC JAPAN</span>
+<p class="font-body-md text-body-md text-surface-variant text-sm">Empowering Uzbek scholars across Japan.</p>
+</div>
+<div class="flex flex-col gap-2">
+<a class="font-body-md text-body-md text-surface-variant hover:text-secondary-fixed transition-colors underline-offset-4 hover:underline" href="#">Quick Links</a>
+<a class="font-body-md text-body-md text-surface-variant hover:text-secondary-fixed transition-colors underline-offset-4 hover:underline" href="#">Regional Info</a>
+</div>
+<div class="flex flex-col gap-2">
+<a class="font-body-md text-body-md text-surface-variant hover:text-secondary-fixed transition-colors underline-offset-4 hover:underline" href="#">Privacy Policy</a>
+<a class="font-body-md text-body-md text-surface-variant hover:text-secondary-fixed transition-colors underline-offset-4 hover:underline" href="#">Terms</a>
+</div>
+<div class="col-span-1 md:col-span-4 mt-stack-md pt-stack-sm border-t border-outline-variant/20">
+<p class="font-body-md text-body-md text-surface-variant text-sm text-center">© 2024 Uzbek Academic Club in Japan. All rights reserved.</p>
+</div>
+</div>
+</footer>
+<!-- Mobile Navigation Drawer Shell (Hidden initially) -->
+<!-- Assuming this is invoked via the menu button, structural skeleton provided -->
+<div class="fixed inset-y-0 left-0 z-[60] flex flex-col h-full w-80 rounded-r-xl bg-surface-bright shadow-lg transform -translate-x-full transition-all duration-300 ease-in-out" id="nav-drawer">
+<div class="p-stack-md border-b border-outline-variant/10">
+<span class="font-headline-lg text-headline-lg text-primary">Academic Club</span>
+</div>
+<nav class="flex-1 overflow-y-auto py-stack-sm font-body-lg text-body-lg">
+<!-- Active Item: Home -->
+<a class="flex items-center gap-3 bg-secondary-container text-on-secondary-container rounded-full mx-2 px-4 py-3 hover:bg-surface-container-high transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+                Home
+            </a>
+<!-- Inactive Items -->
+<a class="flex items-center gap-3 text-on-surface-variant mx-2 px-4 py-3 hover:bg-surface-container-high transition-all duration-300 ease-in-out rounded-full" href="#">
+<span class="material-symbols-outlined">map</span>
+                Regions
+            </a>
+<a class="flex items-center gap-3 text-on-surface-variant mx-2 px-4 py-3 hover:bg-surface-container-high transition-all duration-300 ease-in-out rounded-full" href="#">
+<span class="material-symbols-outlined">history_edu</span>
+                Activities
+            </a>
+<a class="flex items-center gap-3 text-on-surface-variant mx-2 px-4 py-3 hover:bg-surface-container-high transition-all duration-300 ease-in-out rounded-full" href="#">
+<span class="material-symbols-outlined">group</span>
+                Members
+            </a>
+<a class="flex items-center gap-3 text-on-surface-variant mx-2 px-4 py-3 hover:bg-surface-container-high transition-all duration-300 ease-in-out rounded-full" href="#">
+<span class="material-symbols-outlined">handshake</span>
+                Partners
+            </a>
+<a class="flex items-center gap-3 text-on-surface-variant mx-2 px-4 py-3 hover:bg-surface-container-high transition-all duration-300 ease-in-out rounded-full" href="#">
+<span class="material-symbols-outlined">info</span>
+                About
+            </a>
+<a class="flex items-center gap-3 text-on-surface-variant mx-2 px-4 py-3 hover:bg-surface-container-high transition-all duration-300 ease-in-out rounded-full" href="#">
+<span class="material-symbols-outlined">mail</span>
+                Contact
+            </a>
+<a class="flex items-center gap-3 text-on-surface-variant mx-2 px-4 py-3 hover:bg-surface-container-high transition-all duration-300 ease-in-out rounded-full" href="#">
+<span class="material-symbols-outlined">person_add</span>
+                Join Us
+            </a>
+</nav>
+</div>
+<!-- Overlay for drawer -->
+<div class="fixed inset-0 bg-on-background/50 z-50 hidden transition-opacity" id="drawer-overlay"></div>
+<script>
+        // Simple drawer toggle logic for demonstration
+        const menuBtn = document.querySelector('.material-symbols-outlined.cursor-pointer');
+        const drawer = document.getElementById('nav-drawer');
+        const overlay = document.getElementById('drawer-overlay');
+
+        menuBtn.addEventListener('click', () => {
+            drawer.classList.remove('-translate-x-full');
+            overlay.classList.remove('hidden');
+        });
+
+        overlay.addEventListener('click', () => {
+            drawer.classList.add('-translate-x-full');
+            overlay.classList.add('hidden');
+        });
+    </script>
+</body></html>

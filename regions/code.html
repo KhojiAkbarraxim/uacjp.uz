@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>UAC Regional Chapters</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#ffffff",
+                        "outline": "#737780",
+                        "error-container": "#ffdad6",
+                        "on-background": "#191c1e",
+                        "surface-variant": "#e0e3e6",
+                        "on-tertiary-container": "#4f3e00",
+                        "on-error-container": "#93000a",
+                        "outline-variant": "#c3c6d1",
+                        "secondary": "#1b6d24",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed-dim": "#e9c349",
+                        "surface-container-low": "#f2f4f7",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-container": "#799dd6",
+                        "on-surface-variant": "#43474f",
+                        "surface-bright": "#f7f9fc",
+                        "surface-container": "#eceef1",
+                        "surface-tint": "#3a5f94",
+                        "surface-container-highest": "#e0e3e6",
+                        "tertiary-fixed": "#ffe088",
+                        "inverse-primary": "#a7c8ff",
+                        "on-secondary-fixed-variant": "#005312",
+                        "tertiary": "#735c00",
+                        "secondary-fixed-dim": "#88d982",
+                        "background": "#f7f9fc",
+                        "on-surface": "#191c1e",
+                        "inverse-surface": "#2d3133",
+                        "surface-container-high": "#e6e8eb",
+                        "primary": "#001e40",
+                        "on-primary-fixed": "#001b3c",
+                        "on-error": "#ffffff",
+                        "on-primary-fixed-variant": "#1f477b",
+                        "on-tertiary-fixed": "#241a00",
+                        "inverse-on-surface": "#eff1f4",
+                        "primary-fixed": "#d5e3ff",
+                        "primary-fixed-dim": "#a7c8ff",
+                        "on-tertiary-fixed-variant": "#574500",
+                        "surface-dim": "#d8dadd",
+                        "on-secondary-fixed": "#002204",
+                        "secondary-container": "#a0f399",
+                        "surface": "#f7f9fc",
+                        "primary-container": "#003366",
+                        "tertiary-container": "#cca830",
+                        "secondary-fixed": "#a3f69c",
+                        "error": "#ba1a1a",
+                        "on-secondary-container": "#217128",
+                        "on-secondary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "stack-lg": "32px",
+                        "gutter": "16px",
+                        "stack-md": "16px",
+                        "unit": "4px",
+                        "container-margin": "20px",
+                        "stack-sm": "8px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Playfair Display"],
+                        "display-lg": ["Playfair Display"],
+                        "headline-lg-mobile": ["Playfair Display"],
+                        "headline-md": ["Playfair Display"],
+                        "label-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "display-lg": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg-mobile": ["28px", {"lineHeight": "36px", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "fontWeight": "600"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="bg-surface dark:bg-on-background fixed top-0 w-full z-50 border-b border-outline-variant/10 dark:border-outline-variant/5 shadow-sm dark:shadow-none">
+<div class="flex justify-between items-center px-container-margin py-stack-md h-16 w-full max-w-7xl mx-auto">
+<div class="flex items-center gap-4">
+<button aria-label="Open menu" class="cursor-pointer active:opacity-70 transition-all text-primary dark:text-primary-fixed">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<span class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed tracking-tight">UAC JAPAN</span>
+</div>
+<button class="font-label-md text-label-md text-primary dark:text-primary-fixed cursor-pointer active:opacity-70 transition-all font-bold">
+                JOIN
+            </button>
+</div>
+</header>
+<!-- NavigationDrawer (Hidden by default, structure provided for context based on JSON) -->
+<aside class="hidden bg-surface-bright dark:bg-inverse-surface h-full w-80 rounded-r-xl shadow-lg fixed inset-y-0 left-0 z-[60] flex flex-col">
+<div class="p-stack-md border-b border-outline-variant/10">
+<h2 class="font-headline-lg text-headline-lg text-primary dark:text-primary-fixed">Academic Club</h2>
+</div>
+<nav class="flex-1 overflow-y-auto py-stack-md">
+<ul class="space-y-stack-sm">
+<!-- Using Intent Logic: "Regions" is the active tab for this page -->
+<li>
+<a class="flex items-center gap-4 bg-secondary-container text-on-secondary-container dark:bg-secondary dark:text-on-secondary rounded-full mx-2 px-4 py-3 transition-all duration-300 ease-in-out" href="#">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+<span class="font-body-lg text-body-lg font-bold">Regions</span>
+</a>
+</li>
+</ul>
+</nav>
+</aside>
+<!-- Main Content -->
+<main class="flex-1 pt-[80px] pb-stack-lg max-w-7xl mx-auto w-full px-container-margin">
+<!-- Hero / Intro Section -->
+<section class="py-[48px] md:py-[64px] border-b border-outline-variant/10 mb-stack-lg relative overflow-hidden">
+<!-- Ambient Background Element -->
+<div class="absolute top-0 right-0 w-64 h-64 bg-primary/5 rounded-full blur-3xl -z-10 translate-x-1/2 -translate-y-1/2"></div>
+<div class="max-w-3xl">
+<h1 class="font-display-lg text-display-lg text-primary mb-stack-md">Our Regional Chapters</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
+                    UAC operates across Japan, providing local support and networking opportunities for scholars in every prefecture. Our regional structure ensures that academic collaboration and cultural exchange are accessible no matter where your research takes you.
+                </p>
+</div>
+</section>
+<!-- Bento Grid Region Selection -->
+<section class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Active Regions (Spanning larger columns) -->
+<!-- UAC Kanto -->
+<article class="md:col-span-8 bg-surface-container-lowest rounded-xl shadow-[0_4px_16px_rgba(0,0,0,0.04)] border-l-2 border-secondary overflow-hidden group cursor-pointer transition-transform hover:-translate-y-1 relative">
+<div class="h-48 md:h-64 w-full bg-surface-variant relative overflow-hidden">
+<img alt="Tokyo cityscape" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A sweeping, high-contrast aerial photograph of the Tokyo skyline under clear blue skies, representing the Kanto region. The image features modern skyscrapers mixing with historic temples, illuminated by bright daylight. The mood is energetic, authoritative, and academic, fitting a prestigious Modern Corporate design aesthetic. The color palette emphasizes clean whites, deep architectural blues, and vibrant urban greenery." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0Oe809Tfw8uo_wCW7cbSznM_LKkwGmfaj44ZTxX9NUbI0XXnieyXqFizXckc-F2sBg7n8pkDPxWIGLI34cf6YHdZC5fNb0NwjiWKD2D4_SBgaw3Vx5mD4yx2GH8tGgwTWHAXryS8jgw6aq2qJ_jbJ_925TFoPuDTQMJpmugcPeHLNiqypqliRaU_PO81Xzwu4akJTJB58r4caGALt-DOfHJBV51vtwjWYxU9S9QbMfPkL09xwyTbnZ4P6u7ASJMZtplnlmBi_aiW-"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="absolute bottom-stack-md left-stack-md right-stack-md flex justify-between items-end">
+<div>
+<span class="inline-block bg-surface/90 backdrop-blur-sm text-primary font-label-sm text-label-sm px-2 py-1 rounded mb-2">Active Chapter</span>
+<h2 class="font-headline-md text-headline-md text-on-primary">UAC Kanto</h2>
+</div>
+<span class="material-symbols-outlined text-on-primary opacity-0 group-hover:opacity-100 transition-opacity">arrow_forward</span>
+</div>
+</div>
+<div class="p-stack-md">
+<p class="font-body-md text-body-md text-on-surface-variant">The central hub of our activities, encompassing major universities and research institutions in the Greater Tokyo Area.</p>
+</div>
+</article>
+<!-- UAC Kansai -->
+<article class="md:col-span-4 bg-surface-container-lowest rounded-xl shadow-[0_4px_16px_rgba(0,0,0,0.04)] border-l-2 border-secondary overflow-hidden group cursor-pointer transition-transform hover:-translate-y-1 relative">
+<div class="h-48 md:h-64 w-full bg-surface-variant relative overflow-hidden">
+<img alt="Kyoto temple" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A serene, high-quality photograph of a traditional temple in Kyoto surrounded by vibrant autumn foliage, representing the Kansai region. The lighting is soft and natural, creating a calm, scholarly atmosphere suitable for an academic institution's modern minimalist interface. Deep academic blues and scholar greens subtly influence the color grading, while high contrast ensures visual clarity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAGGX_yW0jsZUmvmdMmxYy8cbIvkU7AU9e82NN7ISWRDMGFyZrty7CJ5dgVULAHSvIKwQuBH8ysG3omVKh58a-FWve9kSBUPYnNheIt9PUmRDBqAvKMzuynkNoHklAHM4xUSYTGqKQ-O1rK9ZV_Bb2RTuDdWCegXlvVGxPERpm3H6Oa1TqoAjSI9rz8UMpKWWcJgL_umi0Bz-LFd9iLrEzpqxufWF0JRfmBx52WQN3BOMw40EkuUJ3ghUAalHEHmArytpvtnIjG7W_4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="absolute bottom-stack-md left-stack-md right-stack-md">
+<span class="inline-block bg-surface/90 backdrop-blur-sm text-primary font-label-sm text-label-sm px-2 py-1 rounded mb-2">Active Chapter</span>
+<h2 class="font-headline-md text-headline-md text-on-primary">UAC Kansai</h2>
+</div>
+</div>
+<div class="p-stack-md flex justify-between items-center">
+<p class="font-body-md text-body-md text-on-surface-variant line-clamp-2">Bridging historic tradition with cutting-edge academic research in Kyoto, Osaka, and Kobe.</p>
+</div>
+</article>
+<!-- UAC Chubu -->
+<article class="md:col-span-4 bg-surface-container-lowest rounded-xl shadow-[0_4px_16px_rgba(0,0,0,0.04)] border-l-2 border-secondary overflow-hidden group cursor-pointer transition-transform hover:-translate-y-1 relative">
+<div class="h-48 w-full bg-surface-variant relative overflow-hidden">
+<img alt="Nagoya Castle" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="A crisp, architectural photograph of Nagoya Castle against a bright, clear sky, representing the Chubu region. The image emphasizes the structural elegance of the landmark, aligned with a Minimalist, Modern Corporate aesthetic. Soft ambient shadows and high-key lighting highlight the crisp details of the castle, projecting an image of trusted academic excellence." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDV8hH7YY4-Nvq59KOzFCPebEJPOmbyWniPUyU7jKd1ofaV-5uhVYy-NJSf09Wc58MFN6ahMJ0j6RV7Luh5AoH0KEcQK3iHWTymOU0uRgzHlYf7J04sM4tpQ6KG7oqGhLOcBrnBD1xDWrdEJapRqjTczo6LQAGUiFu7e1RF8TMgxmeCuyKkH2-6z7j6pwwoVg5f3vGJkfG0dfy0I0UMOrM_eCMeNxY7YHsMsQ-1WFWZ2ORRoF0UL5k1THlf5rWVoJrAYVe8bEyjvAAi"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+<div class="absolute bottom-stack-md left-stack-md right-stack-md">
+<span class="inline-block bg-surface/90 backdrop-blur-sm text-primary font-label-sm text-label-sm px-2 py-1 rounded mb-2">Active Chapter</span>
+<h2 class="font-headline-md text-headline-md text-on-primary">UAC Chubu</h2>
+</div>
+</div>
+</article>
+<!-- Future Chapters (Styling indicates inactive/planned state) -->
+<!-- UAC Kyushu -->
+<article class="md:col-span-4 bg-surface-container-lowest rounded-xl border border-outline-variant/30 overflow-hidden opacity-80 relative flex flex-col justify-end min-h-[200px]">
+<div class="absolute inset-0 bg-surface-variant mix-blend-multiply opacity-50 z-10"></div>
+<img alt="Fukuoka cityscape" class="absolute inset-0 w-full h-full object-cover grayscale" data-alt="A monochromatic, high-contrast aerial photograph of Fukuoka's cityscape, representing the future Kyushu chapter. The image is styled with low saturation to indicate an upcoming, planned status within a Modern Corporate UI. The lighting is bright and evenly distributed, maintaining the clean, minimalist aesthetic of a prestigious scholarly organization." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAt2GoSPRF9nS5EgzMtKOFYOwPg-80sF-_xQSqYtFlRSW9SpuK9-6F3ScElvhofFiAzt-oC-8OxCeFXwCoN5mTh9Wc2E03757BMfIUZyZPpDnb4AuRvKq8Ed_yiyOyW9aiSY3bRAIn1HLdjpYWwLQQVOMg-8mnjVPlYoXbzJu0VbkjAv5lHIU_LRcVVGOzFzY8THJa3bDmuTblXoxUATnf3fbOEcbGq0nteuOZm1kBFzMNaMVj-FNfu7mUz37x4RyshnEFmeqzQ6xAs"/>
+<div class="relative z-20 p-stack-md bg-gradient-to-t from-surface to-transparent h-full flex flex-col justify-end">
+<div>
+<span class="inline-block bg-surface-variant text-on-surface-variant font-label-sm text-label-sm px-2 py-1 rounded mb-2">Future Chapter</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">UAC Kyushu</h2>
+</div>
+</div>
+</article>
+<!-- UAC Tohoku -->
+<article class="md:col-span-4 bg-surface-container-lowest rounded-xl border border-outline-variant/30 overflow-hidden opacity-80 relative flex flex-col justify-end min-h-[200px]">
+<div class="absolute inset-0 bg-surface-variant mix-blend-multiply opacity-50 z-10"></div>
+<img alt="Sendai scenery" class="absolute inset-0 w-full h-full object-cover grayscale" data-alt="A stark, beautiful monochromatic landscape photograph of a snowy mountain scene in Tohoku, representing the future Tohoku chapter. The image serves as a subtle background element within a crisp white card interface. The mood is quiet and contemplative, aligning with the fluid grid layout and rigorous academic design standards of the site." src="https://lh3.googleusercontent.com/aida-public/AB6AXuABEnK8y4E8OhgTkjMSaFwji9ifO_57_uFo238m-Xdr5X8ifbXIgrOvUwPeV4bAgopMzfLN6t_orsMPsak6AdNzNZJb0Y68T4eDaC7Qc6h6UZpSh4cVj1gUCxYT3okMCWTMtRP7fO0eflND_aspCzqtXlJJlL8PQAmIDMunLshq3QeYbAukKH825riQLA5XXTUavc_dwi4lm6wY_K5YzAToVfCTtr0kN_L0IIik3tynxhUmrR-C-ue2e_YAKj49q_U-8dcxYksi87km"/>
+<div class="relative z-20 p-stack-md bg-gradient-to-t from-surface to-transparent h-full flex flex-col justify-end">
+<div>
+<span class="inline-block bg-surface-variant text-on-surface-variant font-label-sm text-label-sm px-2 py-1 rounded mb-2">Future Chapter</span>
+<h2 class="font-headline-md text-headline-md text-on-surface">UAC Tohoku</h2>
+</div>
+</div>
+</article>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-primary dark:bg-on-background w-full border-t border-outline-variant/20 mt-auto">
+<div class="w-full py-stack-lg px-container-margin grid grid-cols-1 md:grid-cols-4 gap-gutter max-w-7xl mx-auto text-on-primary dark:text-primary-fixed">
+<div class="col-span-1 md:col-span-4 mb-stack-md">
+<span class="font-headline-md text-headline-md text-on-primary">UAC JAPAN</span>
+</div>
+<nav class="flex flex-col gap-2">
+<a class="font-body-md text-body-md text-surface-variant dark:text-outline-variant hover:text-secondary-fixed transition-colors underline-offset-4 hover:underline" href="#">Quick Links</a>
+</nav>
+<nav class="flex flex-col gap-2">
+<a class="font-body-md text-body-md text-tertiary-fixed font-bold hover:text-secondary-fixed transition-colors underline-offset-4 hover:underline" href="#">Regional Info</a>
+</nav>
+<nav class="flex flex-col gap-2">
+<a class="font-body-md text-body-md text-surface-variant dark:text-outline-variant hover:text-secondary-fixed transition-colors underline-offset-4 hover:underline" href="#">Privacy Policy</a>
+</nav>
+<nav class="flex flex-col gap-2">
+<a class="font-body-md text-body-md text-surface-variant dark:text-outline-variant hover:text-secondary-fixed transition-colors underline-offset-4 hover:underline" href="#">Terms</a>
+</nav>
+<div class="col-span-1 md:col-span-4 mt-stack-lg pt-stack-md border-t border-on-primary/10">
+<p class="font-body-md text-body-md text-surface-variant dark:text-outline-variant text-center md:text-left">
+                    © 2024 Uzbek Academic Club in Japan. All rights reserved.
+                </p>
+</div>
+</div>
+</footer>
+</body></html>
