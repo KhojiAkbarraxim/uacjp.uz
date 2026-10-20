@@ -53,6 +53,16 @@
 
     <section class="section-shell pt-0">
         <div class="container-shell">
+            <div class="academic-card border-l-4 border-primary p-8">
+                <x-i18n :text="ui('pages.home.what_is_uac_eyebrow')" tag="span" class="eyebrow" />
+                <x-i18n :text="ui('pages.home.what_is_uac_title')" tag="h2" class="mt-3 text-3xl" />
+                <x-i18n :text="ui('pages.home.what_is_uac_body')" tag="p" class="mt-4 text-base leading-8 text-muted" />
+            </div>
+        </div>
+    </section>
+
+    <section class="section-shell pt-0">
+        <div class="container-shell">
             <div class="grid gap-6 lg:grid-cols-2">
                 <div class="academic-card border-l-4 border-secondary p-8">
                     <x-i18n :text="$mission['title']" tag="h2" class="text-3xl" />
