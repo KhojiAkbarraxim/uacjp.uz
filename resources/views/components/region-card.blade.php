@@ -38,6 +38,15 @@
             <x-i18n :text="$region['members_count']" tag="span" class="chip" />
         </div>
 
+        @if (! empty($region['secretaries']))
+            <p class="text-sm text-muted">
+                <span class="font-semibold text-primary">{{ $region['secretaries'][0]['name'] }}</span>
+                @if (! empty($region['secretaries'][0]['role']))
+                    — {{ is_array($region['secretaries'][0]['role']) ? ($region['secretaries'][0]['role'][app()->getLocale()] ?? $region['secretaries'][0]['role']['en']) : $region['secretaries'][0]['role'] }}
+                @endif
+            </p>
+        @endif
+
         <a href="{{ route('regions.show', $region['slug']) }}" class="inline-flex items-center gap-2 text-sm font-semibold text-secondary transition hover:text-primary">
             <x-i18n :text="ui('common.explore_chapter')" />
             <span aria-hidden="true">&rarr;</span>
