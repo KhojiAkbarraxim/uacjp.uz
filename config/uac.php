@@ -650,4 +650,15 @@ return [
             ['name' => ['en' => 'Partner', 'uz' => 'Hamkor', 'ja' => 'パートナー'], 'description' => ['en' => 'For institutions, organizations, and sponsors interested in academic cooperation.', 'uz' => 'Ilmiy hamkorlikka qiziqqan muassasalar, tashkilotlar va homiylar uchun.', 'ja' => '学術協力に関心のある機関、団体、スポンサー向け。']],
         ],
     ],
+
+    'events' => [
+        ['title' => ['en' => 'Annual Scholar Symposium', 'uz' => 'Yillik olimlar simpoziumi', 'ja' => '年次学術シンポジウム'], 'date' => '2026-11-15', 'location' => ['en' => 'Tokyo', 'uz' => 'Tokio', 'ja' => '東京'], 'type' => ['en' => 'Symposium', 'uz' => 'Simpozium', 'ja' => 'シンポジウム']],
+        ['title' => ['en' => 'Regional Chapter Meetup', 'uz' => 'Mintaqaviy uchrashuv', 'ja' => '地域支部ミートアップ'], 'date' => '2026-12-05', 'location' => ['en' => 'Osaka', 'uz' => 'Osaka', 'ja' => '大阪'], 'type' => ['en' => 'Meetup', 'uz' => 'Uchrashuv', 'ja' => 'ミートアップ']],
+        ['title' => ['en' => 'Research Writing Workshop', 'uz' => 'Tadqiqot yozish ustaxonasi', 'ja' => '研究執筆ワークショップ'], 'date' => '2027-01-20', 'location' => ['en' => 'Online', 'uz' => 'Onlayn', 'ja' => 'オンライン'], 'type' => ['en' => 'Workshop', 'uz' => 'Ustaxona', 'ja' => 'ワークショップ']],
+        ['title' => ['en' => 'Career & Mentorship Forum', 'uz' => 'Karyera va murabbiylik forumi', 'ja' => 'キャリア＆メンタリングフォーラム'], 'date' => '2027-02-10', 'location' => ['en' => 'Kyoto', 'uz' => 'Kyoto', 'ja' => '京都'], 'type' => ['en' => 'Forum', 'uz' => 'Forum', 'ja' => 'フォーラム']],
+    ],
+
+    'event_gallery' => [
+        'images/home-hero.webp',
+    ],
 ];

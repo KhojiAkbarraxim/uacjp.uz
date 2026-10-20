@@ -61,6 +61,56 @@
         </div>
     </section>
 
+    <section class="section-shell bg-white/45">
+        <div class="container-shell space-y-8">
+            <x-section-title
+                :eyebrow="ui('pages.home.events_eyebrow')"
+                :title="ui('pages.home.events_title')"
+                :description="ui('pages.home.events_description')"
+            />
+            <div class="grid gap-4 md:grid-cols-2">
+                @foreach (config('uac.events') as $event)
+                    <div class="academic-card p-6">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span class="chip">{{ $event['date'] }}</span>
+                            <span class="eyebrow">{{ is_array($event['type']) ? ($event['type'][app()->getLocale()] ?? $event['type']['en']) : $event['type'] }}</span>
+                        </div>
+                        <h3 class="text-xl">{{ is_array($event['title']) ? ($event['title'][app()->getLocale()] ?? $event['title']['en']) : $event['title'] }}</h3>
+                        <p class="mt-2 text-sm text-muted">{{ is_array($event['location']) ? ($event['location'][app()->getLocale()] ?? $event['location']['en']) : $event['location'] }}</p>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
+    <section class="section-shell">
+        <div class="container-shell space-y-8">
+            <x-section-title
+                :eyebrow="ui('pages.home.gallery_eyebrow')"
+                :title="ui('pages.home.gallery_title')"
+                align="center"
+            />
+            <div class="relative overflow-hidden rounded-[1.35rem]" data-event-slider>
+                @foreach (config('uac.event_gallery') as $img)
+                    <img src="{{ asset($img) }}" alt="Event photo" class="w-full h-72 object-cover transition-opacity duration-700" data-slide style="{{ $loop->first ? '' : 'display:none;' }}">
+                @endforeach
+            </div>
+        </div>
+    </section>
+
+    <script>
+        (function () {
+            const slides = document.querySelectorAll('[data-slide]');
+            if (slides.length < 2) return;
+            let i = 0;
+            setInterval(() => {
+                slides[i].style.display = 'none';
+                i = (i + 1) % slides.length;
+                slides[i].style.display = '';
+            }, 3500);
+        })();
+    </script>
+
     <section class="section-shell pt-0">
         <div class="container-shell">
             <div class="grid gap-6 lg:grid-cols-2">
