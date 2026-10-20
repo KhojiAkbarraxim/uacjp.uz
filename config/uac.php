@@ -611,8 +611,8 @@ return [
         ],
         'socials' => [
             ['label' => 'LinkedIn', 'url' => '#'],
+            ['label' => 'Facebook', 'url' => '#'],
             ['label' => 'Telegram', 'url' => '#'],
-            ['label' => 'Instagram', 'url' => '#'],
         ],
         'regional_contacts' => [
             ['region' => ['en' => 'Kanto', 'uz' => 'Kanto', 'ja' => '関東'], 'email' => 'kanto@uacjp.uz'],
