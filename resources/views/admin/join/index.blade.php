@@ -13,6 +13,14 @@
                     <x-i18n :text="ui('admin.join.title')" tag="h2" class="text-3xl" />
                     <x-i18n :text="ui('admin.join.subtitle')" tag="p" class="mt-2 text-muted" />
                 </div>
+                <div class="flex gap-2">
+                    <form action="{{ route('admin.logout') }}" method="post" class="inline">
+                        @csrf
+                        <button type="submit" class="btn-secondary text-sm">
+                            {{ i18n_text(['en' => 'Logout', 'uz' => 'Chiqqan', 'ja' => 'ログアウト']) }}
+                        </button>
+                    </form>
+                </div>
             </div>
 
             @if (session('success'))
@@ -26,12 +34,13 @@
                     <thead>
                         <tr class="border-b border-muted/30 text-sm font-semibold uppercase tracking-[0.1em] text-muted">
                             <th class="py-4 px-6">#</th>
-                            <th class="py-4 px-6">@lang('Name')</th>
-                            <th class="py-4 px-6">@lang('Email')</th>
-                            <th class="py-4 px-6">@lang('Type')</th>
-                            <th class="py-4 px-6">@lang('Region')</th>
-                            <th class="py-4 px-6">@lang('Status')</th>
-                            <th class="py-4 px-6">@lang('Date')</th>
+                            <th class="py-4 px-6">Name</th>
+                            <th class="py-4 px-6">Email</th>
+                            <th class="py-4 px-6">Type</th>
+                            <th class="py-4 px-6">Region</th>
+                            <th class="py-4 px-6">Status</th>
+                            <th class="py-4 px-6">Date</th>
+                            <th class="py-4 px-6 text-right">Actions</th>
                         </tr>
                     </thead>
                     <tbody class="divide-y divide-muted/10">
@@ -47,15 +56,37 @@
                                         @if($app->status === 'pending') bg-yellow-50 text-yellow-700
                                         @elseif($app->status === 'approved') bg-green-50 text-green-700
                                         @else bg-red-50 text-red-700 @endif">
-                                        {{ ucfirst($app->status) }}
+                                        {{ i18n_text(ui('admin.status.' . $app->status)) }}
                                     </span>
                                 </td>
                                 <td class="py-4 px-6 text-sm text-muted">{{ $app->created_at->format('M d, Y') }}</td>
+                                <td class="py-4 px-6 text-right space-x-2">
+                                    @if ($app->status === 'pending')
+                                        <form action="{{ route('admin.join.update', $app->id) }}" method="POST" class="inline">
+                                            @csrf
+                                            @method('PATCH')
+                                            <input type="hidden" name="status" value="approved">
+                                            <button type="submit" class="text-xs bg-green-50 text-green-700 px-2 py-1 rounded border border-green-200 hover:bg-green-100 transition">
+                                                Approve
+                                            </button>
+                                        </form>
+                                        <form action="{{ route('admin.join.update', $app->id) }}" method="POST" class="inline">
+                                            @csrf
+                                            @method('PATCH')
+                                            <input type="hidden" name="status" value="rejected">
+                                            <button type="submit" class="text-xs bg-red-50 text-red-700 px-2 py-1 rounded border border-red-200 hover:bg-red-100 transition">
+                                                Reject
+                                            </button>
+                                        </form>
+                                    @else
+                                        <span class="text-xs text-muted">{{ i18n_text(ui('admin.status.' . $app->status)) }}</span>
+                                    @endif
+                                </td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="7" class="py-10 text-center text-muted">
-                                    @lang('No applications yet.')
+                                <td colspan="8" class="py-10 text-center text-muted">
+                                    No applications yet.
                                 </td>
                             </tr>
                         @endforelse

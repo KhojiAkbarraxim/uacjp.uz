@@ -231,5 +231,10 @@ return [
             'approved' => ['en' => 'Approved', 'uz' => 'Tasdiqlangan', 'ja' => '承認済み'],
             'rejected' => ['en' => 'Rejected', 'uz' => 'Rad etildi', 'ja' => '拒否'],
         ],
+        'actions' => [
+            'approve' => ['en' => 'Approve', 'uz' => 'Tasdiqlash', 'ja' => '承認'],
+            'reject' => ['en' => 'Reject', 'uz' => 'Rad etish', 'ja' => '拒否'],
+            'logout' => ['en' => 'Logout', 'uz' => 'Chiqish', 'ja' => 'ログアウト'],
+        ],
     ],
 ];
