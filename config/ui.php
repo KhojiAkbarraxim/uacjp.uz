@@ -226,6 +226,12 @@ return [
             'title' => ['en' => 'Membership Applications', 'uz' => 'Aʼzolik arizalari', 'ja' => '参加申請一覧'],
             'subtitle' => ['en' => 'Review new member requests and update their status.', 'uz' => 'Yangi aʼzo soʻrovlarini koʻrib chiqish va ularning holatini yangilang.', 'ja' => '新しいメンバー申請を確認し、ステータスを更新してください。'],
         ],
+        'dashboard' => [
+            'title' => ['en' => 'Admin Dashboard', 'uz' => 'Admin boshqaruv paneli', 'ja' => '管理ダッシュボード'],
+            'subtitle' => ['en' => 'Overview of membership applications and key metrics.', 'uz' => 'Aʼzolik arizalari va asosiy ko‘rsatkichlar qisqacha overview.', 'ja' => '参加申請と主要指標の概要。'],
+            'total' => ['en' => 'Total Applications', 'uz' => 'Jami arizalar', 'ja' => '総申請数'],
+            'recent' => ['en' => 'Recent Applications', 'uz' => 'Oxirgi arizalar', 'ja' => '最近の申請'],
+        ],
         'status' => [
             'pending' => ['en' => 'Pending', 'uz' => 'Kutilmoqda', 'ja' => '保留中'],
             'approved' => ['en' => 'Approved', 'uz' => 'Tasdiqlangan', 'ja' => '承認済み'],

@@ -3,7 +3,6 @@
 @section('content')
     @php
         $pageTitle = ['en' => 'Join Applications', 'uz' => 'Arizalar', 'ja' => '参加申請'];
-        $metaDescription = ['en' => 'Review and manage UAC Japan membership applications.', 'uz' => 'UAC Japan aʼzolik arizalarini koʻrib chiqish va boshqarish.', 'ja' => 'UAC Japanの参加申請を確認・管理します。'];
     @endphp
 
     <section class="section-shell">
@@ -17,7 +16,7 @@
                     <form action="{{ route('admin.logout') }}" method="post" class="inline">
                         @csrf
                         <button type="submit" class="btn-secondary text-sm">
-                            {{ i18n_text(['en' => 'Logout', 'uz' => 'Chiqqan', 'ja' => 'ログアウト']) }}
+                            {{ i18n_text(ui('admin.actions.logout')) }}
                         </button>
                     </form>
                 </div>
@@ -28,6 +27,58 @@
                     {{ session('success') }}
                 </div>
             @endif
+
+            <!-- Filters -->
+            <div class="academic-card p-6">
+                <form action="{{ route('admin.join.index') }}" method="GET" class="grid gap-4 sm:grid-cols-4 lg:grid-cols-6">
+                    <div>
+                        <label class="block text-sm font-medium text-primary mb-1">{{ i18n_text(['en' => 'Search', 'uz' => 'Qidirish', 'ja' => '検索']) }}</label>
+                        <input name="search" type="text" class="form-input w-full" placeholder="{{ i18n_text(['en' => 'Name or email', 'uz' => 'Ism yoki email', 'ja' => '名前またはメール']) }}" value="{{ old('search', request('search')) }}">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-primary mb-1">{{ i18n_text(['en' => 'Status', 'uz' => 'Holat', 'ja' => 'ステータス']) }}</label>
+                        <select name="status" class="form-input w-full">
+                            <option value="">{{ i18n_text(['en' => 'All statuses', 'uz' => 'Barcha holatlar', 'ja' => 'すべてのステータス']) }}</option>
+                            @foreach (ui('admin.status') as $key => $label)
+                                <option value="{{ $key }}" {{ request('status') === $key ? 'selected' : '' }}>{{ i18n_text($label) }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-primary mb-1">{{ i18n_text(['en' => 'Region', 'uz' => 'Mintaqa', 'ja' => '地域']) }}</label>
+                        <select name="region" class="form-input w-full">
+                            <option value="">{{ i18n_text(['en' => 'All regions', 'uz' => 'Barcha mintaqalar', 'ja' => 'すべての地域']) }}</option>
+                            @foreach ($regions as $region)
+                                <option value="{{ $region }}" {{ request('region') === $region ? 'selected' : '' }}>{{ $region }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-primary mb-1">{{ i18n_text(['en' => 'Membership type', 'uz' => 'Aʼzo turi', 'ja' => '会員種別']) }}</label>
+                        <select name="membership_type" class="form-input w-full">
+                            <option value="">{{ i18n_text(['en' => 'All types', 'uz' => 'Barcha turlar', 'ja' => 'すべての種類']) }}</option>
+                            @foreach ($types as $type)
+                                <option value="{{ $type }}" {{ request('membership_type') === $type ? 'selected' : '' }}>{{ $type }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="flex items-end">
+                        <button type="submit" class="btn-primary w-full">
+                            {{ i18n_text(['en' => 'Filter', 'uz' => 'Filtr', 'ja' => 'フィルター']) }}
+                        </button>
+                    </div>
+
+                    @if (request()->hasAny(['search', 'status', 'region', 'membership_type']))
+                        <a href="{{ route('admin.join.index') }}" class="text-sm text-secondary hover:text-primary underline">
+                            {{ i18n_text(['en' => 'Clear filters', 'uz' => 'Filtrlarni tozalash', 'ja' => 'フィルターをクリア']) }}
+                        </a>
+                    @endif
+                </form>
+            </div>
 
             <div class="academic-card overflow-hidden">
                 <table class="w-full text-left border-collapse">
@@ -67,7 +118,7 @@
                                             @method('PATCH')
                                             <input type="hidden" name="status" value="approved">
                                             <button type="submit" class="text-xs bg-green-50 text-green-700 px-2 py-1 rounded border border-green-200 hover:bg-green-100 transition">
-                                                Approve
+                                                {{ i18n_text(ui('admin.actions.approve')) }}
                                             </button>
                                         </form>
                                         <form action="{{ route('admin.join.update', $app->id) }}" method="POST" class="inline">
@@ -75,7 +126,7 @@
                                             @method('PATCH')
                                             <input type="hidden" name="status" value="rejected">
                                             <button type="submit" class="text-xs bg-red-50 text-red-700 px-2 py-1 rounded border border-red-200 hover:bg-red-100 transition">
-                                                Reject
+                                                {{ i18n_text(ui('admin.actions.reject')) }}
                                             </button>
                                         </form>
                                     @else
@@ -86,7 +137,7 @@
                         @empty
                             <tr>
                                 <td colspan="8" class="py-10 text-center text-muted">
-                                    No applications yet.
+                                    No applications match your filters.
                                 </td>
                             </tr>
                         @endforelse

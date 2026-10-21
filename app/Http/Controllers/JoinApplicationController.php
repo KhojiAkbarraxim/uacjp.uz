@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\JoinApplicationReceived;
 use App\Models\JoinApplication;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -31,11 +30,35 @@ class JoinApplicationController extends Controller
         return back()->with('success', 'Arizangiz qabul qilindi! Tez orada siz bilan bog‘lanamiz.');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $applications = JoinApplication::latest()->paginate(15);
+        $query = JoinApplication::query();
 
-        return view('admin.join.index', compact('applications'));
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+
+        if ($request->filled('region')) {
+            $query->where('region', 'like', '%'.$request->region.'%');
+        }
+
+        if ($request->filled('membership_type')) {
+            $query->where('membership_type', 'like', '%'.$request->membership_type.'%');
+        }
+
+        if ($request->filled('search')) {
+            $query->where(function ($q) use ($request) {
+                $q->where('name', 'like', '%'.$request->search.'%')
+                  ->orWhere('email', 'like', '%'.$request->search.'%');
+            });
+        }
+
+        $applications = $query->latest()->paginate(15)->appends($request->only(['status', 'region', 'membership_type', 'search']));
+
+        $regions = JoinApplication::distinct()->pluck('region');
+        $types = JoinApplication::distinct()->pluck('membership_type');
+
+        return view('admin.join.index', compact('applications', 'regions', 'types'));
     }
 
     public function updateStatus(Request $request, JoinApplication $application)
