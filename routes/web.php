@@ -25,5 +25,6 @@ Route::post('/admin/logout', [LoginController::class, 'logout'])->name('admin.lo
 Route::middleware([EnsureAdminAuthenticated::class])->group(function () {
     Route::get('/admin/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
     Route::get('/admin/join-applications', [JoinApplicationController::class, 'index'])->name('admin.join.index');
+    Route::get('/admin/join-applications/{joinApplication}', [JoinApplicationController::class, 'show'])->name('admin.join.show');
     Route::patch('/admin/join-applications/{joinApplication}/status', [JoinApplicationController::class, 'updateStatus'])->name('admin.join.update');
 });

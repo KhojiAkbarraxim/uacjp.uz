@@ -71,4 +71,9 @@ class JoinApplicationController extends Controller
 
         return back()->with('success', "Status updated to {$request->status}.");
     }
+
+    public function show(JoinApplication $application)
+    {
+        return view('admin.join.show', compact('application'));
+    }
 }
