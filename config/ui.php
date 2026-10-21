@@ -220,4 +220,16 @@ return [
             'meta_template' => ['en' => 'Learn about %s, its universities, activities, and leadership.', 'uz' => '%s, uning universitetlari, tadbirlari va rahbariyati haqida bilib oling.', 'ja' => '%sの大学、活動、リーダーシップについてご紹介します。'],
         ],
     ],
+
+    'admin' => [
+        'join' => [
+            'title' => ['en' => 'Membership Applications', 'uz' => 'Aʼzolik arizalari', 'ja' => '参加申請一覧'],
+            'subtitle' => ['en' => 'Review new member requests and update their status.', 'uz' => 'Yangi aʼzo soʻrovlarini koʻrib chiqish va ularning holatini yangilang.', 'ja' => '新しいメンバー申請を確認し、ステータスを更新してください。'],
+        ],
+        'status' => [
+            'pending' => ['en' => 'Pending', 'uz' => 'Kutilmoqda', 'ja' => '保留中'],
+            'approved' => ['en' => 'Approved', 'uz' => 'Tasdiqlangan', 'ja' => '承認済み'],
+            'rejected' => ['en' => 'Rejected', 'uz' => 'Rad etildi', 'ja' => '拒否'],
+        ],
+    ],
 ];

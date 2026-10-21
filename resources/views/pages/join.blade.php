@@ -13,6 +13,11 @@
 
     <section class="section-shell bg-white/45">
         <div class="container-shell grid gap-6 lg:grid-cols-2">
+            @if (session('success'))
+                <div class="bg-green-50 border-l-4 border-green-600 p-4 text-green-800 rounded col-span-full">
+                    {{ session('success') }}
+                </div>
+            @endif
             <div class="academic-card p-8">
                 <x-i18n :text="ui('pages.join.eligibility_heading')" tag="h2" class="text-3xl" />
                 <ul class="mt-5 space-y-3 text-base leading-8 text-muted">
@@ -55,7 +60,8 @@
                 <x-i18n :text="ui('pages.join.form_heading')" tag="h2" class="text-3xl" />
                 <x-i18n :text="ui('pages.join.form_description')" tag="p" class="mt-3 text-base leading-8 text-muted" />
 
-                <form class="mt-8 space-y-5" action="#" method="post" novalidate>
+                <form class="mt-8 space-y-5" action="{{ route('join.apply') }}" method="post" novalidate>
+                    @csrf
                     <div class="grid gap-5 sm:grid-cols-2">
                         <div>
                             <x-i18n :text="ui('pages.join.label_full_name')" tag="label" for="join-name" class="mb-2 block text-sm font-medium text-primary" />

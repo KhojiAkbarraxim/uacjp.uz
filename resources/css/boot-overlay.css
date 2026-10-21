@@ -1,0 +1,73 @@
+[data-boot-overlay] {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    /* Purely a visual mask, never a modal: clicks must always reach the
+       real page underneath, even during the brief window before this is
+       dismissed. Without this, an early/impatient click on a nav link
+       gets silently swallowed by the overlay instead of navigating. */
+    pointer-events: none;
+    transition: opacity 300ms ease;
+}
+
+[data-boot-overlay].is-dismissing {
+    opacity: 0;
+}
+
+[data-boot-overlay] img {
+    width: 4.5rem;
+    height: auto;
+}
+
+[data-site-content] {
+    opacity: 0;
+    transition: opacity 300ms ease;
+}
+
+[data-site-content].is-visible {
+    opacity: 1;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    [data-boot-overlay]:not(.is-static) img {
+        animation:
+            boot-overlay-intro 600ms ease-out both,
+            boot-overlay-pulse 2400ms ease-in-out 600ms infinite;
+    }
+}
+
+@keyframes boot-overlay-intro {
+    from {
+        opacity: 0;
+        transform: scale(0.88);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes boot-overlay-pulse {
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.045);
+        opacity: 0.86;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    [data-boot-overlay],
+    [data-boot-overlay] img,
+    [data-site-content] {
+        transition: none !important;
+        animation: none !important;
+    }
+}
