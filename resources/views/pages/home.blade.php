@@ -51,15 +51,55 @@
         </div>
     </section>
 
+    {{-- ═══════════════════════════════════════════════════
+         "UAC NIMA?" — Tezkor tushuntirish bo'limi
+    ═══════════════════════════════════════════════════ --}}
     <section class="section-shell pt-0">
         <div class="container-shell">
-            <div class="academic-card border-l-4 border-primary p-8">
-                <x-i18n :text="ui('pages.home.what_is_uac_eyebrow')" tag="span" class="eyebrow" />
-                <x-i18n :text="ui('pages.home.what_is_uac_title')" tag="h2" class="mt-3 text-3xl" />
-                <x-i18n :text="ui('pages.home.what_is_uac_body')" tag="p" class="mt-4 text-base leading-8 text-muted" />
+            <div class="relative overflow-hidden rounded-[1.5rem] border border-primary/10 bg-primary pattern-grid p-8 sm:p-12">
+                {{-- Radial glow --}}
+                <div class="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(27,109,36,0.18),transparent_60%)]"></div>
+
+                <div class="relative space-y-10">
+                    <div class="max-w-2xl">
+                        <x-i18n :text="ui('pages.home.what_is_uac_eyebrow')" tag="span" class="eyebrow border-white/20 bg-white/10 text-white/90" />
+                        <x-i18n :text="ui('pages.home.what_is_uac_title')" tag="h2" class="mt-4 text-3xl text-white sm:text-4xl" />
+                        <x-i18n :text="ui('pages.home.what_is_uac_body')" tag="p" class="mt-4 text-base leading-8 text-white/70" />
+                    </div>
+
+                    <div class="grid gap-5 sm:grid-cols-3">
+                        {{-- Pillar 1: Community --}}
+                        <div class="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition duration-300 hover:bg-white/10">
+                            <div class="mb-4 flex h-11 w-11 items-center justify-center rounded-2xl bg-secondary/20 text-secondary">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6"><path d="M4.5 6.375a4.125 4.125 0 1 1 8.25 0 4.125 4.125 0 0 1-8.25 0ZM14.25 8.625a3.375 3.375 0 1 1 6.75 0 3.375 3.375 0 0 1-6.75 0ZM1.5 19.125a7.125 7.125 0 0 1 14.25 0v.003l-.001.119a.75.75 0 0 1-.363.63 13.067 13.067 0 0 1-6.761 1.873c-2.472 0-4.786-.684-6.76-1.873a.75.75 0 0 1-.364-.63l-.001-.122ZM17.25 19.128l-.001.144a2.25 2.25 0 0 1-.233.96 10.088 10.088 0 0 0 5.06-1.01.75.75 0 0 0 .42-.643 4.875 4.875 0 0 0-6.957-4.611 8.586 8.586 0 0 1 1.71 5.157v.003Z" /></svg>
+                            </div>
+                            <x-i18n :text="ui('pages.home.pillar_community_title')" tag="h3" class="text-lg text-white" />
+                            <x-i18n :text="ui('pages.home.pillar_community_body')" tag="p" class="mt-2 text-sm leading-7 text-white/60" />
+                        </div>
+
+                        {{-- Pillar 2: Research --}}
+                        <div class="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition duration-300 hover:bg-white/10">
+                            <div class="mb-4 flex h-11 w-11 items-center justify-center rounded-2xl bg-accent/20 text-accent">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6"><path d="M11.25 4.533A9.707 9.707 0 0 0 6 3a9.735 9.735 0 0 0-3.25.555.75.75 0 0 0-.5.707v14.25a.75.75 0 0 0 1 .707A8.237 8.237 0 0 1 6 18.75c1.995 0 3.823.707 5.25 1.886V4.533ZM12.75 20.636A8.214 8.214 0 0 1 18 18.75c.966 0 1.89.166 2.75.47a.75.75 0 0 0 1-.708V4.262a.75.75 0 0 0-.5-.707A9.735 9.735 0 0 0 18 3a9.707 9.707 0 0 0-5.25 1.533v16.103Z" /></svg>
+                            </div>
+                            <x-i18n :text="ui('pages.home.pillar_research_title')" tag="h3" class="text-lg text-white" />
+                            <x-i18n :text="ui('pages.home.pillar_research_body')" tag="p" class="mt-2 text-sm leading-7 text-white/60" />
+                        </div>
+
+                        {{-- Pillar 3: Japan --}}
+                        <div class="rounded-2xl border border-white/10 bg-white/5 p-6 backdrop-blur-sm transition duration-300 hover:bg-white/10">
+                            <div class="mb-4 flex h-11 w-11 items-center justify-center rounded-2xl bg-white/15 text-white">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="h-6 w-6"><path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25ZM6.262 6.072a8.25 8.25 0 1 0 10.562-.766 4.5 4.5 0 0 1-1.318 1.357L14.25 7.5l.165.33a.809.809 0 0 1-1.086 1.085l-.604-.302a1.125 1.125 0 0 0-1.298.21l-.132.131c-.439.44-.439 1.152 0 1.591l.296.296c.256.257.622.374.98.314l1.17-.195c.323-.054.654.036.905.245l1.33 1.108c.32.267.46.694.358 1.1a8.7 8.7 0 0 1-2.288 4.04l-.723.724a1.125 1.125 0 0 1-1.298.21l-.153-.076a1.125 1.125 0 0 1-.622-1.006v-1.089c0-.298-.119-.585-.33-.796l-1.347-1.347a1.125 1.125 0 0 1-.21-1.298L9.75 12l-1.64-1.64a6 6 0 0 1-1.676-3.257l-.172-1.03Z" clip-rule="evenodd" /></svg>
+                            </div>
+                            <x-i18n :text="ui('pages.home.pillar_japan_title')" tag="h3" class="text-lg text-white" />
+                            <x-i18n :text="ui('pages.home.pillar_japan_body')" tag="p" class="mt-2 text-sm leading-7 text-white/60" />
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
+
 
     <section class="section-shell bg-white/45">
         <div class="container-shell space-y-8">
@@ -90,26 +130,63 @@
                 :title="ui('pages.home.gallery_title')"
                 align="center"
             />
-            <div class="relative overflow-hidden rounded-[1.35rem]" data-event-slider>
-                @foreach (config('uac.event_gallery') as $img)
-                    <img src="{{ asset($img) }}" alt="Event photo" class="w-full h-72 object-cover transition-opacity duration-700" data-slide style="{{ $loop->first ? '' : 'display:none;' }}">
+            <div class="relative overflow-hidden rounded-[1.35rem] bg-primary" data-event-slider>
+                @php $galleryImages = config('uac.event_gallery'); @endphp
+                @foreach ($galleryImages as $img)
+                    <img
+                        src="{{ asset($img) }}"
+                        alt="UAC event photo"
+                        class="absolute inset-0 h-full w-full object-cover transition-opacity duration-700"
+                        data-slide
+                        style="opacity: {{ $loop->first ? '1' : '0' }}; position: {{ $loop->first ? 'relative' : 'absolute' }}; height: 22rem;"
+                    >
                 @endforeach
+                {{-- Height spacer --}}
+                <div class="h-[22rem] w-full"></div>
+                {{-- Gradient overlay --}}
+                <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-primary/60 via-transparent to-transparent"></div>
+                {{-- Dot indicators --}}
+                <div class="absolute inset-x-0 bottom-5 flex justify-center gap-2" data-slider-dots>
+                    @foreach ($galleryImages as $i => $img)
+                        <button
+                            data-dot="{{ $i }}"
+                            class="h-2 w-2 rounded-full transition-all duration-300 {{ $loop->first ? 'bg-white w-6' : 'bg-white/40' }}"
+                            aria-label="Slide {{ $loop->iteration }}"
+                        ></button>
+                    @endforeach
+                </div>
             </div>
         </div>
     </section>
 
     <script>
         (function () {
-            const slides = document.querySelectorAll('[data-slide]');
+            const slider = document.querySelector('[data-event-slider]');
+            if (!slider) return;
+            const slides = slider.querySelectorAll('[data-slide]');
+            const dots   = slider.querySelectorAll('[data-dot]');
             if (slides.length < 2) return;
-            let i = 0;
-            setInterval(() => {
-                slides[i].style.display = 'none';
-                i = (i + 1) % slides.length;
-                slides[i].style.display = '';
-            }, 3500);
+            let current = 0;
+
+            function goTo(next) {
+                slides[current].style.opacity = '0';
+                slides[current].style.position = 'absolute';
+                dots[current].style.width = '';
+                dots[current].style.backgroundColor = '';
+
+                current = next;
+                slides[current].style.opacity = '1';
+                slides[current].style.position = 'relative';
+                dots[current].style.width = '1.5rem';
+                dots[current].style.backgroundColor = 'white';
+            }
+
+            dots.forEach((dot, idx) => dot.addEventListener('click', () => goTo(idx)));
+            setInterval(() => goTo((current + 1) % slides.length), 4000);
         })();
     </script>
+
+
 
     <section class="section-shell pt-0">
         <div class="container-shell">

@@ -64,6 +64,13 @@ return [
             'partners_description' => ['en' => 'UAC Japan values institutions and organizations that help scholars grow, collaborate, and stay visible.', 'uz' => 'UAC Japan olimlarning rivojlanishi, hamkorligi va koʻrinishida yordam beruvchi muassasa va tashkilotlarni qadrlaydi.', 'ja' => 'UAC Japanは、研究者の成長・協力・可視性を支える機関や団体を大切にしています。'],
             'cta_title' => ['en' => 'Support scholars, events, and long-term collaboration', 'uz' => 'Olimlar, tadbirlar va uzoq muddatli hamkorlikni qoʻllab-quvvatlang', 'ja' => '研究者・イベント・長期的な協力を支援する'],
             'cta_description' => ['en' => 'Whether you want to join as a member or contribute as an institutional partner, UAC Japan is building a credible and inclusive academic platform.', 'uz' => 'Aʼzo sifatida qoʻshilmoqchi boʻlasizmi yoki institutsional hamkor sifatida hissa qoʻshmoqchi boʻlasizmi, UAC Japan ishonchli va inklyuziv ilmiy platforma qurmoqda.', 'ja' => 'メンバーとして参加する場合も、機関パートナーとして貢献する場合も、UAC Japanは信頼性が高く包摂的な学術プラットフォームを構築しています。'],
+            // UAC intro pillars
+            'pillar_community_title' => ['en' => 'Community', 'uz' => 'Hamjamiyat', 'ja' => 'コミュニティ'],
+            'pillar_community_body'  => ['en' => 'A trusted network of Uzbek students, researchers, and alumni supporting each other across Japan.', 'uz' => 'Yaponiya boʻylab bir-birini qoʻllab-quvvatlovchi oʻzbek talabalari, tadqiqotchilari va bitiruvchilarining ishonchli tarmogʻi.', 'ja' => '日本各地で互いを支え合うウズベキスタン人学生・研究者・卒業生の信頼できるネットワーク。'],
+            'pillar_research_title'  => ['en' => 'Research', 'uz' => 'Tadqiqot', 'ja' => '研究'],
+            'pillar_research_body'   => ['en' => 'Fostering interdisciplinary collaboration, seminars, and mentorship across 18+ academic fields.', 'uz' => '18+ ilmiy soha boʻylab fanlararo hamkorlik, seminarlar va murabbiylikni rivojlantirish.', 'ja' => '18以上の学術分野にわたる学際的な協力・セミナー・メンタリングを推進。'],
+            'pillar_japan_title'     => ['en' => 'Japan Network', 'uz' => 'Yaponiya tarmogʻi', 'ja' => '日本ネットワーク'],
+            'pillar_japan_body'      => ['en' => '5 regional chapters covering Tokyo, Osaka, Nagoya, Fukuoka, and northern Japan.', 'uz' => 'Tokio, Osaka, Nagoya, Fukuoka va shimoliy Yaponiyani qamrab oluvchi 5 ta mintaqaviy boʻlim.', 'ja' => '東京・大阪・名古屋・福岡・北日本をカバーする5つの地域支部。'],
         ],
 
         'about' => [
@@ -93,6 +100,13 @@ return [
             'cta_description' => ['en' => 'UAC Japan welcomes proposals for seminars, research circles, professional networking formats, and member-led initiatives.', 'uz' => 'UAC Japan seminarlar, tadqiqot doiralar, professional tarmoqlashish formatlari va aʼzolar boshchiligidagi tashabbuslar boʻyicha takliflarni kutib oladi.', 'ja' => 'UAC Japanでは、セミナー、研究サークル、専門的なネットワーキング形式、メンバー主導の取り組みに関する提案を歓迎しています。'],
             'cta_primary' => ['en' => 'Contact the team', 'uz' => 'Jamoa bilan bogʻlanish', 'ja' => 'チームに連絡する'],
             'cta_secondary' => ['en' => 'Join the community', 'uz' => 'Hamjamiyatga qoʻshilish', 'ja' => 'コミュニティに参加する'],
+            // Calendar strings
+            'calendar_eyebrow'   => ['en' => 'Annual Calendar', 'uz' => 'Yillik kalendar', 'ja' => '年間カレンダー'],
+            'calendar_title'     => ['en' => 'Upcoming & past events', 'uz' => 'Kelgusi va oʻtgan tadbirlar', 'ja' => '今後・過去のイベント'],
+            'upcoming_label'     => ['en' => 'Upcoming', 'uz' => 'Kelgusi', 'ja' => '予定'],
+            'past_label'         => ['en' => 'Completed', 'uz' => 'Oʻtkazildi', 'ja' => '終了'],
+            'days_away_prefix'   => ['en' => 'in', 'uz' => 'yana', 'ja' => 'あと'],
+            'days_label'         => ['en' => 'days', 'uz' => 'kun', 'ja' => '日'],
         ],
 
         'partners' => [

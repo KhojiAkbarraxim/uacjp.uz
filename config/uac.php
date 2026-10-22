@@ -610,9 +610,8 @@ return [
             'ja' => '通常、2〜3営業日以内にご返信いたします。',
         ],
         'socials' => [
-            ['label' => 'LinkedIn', 'url' => '#'],
-            ['label' => 'Facebook', 'url' => '#'],
-            ['label' => 'Telegram', 'url' => '#'],
+            ['label' => 'Facebook', 'platform' => 'facebook', 'url' => '#'],
+            ['label' => 'Telegram', 'platform' => 'telegram', 'url' => '#'],
         ],
         'regional_contacts' => [
             ['region' => ['en' => 'Kanto', 'uz' => 'Kanto', 'ja' => '関東'], 'email' => 'kanto@uacjp.uz'],
@@ -659,6 +658,11 @@ return [
     ],
 
     'event_gallery' => [
+        'images/regions/kanto-hero.webp',
+        'images/regions/kansai-hero.webp',
+        'images/regions/chubu-hero.webp',
+        'images/regions/kyushu-hero.webp',
+        'images/regions/tohoku-hokkaido-hero.webp',
         'images/home-hero.webp',
     ],
 ];
