@@ -17,14 +17,21 @@ return new class extends Migration
             $table->string('short_name_en');
             $table->string('short_name_uz')->nullable();
             $table->string('short_name_ja')->nullable();
-            $table->string('status')->default('Active');
-            $table->string('members_count')->nullable();
+            $table->string('status_en')->nullable();
+            $table->string('status_uz')->nullable();
+            $table->string('status_ja')->nullable();
+            $table->string('members_count_en')->nullable();
+            $table->string('members_count_uz')->nullable();
+            $table->string('members_count_ja')->nullable();
             $table->text('summary_en')->nullable();
             $table->text('summary_uz')->nullable();
             $table->text('summary_ja')->nullable();
             $table->text('excerpt_en')->nullable();
             $table->text('excerpt_uz')->nullable();
             $table->text('excerpt_ja')->nullable();
+            $table->text('about_en')->nullable();
+            $table->text('about_uz')->nullable();
+            $table->text('about_ja')->nullable();
             $table->string('image')->nullable();
             $table->string('hero_image')->nullable();
             $table->string('email')->nullable();
@@ -32,11 +39,15 @@ return new class extends Migration
             $table->string('city_en')->nullable();
             $table->string('city_uz')->nullable();
             $table->string('city_ja')->nullable();
-            $table->json('locations')->nullable();
+            $table->string('locations_en')->nullable();
+            $table->string('locations_uz')->nullable();
+            $table->string('locations_ja')->nullable();
             $table->json('universities')->nullable();
             $table->json('activities')->nullable();
+            $table->json('gallery')->nullable();
+            $table->json('plans')->nullable();
+            $table->unsignedInteger('sort_order')->default(0);
             $table->timestamps();
-            $table->index('slug');
         });
     }
 

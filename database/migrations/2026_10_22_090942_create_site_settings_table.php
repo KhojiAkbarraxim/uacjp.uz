@@ -16,7 +16,6 @@ return new class extends Migration
             $table->text('value_ja')->nullable();
             $table->json('meta')->nullable();
             $table->timestamps();
-            $table->index('key');
         });
     }
 

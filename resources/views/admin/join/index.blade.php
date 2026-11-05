@@ -1,9 +1,8 @@
 @extends('admin.layout')
 
+@section('title', 'Applications')
+
 @section('content')
-    @php
-        $pageTitle = ['en' => 'Join Applications', 'uz' => 'Arizalar', 'ja' => '参加申請'];
-    @endphp
 
     <section class="container-shell space-y-6">
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -20,12 +19,6 @@
                 </form>
             </div>
         </div>
-
-        @if (session('success'))
-            <div class="bg-green-50 border-l-4 border-green-600 p-4 text-green-800 rounded">
-                {{ session('success') }}
-            </div>
-        @endif
 
         <!-- Filters -->
         <div class="academic-card p-6">

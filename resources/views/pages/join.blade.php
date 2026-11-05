@@ -85,7 +85,7 @@
                         <div>
                             <x-i18n :text="ui('pages.join.label_preferred_region')" tag="label" for="join-region" class="mb-2 block text-sm font-medium text-primary" />
                             <select id="join-region" name="region" class="form-input">
-                                @foreach (config('uac.regions') as $region)
+                                @foreach (\App\Support\Content::regions() as $region)
                                     <x-i18n :text="$region['name']" tag="option" />
                                 @endforeach
                             </select>

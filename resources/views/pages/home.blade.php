@@ -43,7 +43,7 @@
                         <div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/10 to-transparent"></div>
                         <div class="absolute inset-x-0 bottom-0 p-8 text-white">
                             <x-i18n :text="ui('pages.home.hero_image_eyebrow')" tag="p" class="text-sm uppercase tracking-[0.22em] text-white/70" />
-                            <x-i18n :text="ui('pages.home.hero_image_caption')" tag="p" class="mt-3 max-w-md text-xl font-medium leading-8" />
+                            <x-i18n :text="\App\Support\Content::heroCaption()" tag="p" class="mt-3 max-w-md text-xl font-medium leading-8" />
                         </div>
                     </div>
                 </div>
@@ -109,7 +109,7 @@
                 :description="ui('pages.home.events_description')"
             />
             <div class="grid gap-4 md:grid-cols-2">
-                @foreach (config('uac.events') as $event)
+                @foreach ($events as $event)
                     <div class="academic-card p-6">
                         <div class="flex items-center gap-3 mb-2">
                             <span class="chip">{{ $event['date'] }}</span>
@@ -228,16 +228,31 @@
             />
 
             <div class="space-y-5">
-                @foreach ($latestNews as $news)
-                    <article class="academic-card p-6">
-                        <div class="mb-4 flex flex-wrap items-center gap-2">
-                            <x-i18n :text="$news['type']" tag="span" class="eyebrow" />
-                            <x-i18n :text="$news['date']" tag="span" class="chip" />
+                @forelse ($latestNews as $news)
+                    @php $newsUrl = ! empty($news['slug']) ? route('news.show', $news['slug']) : null; @endphp
+                    <article class="academic-card overflow-hidden sm:flex">
+                        @if (! empty($news['image']))
+                            <img src="{{ asset($news['image']) }}" alt="" loading="lazy" class="h-48 w-full object-cover sm:h-auto sm:w-56 sm:shrink-0">
+                        @endif
+                        <div class="p-6">
+                            <div class="mb-4 flex flex-wrap items-center gap-2">
+                                <x-i18n :text="$news['type']" tag="span" class="eyebrow" />
+                                <x-i18n :text="$news['date']" tag="span" class="chip" />
+                            </div>
+                            @if ($newsUrl)
+                                <a href="{{ $newsUrl }}" class="hover:underline"><x-i18n :text="$news['title']" tag="h3" class="text-2xl" /></a>
+                            @else
+                                <x-i18n :text="$news['title']" tag="h3" class="text-2xl" />
+                            @endif
+                            <x-i18n :text="$news['summary']" tag="p" class="mt-3 text-sm leading-7 text-muted" />
+                            @if ($newsUrl)
+                                <x-i18n :text="ui('pages.news.read_more')" tag="a" href="{{ $newsUrl }}" class="mt-4 inline-block text-sm font-semibold text-secondary hover:text-primary" />
+                            @endif
                         </div>
-                        <x-i18n :text="$news['title']" tag="h3" class="text-2xl" />
-                        <x-i18n :text="$news['summary']" tag="p" class="mt-3 text-sm leading-7 text-muted" />
                     </article>
-                @endforeach
+                @empty
+                    <x-i18n :text="ui('pages.news.empty')" tag="p" class="academic-card p-6 text-muted" />
+                @endforelse
             </div>
         </div>
     </section>

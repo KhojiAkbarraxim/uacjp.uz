@@ -1,10 +1,8 @@
 @extends('admin.layout')
 
+@section('title', 'Application #'.$application->id)
+
 @section('content')
-    @php
-        $pageTitle = ['en' => 'Application #{{ $application->id }}', 'uz' => 'Ariza #{{ $application->id }}', 'ja' => '申請 #{{ $application->id }}'];
-        $metaDescription = ['en' => 'View details of membership application #{{ $application->id }}.', 'uz' => 'Aʼzolik arizasi #{{ $application->id }} tafsilotlari.', 'ja' => '参加申請 #{{ $application->id }} の詳細。'];
-    @endphp
 
     <div class="flex flex-col lg:flex-row gap-6">
         <!-- Application info card -->

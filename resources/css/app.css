@@ -165,3 +165,94 @@
         background-size: 32px 32px;
     }
 }
+
+/* ---------- Admin panel ---------- */
+@layer components {
+    .admin-sidebar {
+        @apply fixed inset-y-0 left-0 z-50 flex w-64 -translate-x-full flex-col border-r border-line bg-white transition-transform duration-300 md:translate-x-0;
+    }
+
+    .admin-sidebar.is-open {
+        @apply translate-x-0 shadow-paper;
+    }
+
+    .admin-overlay {
+        @apply fixed inset-0 z-40 hidden bg-primary/40 backdrop-blur-sm md:hidden;
+    }
+
+    .admin-overlay.is-open {
+        @apply block;
+    }
+
+    .admin-nav-link {
+        @apply flex items-center gap-3 rounded-xl px-4 py-2.5 text-sm font-medium text-muted transition-colors hover:bg-surface-soft hover:text-primary;
+    }
+
+    .admin-nav-link.is-active {
+        @apply bg-secondary-soft text-secondary;
+    }
+
+    .admin-card {
+        @apply rounded-[var(--radius-card)] border border-line/70 bg-surface shadow-paper;
+    }
+
+    .admin-table {
+        @apply w-full border-collapse text-left text-sm;
+    }
+
+    .admin-table th {
+        @apply border-b border-line px-5 py-3 text-xs font-semibold uppercase tracking-[0.12em] text-muted;
+    }
+
+    .admin-table td {
+        @apply border-b border-line/50 px-5 py-3 align-middle;
+    }
+
+    .admin-table tbody tr:hover {
+        @apply bg-surface-soft/60;
+    }
+
+    .admin-label {
+        @apply mb-1 block text-sm font-medium text-primary;
+    }
+
+    .admin-hint {
+        @apply mt-1 text-xs text-muted;
+    }
+
+    .admin-fieldset {
+        @apply space-y-5 rounded-[var(--radius-card)] border border-line/70 bg-surface p-5 shadow-paper sm:p-6;
+    }
+
+    .admin-fieldset > legend {
+        @apply float-left mb-1 w-full font-display text-lg text-primary;
+    }
+
+    .admin-fieldset > legend + * {
+        @apply clear-both;
+    }
+
+    .admin-lang {
+        @apply mr-1 inline-flex rounded bg-surface-strong px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-muted;
+    }
+
+    .btn-small {
+        @apply inline-flex items-center rounded-lg border border-line bg-white px-3 py-1.5 text-xs font-semibold text-primary transition hover:border-primary hover:bg-primary hover:text-white;
+    }
+
+    .btn-danger {
+        @apply inline-flex items-center rounded-lg border border-red-200 bg-red-50 px-3 py-1.5 text-xs font-semibold text-red-700 transition hover:bg-red-600 hover:text-white;
+    }
+
+    .admin-thumb {
+        @apply h-10 w-14 max-w-none rounded-md border border-line object-cover;
+    }
+
+    .admin-pagination nav {
+        @apply flex flex-wrap items-center justify-between gap-3 text-sm;
+    }
+
+    .admin-main .academic-card:hover {
+        @apply translate-y-0 shadow-paper;
+    }
+}

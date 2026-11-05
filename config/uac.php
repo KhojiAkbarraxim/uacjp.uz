@@ -53,47 +53,27 @@ return [
         ],
     ],
 
+    // Seed source for `php artisan static:seed`; manage news in the admin panel afterwards.
     'latest_news' => [
         [
+            'slug' => '2024-05-27-first-meeting-of-the-year',
             'title' => [
-                'en' => 'Annual Scholar Symposium Opens Registration in Tokyo',
-                'uz' => 'Tokioda yillik olimlar simpoziumiga roʻyxatga olish boshlandi',
-                'ja' => '年次スカラーシンポジウム、東京で参加登録開始',
+                'en' => 'First Meeting of the Year',
+                'uz' => 'Bu yil hisobidan birinchi uchrashuv',
+                'ja' => '今年最初の例会',
             ],
-            'date' => ['en' => 'October 15, 2026', 'uz' => '2026-yil 15-oktabr', 'ja' => '2026年10月15日'],
-            'type' => ['en' => 'Event', 'uz' => 'Tadbir', 'ja' => 'イベント'],
+            'date' => ['en' => 'May 27, 2024', 'uz' => '2024-yil 27-may', 'ja' => '2024年5月27日'],
+            'type' => ['en' => 'Meeting', 'uz' => 'Uchrashuv', 'ja' => '例会'],
+            'image' => 'images/news/2024-05-27-tufs-meeting.webp',
             'summary' => [
-                'en' => 'A full-day gathering for postgraduate students, researchers, and alumni focused on interdisciplinary research exchange and mentorship.',
-                'uz' => 'Magistrantlar, tadqiqotchilar va bitiruvchilar uchun fanlararo tadqiqot almashinuvi va murabbiylikka bagʻishlangan bir kunlik yigʻin.',
-                'ja' => '大学院生・研究者・卒業生を対象とした、学際的な研究交流とメンタリングに焦点を当てた終日イベント。',
+                'en' => 'The Academic Club of young Uzbek researchers in Tokyo met at TUFS and welcomed new talent from across the Kanto region.',
+                'uz' => 'Tokiodagi oʻzbekistonlik yosh tadqiqotchilarning Akademik klubi TUFSda yigʻilib, Kanto mintaqasidan kelgan yangi iqtidorlar bilan tanishdi.',
+                'ja' => '東京の若手ウズベキスタン人研究者によるアカデミッククラブが東京外国語大学で例会を開き、関東各地から集まった新しいメンバーを迎えました。',
             ],
-        ],
-        [
-            'title' => [
-                'en' => 'UAC Launches Joint Research Matchmaking Initiative',
-                'uz' => 'UAC qoʻshma tadqiqot moslashtirish tashabbusini ishga tushirdi',
-                'ja' => 'UAC、共同研究マッチングイニシアチブを開始',
-            ],
-            'date' => ['en' => 'September 28, 2026', 'uz' => '2026-yil 28-sentabr', 'ja' => '2026年9月28日'],
-            'type' => ['en' => 'News', 'uz' => 'Yangilik', 'ja' => 'ニュース'],
-            'summary' => [
-                'en' => 'The new initiative pairs Uzbek scholars in Japan with institutional and industry collaborators for pilot research opportunities.',
-                'uz' => 'Yangi tashabbus Yaponiyadagi oʻzbek olimlarini institutsional va sanoat hamkorlari bilan bogʻlab, pilot tadqiqot imkoniyatlarini taqdim etadi.',
-                'ja' => '新イニシアチブは、日本のウズベキスタン人研究者を機関・産業パートナーと結びつけ、パイロット研究の機会を提供します。',
-            ],
-        ],
-        [
-            'title' => [
-                'en' => 'Autumn Networking Evening Announced for Kansai Members',
-                'uz' => 'Kansai aʼzolari uchun kuzgi tarmoqlashish kechasi eʼlon qilindi',
-                'ja' => '関西メンバー向け「秋のネットワーキングイブニング」開催決定',
-            ],
-            'date' => ['en' => 'September 12, 2026', 'uz' => '2026-yil 12-sentabr', 'ja' => '2026年9月12日'],
-            'type' => ['en' => 'Community', 'uz' => 'Hamjamiyat', 'ja' => 'コミュニティ'],
-            'summary' => [
-                'en' => 'A regional meet-up in Kyoto bringing together students, visiting scholars, and partner organizations from western Japan.',
-                'uz' => 'Kiotoda boʻlib oʻtadigan mintaqaviy uchrashuv Gʻarbiy Yaponiyadan talabalar, mehmon olimlar va hamkor tashkilotlarni bir joyga toʻplaydi.',
-                'ja' => '京都で開催される地域交流会には、西日本の学生・客員研究者・パートナー団体が集まります。',
+            'body' => [
+                'en' => "The Academic Club of young Uzbek researchers in Tokyo held its meeting, where we got to know the new talent who gathered from across the Kanto region, home to Tokyo.\n\nAt the event, Alisher Umirdinov presented the new book he is preparing for publication, and Firdavs Khasanov, a doctoral student at the University of Tsukuba, shared his research findings on mentorship in Japan.\n\nThe next meeting will be held in July at the University of Tsukuba in Ibaraki Prefecture. We look forward to seeing you there!\n\nMay 27, 2024 · Tokyo University of Foreign Studies (TUFS)",
+                'uz' => "Tokiodagi oʻzbekistonlik yosh tadqiqotchilarning Akademik klubi yigʻilishi boʻlib oʻtdi. Tokio joylashgan Kanto mintaqasidan yigʻilgan yangi iqtidorlar bilan yaqindan tanishildi.\n\nTadbirda Alisher aka Umirdinov nashrga tayyorlayotgan yangi kitobi taqdimotini qildilar, Tsukuba universiteti doktoranti Firdavs aka Xasanov esa Yaponiyadagi mentorlikka oid ilmiy natijalari bilan boʻlishdilar.\n\nKeyingi yigʻilish iyul oyida Ibaraki prefekturasidagi Tsukuba universitetida boʻlib oʻtadi. Sizni ham albatta kutamiz!\n\n2024-yil 27-may · Tokio xorijiy tillar universiteti (TUFS)",
+                'ja' => "東京の若手ウズベキスタン人研究者によるアカデミッククラブの例会が開催され、東京を含む関東各地から集まった新しいメンバーと親交を深めました。\n\n当日は、Alisher Umirdinov氏が出版準備中の新著を紹介し、筑波大学博士課程のFirdavs Khasanov氏が日本におけるメンタリングに関する研究成果を共有しました。\n\n次回の例会は7月に茨城県の筑波大学で開催予定です。皆さまのご参加をお待ちしています！\n\n2024年5月27日・東京外国語大学（TUFS）",
             ],
         ],
     ],

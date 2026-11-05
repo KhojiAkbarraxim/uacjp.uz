@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Support\Content;
+
 class RegionController extends Controller
 {
     public function index()
@@ -9,13 +11,13 @@ class RegionController extends Controller
         return view('pages.regions.index', [
             'pageTitle' => ui('pages.regions_index.title'),
             'metaDescription' => ui('pages.regions_index.meta'),
-            'regions' => array_values(config('uac.regions')),
+            'regions' => array_values(Content::regions()),
         ]);
     }
 
     public function show(string $slug)
     {
-        $region = config("uac.regions.{$slug}");
+        $region = Content::region($slug);
 
         abort_unless($region, 404);
 

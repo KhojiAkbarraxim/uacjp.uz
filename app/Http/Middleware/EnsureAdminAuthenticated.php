@@ -11,6 +11,10 @@ class EnsureAdminAuthenticated
     public function handle(Request $request, Closure $next): Response
     {
         if (! session('admin_authenticated')) {
+            if ($request->isMethod('GET')) {
+                $request->session()->put('url.intended', $request->fullUrl());
+            }
+
             return redirect()->route('admin.login')
                 ->with('error', 'Please log in to access the admin panel.');
         }

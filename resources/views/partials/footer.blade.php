@@ -33,8 +33,9 @@
             <div>
                 <x-i18n :text="ui('footer.contact_heading')" tag="h2" class="mb-4 text-xs font-semibold uppercase tracking-[0.24em] text-white/80" />
                 <div class="space-y-2.5 text-sm leading-6 text-white/70">
-                    <a href="mailto:{{ config('uac.contact.email') }}" class="block transition-colors duration-200 hover:text-white">
-                        {{ config('uac.contact.email') }}
+                    @php $contactEmail = \App\Support\Content::contactEmail(); @endphp
+                    <a href="mailto:{{ $contactEmail }}" class="block transition-colors duration-200 hover:text-white">
+                        {{ $contactEmail }}
                     </a>
                     <x-i18n :text="ui('footer.regional_contacts')" tag="a" href="{{ route('contact') }}" class="block transition-colors duration-200 hover:text-[#a3f69c]" />
                     <x-i18n :text="ui('footer.response_note')" tag="p" />
@@ -44,7 +45,7 @@
             <div>
                 <x-i18n :text="ui('footer.community_heading')" tag="h2" class="mb-4 text-xs font-semibold uppercase tracking-[0.24em] text-white/80" />
                 <div class="space-y-3">
-                    @foreach (config('uac.contact.socials') as $social)
+                    @foreach (\App\Support\Content::socials() as $social)
                         <a href="{{ $social['url'] }}" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-sm leading-6 text-white/70 transition-colors duration-200 hover:text-[#a3f69c]">
                             <span class="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/80 transition-colors duration-200 hover:bg-white/10">
                                 @if (($social['platform'] ?? '') === 'facebook')

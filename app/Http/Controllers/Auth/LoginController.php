@@ -5,12 +5,15 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
     public function show()
     {
+        if (session('admin_authenticated')) {
+            return redirect()->route('admin.dashboard');
+        }
+
         return view('auth.login');
     }
 
@@ -18,28 +21,42 @@ class LoginController extends Controller
     {
         $validated = $request->validate([
             'email'    => ['required', 'email'],
-            'password' => ['required'],
+            'password' => ['required', 'string'],
         ]);
 
-        $adminEmail = config('admin.email', env('ADMIN_EMAIL', 'admin@uacjp.uz'));
-        $adminPassword = config('admin.password', env('ADMIN_PASSWORD', 'admin12345'));
-
-        if ($validated['email'] !== $adminEmail || ! Hash::check($validated['password'], $adminPassword)) {
-            return back()->withErrors(['email' => 'Invalid credentials.'])->withInput();
+        if (! $this->credentialsMatch($validated['email'], $validated['password'])) {
+            return back()->withErrors(['email' => 'Invalid credentials.'])->onlyInput('email');
         }
 
-        Session::put('admin_authenticated', true);
-        Session::put('admin_email', $validated['email']);
+        $request->session()->regenerate();
+        $request->session()->put('admin_authenticated', true);
+        $request->session()->put('admin_email', $validated['email']);
 
-        return redirect()->route('admin.join.index')
+        return redirect()->intended(route('admin.dashboard'))
             ->with('success', 'Welcome back, admin.');
     }
 
     public function logout(Request $request)
     {
-        Session::forget('admin_authenticated');
-        Session::forget('admin_email');
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
-        return redirect()->route('home')->with('success', 'Logged out.');
+        return redirect()->route('home');
+    }
+
+    private function credentialsMatch(string $email, string $password): bool
+    {
+        $adminEmail = (string) config('admin.email');
+        $adminPassword = (string) config('admin.password');
+
+        if ($adminEmail === '' || $adminPassword === '' || ! hash_equals(strtolower($adminEmail), strtolower($email))) {
+            return false;
+        }
+
+        if (Hash::info($adminPassword)['algo'] !== null) {
+            return Hash::check($password, $adminPassword);
+        }
+
+        return hash_equals($adminPassword, $password);
     }
 }

@@ -2,19 +2,21 @@
 
 namespace App\Http\Controllers;
 
+use App\Support\Content;
 use Illuminate\Support\Collection;
 
 class PageController extends Controller
 {
     public function home()
     {
-        $regions = collect(config('uac.regions'))->take(4)->values()->all();
+        $regions = collect(Content::regions())->take(4)->values()->all();
 
         return view('pages.home', [
             'pageTitle' => ui('pages.home.title'),
             'metaDescription' => ui('pages.home.meta'),
             'regions' => $regions,
-            'latestNews' => config('uac.latest_news'),
+            'latestNews' => Content::news(),
+            'events' => Content::events(),
             'heroStats' => config('uac.hero_stats'),
             'mission' => config('uac.mission'),
             'vision' => config('uac.vision'),
@@ -57,7 +59,7 @@ class PageController extends Controller
         return view('pages.contact', [
             'pageTitle' => ui('pages.contact.title'),
             'metaDescription' => ui('pages.contact.meta'),
-            'contact' => config('uac.contact'),
+            'contact' => [...config('uac.contact'), 'email' => Content::contactEmail(), 'socials' => Content::socials()],
             'faqs' => config('uac.faqs'),
         ]);
     }

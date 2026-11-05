@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Event;
 use App\Models\JoinApplication;
+use App\Models\Member;
+use App\Models\News;
+use App\Models\Region;
 use Illuminate\Support\Carbon;
 
 class DashboardController extends Controller
@@ -28,6 +32,13 @@ class DashboardController extends Controller
 
         $recent = JoinApplication::latest()->take(5)->get();
 
-        return view('admin.dashboard', compact('stats', 'recent'));
+        $content = [
+            ['label' => 'Regions', 'count' => Region::count(), 'route' => 'admin.regions.index'],
+            ['label' => 'Members', 'count' => Member::count(), 'route' => 'admin.members.index'],
+            ['label' => 'Upcoming events', 'count' => Event::whereDate('date', '>=', today())->count(), 'route' => 'admin.events.index'],
+            ['label' => 'News', 'count' => News::count(), 'route' => 'admin.news.index'],
+        ];
+
+        return view('admin.dashboard', compact('stats', 'recent', 'content'));
     }
 }

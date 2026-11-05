@@ -19,11 +19,17 @@ class PublicPagesTest extends TestCase
             '/partners',
             '/contact',
             '/join',
+            '/news/2024-05-27-first-meeting-of-the-year',
         ];
 
         foreach ($routes as $route) {
             $this->get($route)->assertOk();
         }
+    }
+
+    public function test_unknown_news_returns_not_found(): void
+    {
+        $this->get('/news/no-such-article')->assertNotFound();
     }
 
     public function test_unknown_region_returns_not_found(): void

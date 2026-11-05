@@ -8,31 +8,43 @@ use Illuminate\Http\Request;
 
 class SiteSettingController extends Controller
 {
-    public function index()
+    public function edit()
     {
-        $settings = SiteSetting::all();
-        return view('admin.settings.index', compact('settings'));
+        $settings = [
+            'contact_email' => SiteSetting::get('contact.email', 'en') ?? config('uac.contact.email'),
+            'social_facebook' => $this->url(SiteSetting::get('social.facebook', 'en')),
+            'social_telegram' => $this->url(SiteSetting::get('social.telegram', 'en')),
+            'hero_caption' => SiteSetting::dict('home.hero_caption'),
+        ];
+
+        return view('admin.settings', compact('settings'));
     }
 
     public function update(Request $request)
     {
         $validated = $request->validate([
-            'settings.*.key' => ['required', 'string'],
-            'settings.*.value_en' => ['nullable', 'string'],
-            'settings.*.value_uz' => ['nullable', 'string'],
-            'settings.*.value_ja' => ['nullable', 'string'],
-            'settings.*.meta' => ['nullable', 'json'],
+            'contact_email' => ['required', 'email', 'max:255'],
+            'social_facebook' => ['nullable', 'url', 'max:255'],
+            'social_telegram' => ['nullable', 'url', 'max:255'],
+            'hero_caption_en' => ['nullable', 'string', 'max:500'],
+            'hero_caption_uz' => ['nullable', 'string', 'max:500'],
+            'hero_caption_ja' => ['nullable', 'string', 'max:500'],
         ]);
 
-        collect($validated['settings'])->each(function ($setting) {
-            SiteSetting::updateOrCreate(['key' => $setting['key']], [
-                'value_en' => $setting['value_en'],
-                'value_uz' => $setting['value_uz'],
-                'value_ja' => $setting['value_ja'],
-                'meta' => json_decode($setting['meta'] ?? 'null', true),
-            ]);
-        });
+        SiteSetting::set('contact.email', $validated['contact_email'], 'en');
+        SiteSetting::set('social.facebook', $validated['social_facebook'] ?? null, 'en');
+        SiteSetting::set('social.telegram', $validated['social_telegram'] ?? null, 'en');
+
+        foreach (['en', 'uz', 'ja'] as $locale) {
+            SiteSetting::set('home.hero_caption', $validated["hero_caption_{$locale}"] ?? null, $locale);
+        }
 
         return back()->with('success', 'Settings saved.');
+    }
+
+    /** The seeder stores "#" as a placeholder link; show it as empty. */
+    private function url(?string $value): ?string
+    {
+        return $value === '#' ? null : $value;
     }
 }

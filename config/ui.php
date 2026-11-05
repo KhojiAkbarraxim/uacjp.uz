@@ -38,6 +38,11 @@ return [
     ],
 
     'pages' => [
+        'news' => [
+            'read_more' => ['en' => 'Read more →', 'uz' => 'Batafsil →', 'ja' => '続きを読む →'],
+            'back' => ['en' => '← Back to home', 'uz' => '← Bosh sahifaga', 'ja' => '← ホームへ戻る'],
+            'empty' => ['en' => 'News will be posted here soon.', 'uz' => 'Yangiliklar tez orada shu yerda eʼlon qilinadi.', 'ja' => 'ニュースは近日公開予定です。'],
+        ],
         'home' => [
             'title' => ['en' => 'Home', 'uz' => 'Bosh sahifa', 'ja' => 'ホーム'],
             'meta' => ['en' => 'Uzbek Academic Club in Japan connects scholars across regions, activities, and academic partnerships.', 'uz' => 'Uzbek Academic Club in Japan turli mintaqalar, tadbirlar va ilmiy hamkorliklardagi olimlarni bogʻlaydi.', 'ja' => 'Uzbek Academic Club in Japanは、地域・活動・学術パートナーシップを超えて研究者をつなぎます。'],

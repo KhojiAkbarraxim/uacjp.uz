@@ -24,7 +24,7 @@
 
             @php
                 $locale   = app()->getLocale();
-                $events   = config('uac.events');
+                $events   = \App\Support\Content::events();
                 $now      = \Carbon\Carbon::now();
             @endphp
 

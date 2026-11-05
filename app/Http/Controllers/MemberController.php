@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Support\Content;
+
 class MemberController extends Controller
 {
     public function index()
     {
-        $members = config('uac.members');
+        $members = Content::members();
 
         $regions = collect($members)
             ->unique('region_slug')

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Schema;
 
 class SiteSetting extends Model
 {
@@ -13,13 +14,14 @@ class SiteSetting extends Model
 
     protected $casts = ['meta' => 'array'];
 
-    public static function get(string $key, string $locale = null): ?string
+    public static function get(string $key, ?string $locale = null): ?string
     {
         $locale = $locale ?? app()->getLocale();
         $setting = self::where('key', $key)->first();
         if (! $setting) {
             return null;
         }
+
         return match ($locale) {
             'uz' => $setting->value_uz ?? $setting->value_en,
             'ja' => $setting->value_ja ?? $setting->value_en,
@@ -27,7 +29,7 @@ class SiteSetting extends Model
         };
     }
 
-    public static function set(string $key, string $value, string $locale = 'en'): void
+    public static function set(string $key, ?string $value, string $locale = 'en'): void
     {
         $column = match ($locale) {
             'uz' => 'value_uz',
@@ -38,5 +40,21 @@ class SiteSetting extends Model
             ['key' => $key],
             [$column => $value]
         );
+    }
+
+    public static function dict(string $key): array
+    {
+        $setting = self::where('key', $key)->first();
+
+        return [
+            'en' => $setting?->value_en,
+            'uz' => $setting?->value_uz,
+            'ja' => $setting?->value_ja,
+        ];
+    }
+
+    public static function tablesReady(): bool
+    {
+        return Schema::hasTable('site_settings');
     }
 }

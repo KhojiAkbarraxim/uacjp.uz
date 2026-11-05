@@ -1,9 +1,8 @@
 @extends('admin.layout')
 
+@section('title', 'Dashboard')
+
 @section('content')
-    @php
-        $pageTitle = ['en' => 'Admin Dashboard', 'uz' => 'Admin boshqaruv paneli', 'ja' => '管理ダッシュボード'];
-    @endphp
 
     <section class="container-shell space-y-8">
 
@@ -28,20 +27,31 @@
             <div class="academic-card p-6 border-l-4 border-yellow-500">
                 <x-i18n :text="ui('admin.status.pending')" tag="p" class="text-sm uppercase tracking-[0.15em] text-yellow-700 mb-2" />
                 <p class="text-3xl font-bold text-yellow-700">{{ number_format($stats['pending']) }}</p>
-                <p class="text-xs text-muted mt-1">@{{ i18n_text(ui('admin.status.pending')) }}: {{ $stats['this_week']['pending'] }}</p>
+                <p class="text-xs text-muted mt-1">{{ i18n_text(['en' => 'This week', 'uz' => 'Shu hafta', 'ja' => '今週']) }}: {{ $stats['this_week']['pending'] }}</p>
             </div>
 
             <div class="academic-card p-6 border-l-4 border-green-500">
                 <x-i18n :text="ui('admin.status.approved')" tag="p" class="text-sm uppercase tracking-[0.15em] text-green-700 mb-2" />
                 <p class="text-3xl font-bold text-green-700">{{ number_format($stats['approved']) }}</p>
-                <p class="text-xs text-muted mt-1">@{{ i18n_text(ui('admin.status.approved')) }}: {{ $stats['this_week']['approved'] }}</p>
+                <p class="text-xs text-muted mt-1">{{ i18n_text(['en' => 'This week', 'uz' => 'Shu hafta', 'ja' => '今週']) }}: {{ $stats['this_week']['approved'] }}</p>
             </div>
 
             <div class="academic-card p-6 border-l-4 border-red-500">
                 <x-i18n :text="ui('admin.status.rejected')" tag="p" class="text-sm uppercase tracking-[0.15em] text-red-700 mb-2" />
                 <p class="text-3xl font-bold text-red-700">{{ number_format($stats['rejected']) }}</p>
-                <p class="text-xs text-muted mt-1">@{{ i18n_text(ui('admin.status.rejected')) }}: {{ $stats['this_week']['rejected'] }}</p>
+                <p class="text-xs text-muted mt-1">{{ i18n_text(['en' => 'This week', 'uz' => 'Shu hafta', 'ja' => '今週']) }}: {{ $stats['this_week']['rejected'] }}</p>
             </div>
+        </div>
+
+        <!-- Site content -->
+        <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            @foreach ($content as $item)
+                <a href="{{ route($item['route']) }}" class="academic-card block p-5">
+                    <p class="text-sm uppercase tracking-[0.15em] text-muted">{{ $item['label'] }}</p>
+                    <p class="mt-1 text-3xl font-bold text-primary">{{ number_format($item['count']) }}</p>
+                    <p class="mt-2 text-sm font-semibold text-secondary">{{ i18n_text(['en' => 'Manage', 'uz' => 'Boshqarish', 'ja' => '管理']) }} →</p>
+                </a>
+            @endforeach
         </div>
 
         <!-- Recent Applications -->

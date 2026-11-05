@@ -8,6 +8,12 @@ return new class extends Migration
 {
     public function up(): void
     {
+        // Previously named 2026_10_22_090941_*, which ran before the regions table
+        // existed. Skip if an environment already created it under the old name.
+        if (Schema::hasTable('region_secretaries')) {
+            return;
+        }
+
         Schema::create('region_secretaries', function (Blueprint $table) {
             $table->id();
             $table->foreignId('region_id')->constrained()->onDelete('cascade');
