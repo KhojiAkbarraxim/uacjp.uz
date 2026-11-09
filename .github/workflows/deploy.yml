@@ -1,0 +1,197 @@
+name: Deploy to uacjp.uz
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: 'Upload nothing, only log what would change'
+        type: boolean
+        default: true
+
+# Never cancel a deploy half way through an upload.
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+env:
+  # Everything that lives on the server and must never be uploaded or deleted:
+  # live config, user data, caches, uploaded files.
+  PHP_VERSION: ${{ vars.PHP_VERSION || '8.4' }}
+
+jobs:
+  build:
+    name: Build release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.PHP_VERSION }}
+          coverage: none
+
+      - name: Install PHP dependencies (production)
+        run: composer install --no-dev --optimize-autoloader --no-interaction --no-progress
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install JS dependencies
+        run: npm ci
+
+      # public/build is gitignored, so this is the only place the deployed
+      # CSS/JS is produced. The hosting account needs no Node.js at all.
+      - name: Build assets
+        run: npm run build
+
+      - name: Pack release
+        run: |
+          tar -czf "${RUNNER_TEMP}/release.tar.gz" \
+            --exclude='./.git' \
+            --exclude='./.github' \
+            --exclude='./node_modules' \
+            --exclude='./tests' \
+            --exclude='./storage' \
+            --exclude='./bootstrap/cache' \
+            --exclude='./public/uploads' \
+            --exclude='./.env' \
+            --exclude='./database/*.sqlite' \
+            .
+          ls -lh "${RUNNER_TEMP}/release.tar.gz"
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: release
+          path: ${{ runner.temp }}/release.tar.gz
+          retention-days: 7
+
+  # ---------------------------------------------------------------------------
+  # Preferred path. Requires shell access on the hosting account, because only
+  # this way can migrations and Laravel's caches be refreshed after upload.
+  # Enable by setting the repository variable DEPLOY_METHOD to "ssh".
+  # ---------------------------------------------------------------------------
+  deploy-ssh:
+    name: Deploy over SSH
+    needs: build
+    if: vars.DEPLOY_METHOD == 'ssh'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: release
+          path: ${{ runner.temp }}
+
+      - name: Unpack release
+        run: |
+          mkdir -p release
+          tar -xzf "${RUNNER_TEMP}/release.tar.gz" -C release
+
+      - name: Configure SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_PORT: ${{ vars.SSH_PORT || '22' }}
+        run: |
+          mkdir -p ~/.ssh && chmod 700 ~/.ssh
+          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/id_deploy
+          chmod 600 ~/.ssh/id_deploy
+          if [ -n "$SSH_KNOWN_HOSTS" ]; then
+            printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          else
+            echo "::warning::SSH_KNOWN_HOSTS is not set; trusting the host key on first contact."
+            ssh-keyscan -p "$SSH_PORT" -H "$SSH_HOST" >> ~/.ssh/known_hosts 2>/dev/null
+          fi
+          chmod 600 ~/.ssh/known_hosts
+
+      - name: Upload with rsync
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_PORT: ${{ vars.SSH_PORT || '22' }}
+          DEPLOY_PATH: ${{ vars.DEPLOY_PATH || '/home/uacjpuz/laravel_app' }}
+          DRY_RUN: ${{ inputs.dry_run || false }}
+        run: |
+          FLAGS="-rlz --human-readable --delete --delete-after"
+          if [ "$DRY_RUN" = "true" ]; then
+            FLAGS="$FLAGS --dry-run --itemize-changes"
+            echo "::notice::Dry run - nothing will be written to the server."
+          fi
+          rsync $FLAGS \
+            --exclude='/.env' \
+            --exclude='/storage' \
+            --exclude='/bootstrap/cache' \
+            --exclude='/public/uploads' \
+            --exclude='/database/database.sqlite' \
+            -e "ssh -i ~/.ssh/id_deploy -p ${SSH_PORT}" \
+            release/ "${SSH_USER}@${SSH_HOST}:${DEPLOY_PATH}/"
+
+      - name: Run migrations and refresh caches
+        if: ${{ !(inputs.dry_run || false) }}
+        env:
+          SSH_HOST: ${{ secrets.SSH_HOST }}
+          SSH_USER: ${{ secrets.SSH_USER }}
+          SSH_PORT: ${{ vars.SSH_PORT || '22' }}
+          DEPLOY_PATH: ${{ vars.DEPLOY_PATH || '/home/uacjpuz/laravel_app' }}
+          PHP_BIN: ${{ vars.PHP_BIN || 'php' }}
+        run: |
+          ssh -i ~/.ssh/id_deploy -p "$SSH_PORT" "${SSH_USER}@${SSH_HOST}" \
+            "set -e
+             cd '${DEPLOY_PATH}'
+             ${PHP_BIN} artisan migrate --force
+             ${PHP_BIN} artisan optimize:clear
+             ${PHP_BIN} artisan config:cache
+             ${PHP_BIN} artisan route:cache
+             ${PHP_BIN} artisan view:cache"
+
+  # ---------------------------------------------------------------------------
+  # Fallback path, used when the hosting package has no shell access. Works on
+  # every DirectAdmin account, but cannot run migrations or rebuild Laravel's
+  # caches - those stay a manual step. This is the default.
+  # ---------------------------------------------------------------------------
+  deploy-ftp:
+    name: Deploy over FTP
+    needs: build
+    if: vars.DEPLOY_METHOD == 'ftp' || vars.DEPLOY_METHOD == ''
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          name: release
+          path: ${{ runner.temp }}
+
+      - name: Unpack release
+        run: |
+          mkdir -p release
+          tar -xzf "${RUNNER_TEMP}/release.tar.gz" -C release
+
+      - name: Upload over FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ${{ vars.FTP_PROTOCOL || 'ftps' }}
+          local-dir: ./release/
+          server-dir: ${{ vars.FTP_SERVER_DIR || 'laravel_app/' }}
+          dry-run: ${{ inputs.dry_run || false }}
+          log-level: standard
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/.env
+            storage/**
+            bootstrap/cache/**
+            public/uploads/**
+            database/*.sqlite
+
+      - name: Remind about the manual step
+        if: ${{ !(inputs.dry_run || false) }}
+        run: |
+          echo "::warning::Code and assets are uploaded. Migrations and Laravel caches were NOT refreshed - FTP cannot run artisan. Run them from the panel, or switch DEPLOY_METHOD to 'ssh'."

@@ -1,0 +1,68 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+      - 'claude/**'
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Tests and build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      # PHP_VERSION must match the PHP version the hosting account runs,
+      # otherwise vendor/ built here can fail at runtime on the server.
+      # Set it under Settings -> Secrets and variables -> Actions -> Variables.
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ vars.PHP_VERSION || '8.4' }}
+          coverage: none
+
+      - name: Validate composer.json / composer.lock
+        run: composer validate --strict --no-check-publish
+
+      - name: Cache Composer packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/composer/files
+          key: composer-${{ runner.os }}-php${{ vars.PHP_VERSION || '8.4' }}-${{ hashFiles('composer.lock') }}
+          restore-keys: composer-${{ runner.os }}-php${{ vars.PHP_VERSION || '8.4' }}-
+
+      - name: Install PHP dependencies
+        run: composer install --prefer-dist --no-interaction --no-progress
+
+      - name: Report platform requirements
+        run: composer check-platform-reqs
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install JS dependencies
+        run: npm ci
+
+      # Must run before the tests: Blade's @vite directive reads
+      # public/build/manifest.json, so page tests fail without a build.
+      - name: Build assets
+        run: npm run build
+
+      - name: Prepare test environment
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+
+      # phpunit.xml pins sqlite :memory:, so no database service is needed.
+      - name: Run tests
+        run: php artisan test
