@@ -1,0 +1,73 @@
+# Read-only connection check. Verifies that the deploy secrets, the host key
+# and the SSH port actually work, without writing anything to the server, so
+# the first real deploy is not also the first time the credentials are tried.
+name: SSH connection check
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - 'claude/**'
+
+jobs:
+  check:
+    name: Can the runner reach the server
+    runs-on: ubuntu-latest
+    env:
+      SSH_HOST: ${{ secrets.SSH_HOST }}
+      SSH_USER: ${{ secrets.SSH_USER }}
+      SSH_PORT: ${{ vars.SSH_PORT || '22' }}
+      DEPLOY_PATH: ${{ vars.DEPLOY_PATH || '/home/uacjpuz/laravel_app' }}
+      PHP_BIN: ${{ vars.PHP_BIN || 'php' }}
+
+    steps:
+      - name: Check that the settings are present
+        run: |
+          missing=0
+          for name in SSH_HOST SSH_USER; do
+            if [ -z "${!name}" ]; then echo "::error::secret $name is not set"; missing=1; fi
+          done
+          if [ -z "${{ secrets.SSH_PRIVATE_KEY }}" ]; then
+            echo "::error::secret SSH_PRIVATE_KEY is not set"; missing=1
+          fi
+          if [ "${{ vars.DEPLOY_METHOD }}" != "ssh" ]; then
+            echo "::warning::variable DEPLOY_METHOD is '${{ vars.DEPLOY_METHOD }}', expected 'ssh'"
+          fi
+          exit $missing
+
+      - name: Configure SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          SSH_KNOWN_HOSTS: ${{ secrets.SSH_KNOWN_HOSTS }}
+        run: |
+          mkdir -p ~/.ssh && chmod 700 ~/.ssh
+          printf '%s\n' "$SSH_PRIVATE_KEY" > ~/.ssh/id_deploy
+          chmod 600 ~/.ssh/id_deploy
+          ssh-keygen -y -f ~/.ssh/id_deploy > /dev/null \
+            || { echo "::error::SSH_PRIVATE_KEY is not a usable private key - check that the BEGIN and END lines were copied too"; exit 1; }
+          if [ -n "$SSH_KNOWN_HOSTS" ]; then
+            printf '%s\n' "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
+          else
+            ssh-keyscan -p "$SSH_PORT" -H "$SSH_HOST" >> ~/.ssh/known_hosts 2>/dev/null \
+              || { echo "::error::no SSH service answered on ${SSH_HOST}:${SSH_PORT} - the port is probably not 22"; exit 1; }
+          fi
+          chmod 600 ~/.ssh/known_hosts
+
+      # Nothing below writes to the server.
+      - name: Inspect the account
+        run: |
+          ssh -i ~/.ssh/id_deploy -p "$SSH_PORT" -o BatchMode=yes -o ConnectTimeout=20 \
+            "${SSH_USER}@${SSH_HOST}" "
+              echo 'user:       ' \$(whoami)
+              echo 'home:       ' \$HOME
+              echo 'tar:        ' \$(command -v tar || echo MISSING)
+              echo 'php:        ' \$(${PHP_BIN} -v 2>/dev/null | head -1 || echo MISSING)
+              echo 'composer:   ' \$(command -v composer || echo MISSING)
+              echo 'deploy path:' \$(test -d '${DEPLOY_PATH}' && echo present || echo MISSING)
+              echo '.env:       ' \$(test -f '${DEPLOY_PATH}/.env' && echo present || echo MISSING)
+              echo 'manifest:   ' \$(test -f '${DEPLOY_PATH}/public/build/manifest.json' && echo present || echo MISSING)
+              echo 'free space: ' \$(df -h '${DEPLOY_PATH}' | tail -1 | awk '{print \$4}')
+            "
+
+      - name: Summary
+        run: echo "::notice::SSH works. The deploy can be merged to main."
