@@ -16,7 +16,7 @@ class PageController extends Controller
             'metaDescription' => ui('pages.home.meta'),
             'regions' => $regions,
             'latestNews' => Content::news(),
-            'events' => Content::events(),
+            'events' => Content::upcomingEvents(),
             'heroStats' => config('uac.hero_stats'),
             'mission' => config('uac.mission'),
             'vision' => config('uac.vision'),

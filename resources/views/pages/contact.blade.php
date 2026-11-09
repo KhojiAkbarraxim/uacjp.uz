@@ -17,15 +17,36 @@
                 <x-i18n :text="ui('pages.contact.form_heading')" tag="h2" class="text-3xl" />
                 <x-i18n :text="ui('pages.contact.form_description')" tag="p" class="mt-3 text-base leading-8 text-muted" />
 
-                <form class="mt-8 space-y-5" action="#" method="post" novalidate>
+                @if (session('success'))
+                    <div class="mt-6 rounded border-l-4 border-green-600 bg-green-50 p-4 text-green-800">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
+                @if (session('error'))
+                    <div class="mt-6 rounded border-l-4 border-red-600 bg-red-50 p-4 text-red-800">
+                        {{ session('error') }}
+                    </div>
+                @endif
+
+                @if ($errors->any())
+                    <ul class="mt-6 list-disc rounded border-l-4 border-red-600 bg-red-50 p-4 pl-8 text-red-800">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                @endif
+
+                <form class="mt-8 space-y-5" action="{{ route('contact.send') }}" method="post">
+                    @csrf
                     <div class="grid gap-5 sm:grid-cols-2">
                         <div>
                             <x-i18n :text="ui('pages.contact.label_full_name')" tag="label" for="name" class="mb-2 block text-sm font-medium text-primary" />
-                            <input id="name" name="name" type="text" class="form-input" placeholder="{{ i18n_text(ui('pages.contact.placeholder_full_name')) }}" data-i18n-en="{{ ui('pages.contact.placeholder_full_name')['en'] }}" data-i18n-uz="{{ ui('pages.contact.placeholder_full_name')['uz'] }}" data-i18n-ja="{{ ui('pages.contact.placeholder_full_name')['ja'] }}" data-i18n-target="placeholder" required>
+                            <input id="name" name="name" type="text" value="{{ old('name') }}" class="form-input" placeholder="{{ i18n_text(ui('pages.contact.placeholder_full_name')) }}" data-i18n-en="{{ ui('pages.contact.placeholder_full_name')['en'] }}" data-i18n-uz="{{ ui('pages.contact.placeholder_full_name')['uz'] }}" data-i18n-ja="{{ ui('pages.contact.placeholder_full_name')['ja'] }}" data-i18n-target="placeholder" required>
                         </div>
                         <div>
                             <x-i18n :text="ui('pages.contact.label_email')" tag="label" for="email" class="mb-2 block text-sm font-medium text-primary" />
-                            <input id="email" name="email" type="email" class="form-input" placeholder="{{ i18n_text(ui('pages.contact.placeholder_email')) }}" data-i18n-en="{{ ui('pages.contact.placeholder_email')['en'] }}" data-i18n-uz="{{ ui('pages.contact.placeholder_email')['uz'] }}" data-i18n-ja="{{ ui('pages.contact.placeholder_email')['ja'] }}" data-i18n-target="placeholder" required>
+                            <input id="email" name="email" type="email" value="{{ old('email') }}" class="form-input" placeholder="{{ i18n_text(ui('pages.contact.placeholder_email')) }}" data-i18n-en="{{ ui('pages.contact.placeholder_email')['en'] }}" data-i18n-uz="{{ ui('pages.contact.placeholder_email')['uz'] }}" data-i18n-ja="{{ ui('pages.contact.placeholder_email')['ja'] }}" data-i18n-target="placeholder" required>
                         </div>
                     </div>
 
@@ -42,7 +63,7 @@
 
                     <div>
                         <x-i18n :text="ui('pages.contact.label_message')" tag="label" for="message" class="mb-2 block text-sm font-medium text-primary" />
-                        <textarea id="message" name="message" rows="6" class="form-input" placeholder="{{ i18n_text(ui('pages.contact.placeholder_message')) }}" data-i18n-en="{{ ui('pages.contact.placeholder_message')['en'] }}" data-i18n-uz="{{ ui('pages.contact.placeholder_message')['uz'] }}" data-i18n-ja="{{ ui('pages.contact.placeholder_message')['ja'] }}" data-i18n-target="placeholder" required></textarea>
+                        <textarea id="message" name="message" rows="6" class="form-input" placeholder="{{ i18n_text(ui('pages.contact.placeholder_message')) }}" data-i18n-en="{{ ui('pages.contact.placeholder_message')['en'] }}" data-i18n-uz="{{ ui('pages.contact.placeholder_message')['uz'] }}" data-i18n-ja="{{ ui('pages.contact.placeholder_message')['ja'] }}" data-i18n-target="placeholder" required>{{ old('message') }}</textarea>
                     </div>
 
                     <x-i18n :text="ui('pages.contact.submit_button')" tag="button" type="submit" class="btn-primary" />

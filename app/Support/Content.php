@@ -44,6 +44,38 @@ class Content
         );
     }
 
+    /**
+     * Events that have not happened yet, soonest first.
+     *
+     * Filtered on the date itself, not on the `is_past` column: that column is
+     * only recomputed when a record is saved, so it goes stale the moment a
+     * date passes with nobody editing the event. Both the database rows and the
+     * static config store the date as a `Y-m-d` string, so one comparison
+     * serves both sources.
+     */
+    public static function upcomingEvents(): array
+    {
+        return self::eventsOnOrAfter(true);
+    }
+
+    /** Events that have already happened, most recent first. */
+    public static function pastEvents(): array
+    {
+        return array_reverse(self::eventsOnOrAfter(false));
+    }
+
+    private static function eventsOnOrAfter(bool $upcoming): array
+    {
+        $today = now()->toDateString();
+
+        return array_values(array_filter(
+            self::events(),
+            fn (array $event) => $upcoming
+                ? ($event['date'] ?? '') >= $today
+                : ($event['date'] ?? '') < $today,
+        ));
+    }
+
     public static function news(int $limit = 3): array
     {
         return self::fromTable(
