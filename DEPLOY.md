@@ -39,7 +39,7 @@ Under **Settings → Secrets and variables → Actions → Secrets**:
 | ssh | `SSH_HOST` | `web2.webspace.uz` |
 | ssh | `SSH_USER` | the hosting account user |
 | ssh | `SSH_PRIVATE_KEY` | private key whose public half is registered in DirectAdmin → SSH Keys |
-| ssh | `SSH_KNOWN_HOSTS` | output of `ssh-keyscan web2.webspace.uz` (optional but recommended) |
+| ssh | `SSH_KNOWN_HOSTS` | output of `ssh-keyscan web2.webspace.uz`, run **on your own computer**, not on the server: the DirectAdmin jailshell cannot read `/etc/ssh/ssh_host_*.pub`. Optional; without it the runner trusts the host key on first contact. |
 | ftp | `FTP_SERVER` | `uacjp.uz` |
 | ftp | `FTP_USERNAME` | the FTP account user |
 | ftp | `FTP_PASSWORD` | the FTP account password |
@@ -57,12 +57,25 @@ pasted into a chat, an issue or a commit message.
 | `PHP_BIN` | `php` | ssh only; `php` resolves to 8.4.27 on this account |
 | `FTP_SERVER_DIR` | `laravel_app/` | ftp only; relative to the FTP login directory |
 | `FTP_PROTOCOL` | `ftps` | ftp only; set to `ftp` if the server has no TLS |
+| `SITE_URL` | `https://www.uacjp.uz/up` | health check hit after a deploy; must return 200 |
 
 ### 4. Do a dry run first
 
 Run **Actions → Deploy to uacjp.uz → Run workflow** with `dry_run` left
 checked. Nothing is written to the server; the log lists exactly which files
 would change. Only then merge to `main`, where deploys run for real.
+
+## How the SSH deploy transfers files
+
+The release is streamed to the server as a single tarball over the SSH
+connection and unpacked there. `rsync` is **not** used: it is not installed on
+the hosting account and nothing can be installed without root. The only
+requirements are `tar` and a shell, both of which the jailshell provides.
+
+`public/build` is deleted before unpacking, because asset filenames are content
+hashed and stale builds would otherwise accumulate indefinitely. After
+unpacking, migrations run, Laravel's caches are rebuilt, and the deploy fails if
+`public/build/manifest.json` is missing or if the site does not return 200.
 
 ## What the deploy never touches
 
