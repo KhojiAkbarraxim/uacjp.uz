@@ -11,7 +11,7 @@
 <body class="min-h-screen">
     @php
         $nav = [
-            ['route' => 'admin.dashboard', 'match' => 'admin.dashboard', 'icon' => '📊', 'label' => ['en' => 'Dashboard', 'uz' => 'Boshqaruv paneli', 'ja' => 'ダッシュボード']],
+            ['route' => 'admin.dashboard', 'match' => 'admin.dashboard', 'icon' => '📊', 'label' => ['en' => 'Dashboard', 'uz' => 'Boşqaruv paneli', 'ja' => 'ダッシュボード']],
             ['route' => 'admin.join.index', 'match' => 'admin.join.*', 'icon' => '📋', 'label' => ['en' => 'Applications', 'uz' => 'Arizalar', 'ja' => '申請']],
             ['route' => 'admin.regions.index', 'match' => 'admin.regions.*', 'icon' => '🗾', 'label' => ['en' => 'Regions', 'uz' => 'Regionlar', 'ja' => '地域']],
             ['route' => 'admin.members.index', 'match' => 'admin.members.*', 'icon' => '👥', 'label' => ['en' => 'Members', 'uz' => 'Aʼzolar', 'ja' => 'メンバー']],
@@ -42,7 +42,7 @@
 
         <div class="space-y-2 border-t border-line p-3">
             <a href="{{ route('home') }}" target="_blank" class="admin-nav-link">
-                <span aria-hidden="true">🌐</span> {{ i18n_text(['en' => 'View site', 'uz' => 'Saytni ko‘rish', 'ja' => 'サイトを表示']) }}
+                <span aria-hidden="true">🌐</span> {{ i18n_text(['en' => 'View site', 'uz' => 'Saytni köriş', 'ja' => 'サイトを表示']) }}
             </a>
             <form action="{{ route('admin.logout') }}" method="POST">
                 @csrf
