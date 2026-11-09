@@ -20,15 +20,15 @@ account does not need Node.js.
 
 ## One-time setup
 
-### 1. Pick a deploy method
+### 1. Deploy method
 
-Under **Settings → Secrets and variables → Actions → Variables**, set
-`DEPLOY_METHOD`:
+The account has shell access, so `DEPLOY_METHOD` is set to `ssh` under
+**Settings -> Secrets and variables -> Actions -> Variables**. That is the
+preferred path: it is the only one that can run migrations and rebuild
+Laravel's caches after upload.
 
-| Value | When to use | Limitation |
-| --- | --- | --- |
-| `ssh` | The hosting package has shell access (DirectAdmin shows an **SSH Keys** section). Preferred. | — |
-| `ftp` (default) | No shell access. | Cannot run migrations or rebuild Laravel caches; those stay manual. |
+The `ftp` value remains as a fallback for an account without shell access. It
+uploads code and assets, but migrations and caches stay manual.
 
 ### 2. Add the secrets
 
@@ -51,10 +51,10 @@ pasted into a chat, an issue or a commit message.
 
 | Variable | Default | Notes |
 | --- | --- | --- |
-| `PHP_VERSION` | `8.4` | **Must match the server's PHP version.** See the warning below. |
+| `PHP_VERSION` | `8.4` | Matches the server's PHP 8.4.27; leave as is. |
 | `DEPLOY_PATH` | `/home/uacjpuz/laravel_app` | ssh only |
 | `SSH_PORT` | `22` | ssh only |
-| `PHP_BIN` | `php` | ssh only; some accounts need an absolute path such as `/usr/local/php83/bin/php` |
+| `PHP_BIN` | `php` | ssh only; `php` resolves to 8.4.27 on this account |
 | `FTP_SERVER_DIR` | `laravel_app/` | ftp only; relative to the FTP login directory |
 | `FTP_PROTOCOL` | `ftps` | ftp only; set to `ftp` if the server has no TLS |
 
@@ -70,14 +70,13 @@ would change. Only then merge to `main`, where deploys run for real.
 `database/*.sqlite` are excluded from both upload and deletion. Live config,
 sessions, logs and uploaded files are therefore safe.
 
-## Known issue: PHP version
+## PHP version
 
-`composer.lock` currently pins Symfony 8.1 components that require
-**PHP >= 8.4.1**, while `composer.json` declares `"php": "^8.3"`. If the
-hosting account runs PHP 8.3, `composer install` cannot succeed there and the
-lockfile has to be regenerated against PHP 8.3. Check the account's PHP version
-in DirectAdmin and set `PHP_VERSION` to match; CI will fail loudly if the
-lockfile and that version disagree.
+The hosting account runs **PHP 8.4.27**, verified on the server. `composer.lock`
+pins Symfony 8.1, which requires PHP >= 8.4.1, so it installs cleanly there even
+though `composer.json` still declares the looser `"php": "^8.3"`. The
+`PHP_VERSION` variable therefore stays at its `8.4` default; if the account is
+ever moved to PHP 8.3, the lockfile has to be regenerated first.
 
 ## Leftovers to remove from the web root
 
