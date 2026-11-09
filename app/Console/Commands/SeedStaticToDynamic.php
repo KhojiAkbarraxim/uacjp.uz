@@ -163,12 +163,16 @@ class SeedStaticToDynamic extends Command
                     'region_slug' => $member['region_slug'] ?? null,
                 ],
                 [
+                    'photo' => $member['photo'] ?? null,
                     'role_en' => $this->i18n($member['role'] ?? null, 'en'),
                     'role_uz' => $this->i18n($member['role'] ?? null, 'uz'),
                     'role_ja' => $this->i18n($member['role'] ?? null, 'ja'),
                     'affiliation_en' => $this->i18n($member['affiliation'] ?? null, 'en'),
                     'affiliation_uz' => $this->i18n($member['affiliation'] ?? null, 'uz'),
                     'affiliation_ja' => $this->i18n($member['affiliation'] ?? null, 'ja'),
+                    'bio_en' => $this->i18n($member['bio'] ?? null, 'en'),
+                    'bio_uz' => $this->i18n($member['bio'] ?? null, 'uz'),
+                    'bio_ja' => $this->i18n($member['bio'] ?? null, 'ja'),
                     'field_en' => $this->i18n($member['field'] ?? null, 'en'),
                     'field_uz' => $this->i18n($member['field'] ?? null, 'uz'),
                     'field_ja' => $this->i18n($member['field'] ?? null, 'ja'),
@@ -177,7 +181,7 @@ class SeedStaticToDynamic extends Command
                     'region_uz' => $this->i18n($member['region'] ?? null, 'uz'),
                     'region_ja' => $this->i18n($member['region'] ?? null, 'ja'),
                     'type' => $member['type'] ?? 'General',
-                    'sort_order' => $sort,
+                    'sort_order' => $member['sort_order'] ?? $sort,
                 ]
             );
             $this->info('Created member: '.$member['name']);

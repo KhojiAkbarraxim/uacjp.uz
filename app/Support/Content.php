@@ -70,6 +70,21 @@ class Content
         );
     }
 
+    /**
+     * Every published article, newest first. The news index lists these; the
+     * home page only previews the first few via news().
+     *
+     * @return array<int, array>
+     */
+    public static function newsArchive(): array
+    {
+        return self::fromTable(
+            News::class,
+            fn () => News::orderByDesc('date')->get()->map->toFrontendArray()->all(),
+            fn () => config('uac.latest_news', []),
+        );
+    }
+
     public static function newsItem(string $slug): ?array
     {
         return self::fromTable(

@@ -14,9 +14,11 @@
                         </p>
                     </div>
 
+                    {{-- Hero intentionally carries only the membership CTA; the
+                         "become a partner" button lives in the closing CTA block
+                         and on the About page. --}}
                     <div class="flex flex-col gap-3 sm:flex-row">
                         <x-i18n :text="ui('common.join_uac')" tag="a" href="{{ route('join') }}" class="btn-primary" />
-                        <x-i18n :text="ui('common.become_partner')" tag="a" href="{{ route('partners') }}" class="btn-secondary" />
                     </div>
 
                     <div class="grid gap-4 sm:grid-cols-3">
@@ -238,27 +240,7 @@
 
             <div class="space-y-5">
                 @forelse ($latestNews as $news)
-                    @php $newsUrl = ! empty($news['slug']) ? route('news.show', $news['slug']) : null; @endphp
-                    <article class="academic-card overflow-hidden sm:flex">
-                        @if (! empty($news['image']))
-                            <img src="{{ asset($news['image']) }}" alt="" loading="lazy" class="h-48 w-full object-cover sm:h-auto sm:w-56 sm:shrink-0">
-                        @endif
-                        <div class="p-6">
-                            <div class="mb-4 flex flex-wrap items-center gap-2">
-                                <x-i18n :text="$news['type']" tag="span" class="eyebrow" />
-                                <x-i18n :text="$news['date']" tag="span" class="chip" />
-                            </div>
-                            @if ($newsUrl)
-                                <a href="{{ $newsUrl }}" class="hover:underline"><x-i18n :text="$news['title']" tag="h3" class="text-2xl" /></a>
-                            @else
-                                <x-i18n :text="$news['title']" tag="h3" class="text-2xl" />
-                            @endif
-                            <x-i18n :text="$news['summary']" tag="p" class="mt-3 text-sm leading-7 text-muted" />
-                            @if ($newsUrl)
-                                <x-i18n :text="ui('pages.news.read_more')" tag="a" href="{{ $newsUrl }}" class="mt-4 inline-block text-sm font-semibold text-secondary hover:text-primary" />
-                            @endif
-                        </div>
-                    </article>
+                    <x-news-card :news="$news" />
                 @empty
                     <x-i18n :text="ui('pages.news.empty')" tag="p" class="academic-card p-6 text-muted" />
                 @endforelse
@@ -282,6 +264,34 @@
                             <x-i18n :text="$partner['type']" tag="p" class="text-xs uppercase tracking-[0.22em] text-muted" />
                             <h3 class="mt-3 text-2xl">{{ $partner['name'] }}</h3>
                         </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    </section>
+
+    <section class="section-shell">
+        <div class="container-shell space-y-10">
+            <x-section-title
+                :eyebrow="ui('pages.home.prospective_eyebrow')"
+                :title="ui('pages.home.prospective_title')"
+                :description="ui('pages.home.prospective_description')"
+                align="center"
+            />
+
+            <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                @foreach ($prospectivePartners as $partner)
+                    <div class="academic-card flex min-h-40 flex-col items-center justify-center gap-4 p-6 text-center">
+                        <x-i18n
+                            :text="$partner['name']"
+                            tag="img"
+                            target="alt"
+                            src="{{ asset($partner['logo']) }}"
+                            loading="lazy"
+                            decoding="async"
+                            class="h-16 w-auto max-w-[11rem] object-contain"
+                        />
+                        <x-i18n :text="$partner['name']" tag="p" class="text-sm font-medium leading-6 text-primary" />
                     </div>
                 @endforeach
             </div>

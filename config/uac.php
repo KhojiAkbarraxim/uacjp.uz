@@ -18,14 +18,17 @@ return [
         'founded' => '2024',
     ],
 
+    // Top-level order is fixed by the navbar partial, not by this list; see
+    // $topLevelOrder there. Members and Partners hang off the "About UAC" menu.
     'navigation' => [
         ['label' => ['en' => 'Home', 'uz' => 'Boş sahifa', 'ja' => 'ホーム'], 'route' => 'home'],
-        ['label' => ['en' => 'Regions', 'uz' => 'Regionlar', 'ja' => '地域'], 'route' => 'regions.index'],
+        ['label' => ['en' => 'About UAC', 'uz' => 'UAC haqida', 'ja' => 'UACについて'], 'route' => 'about'],
+        ['label' => ['en' => 'News', 'uz' => 'Yangiliklar', 'ja' => 'ニュース'], 'route' => 'news.index'],
         ['label' => ['en' => 'Activities', 'uz' => 'Tadbirlar', 'ja' => '活動'], 'route' => 'activities'],
+        ['label' => ['en' => 'Regions', 'uz' => 'Regionlar', 'ja' => '地域'], 'route' => 'regions.index'],
+        ['label' => ['en' => 'Contact Us', 'uz' => 'Boğlaniş', 'ja' => 'お問い合わせ'], 'route' => 'contact'],
         ['label' => ['en' => 'Members', 'uz' => 'Aʼzolar', 'ja' => 'メンバー'], 'route' => 'members.index'],
         ['label' => ['en' => 'Partners', 'uz' => 'Hamkorlar', 'ja' => 'パートナー'], 'route' => 'partners'],
-        ['label' => ['en' => 'About UAC', 'uz' => 'UAC haqida', 'ja' => 'UACについて'], 'route' => 'about'],
-        ['label' => ['en' => 'Contact Us', 'uz' => 'Boğlaniş', 'ja' => 'お問い合わせ'], 'route' => 'contact'],
         ['label' => ['en' => 'Join Us', 'uz' => 'Aʼzo böliş', 'ja' => '参加する'], 'route' => 'join'],
     ],
 
@@ -602,16 +605,96 @@ return [
         ],
     ],
 
+    // Real UAC officers. `type` groups them on the Members page:
+    // Executive → Executive Body, Ambassador → regional ambassadors, Staff → roles.
+    // Photos and affiliations arrive from the client; empty values are hidden.
     'members' => [
-        ['name' => 'Dilshod Abdullaev', 'role' => ['en' => 'Ph.D. Candidate', 'uz' => 'PhD doktorant', 'ja' => '博士課程'], 'affiliation' => ['en' => 'Waseda University', 'uz' => 'Vaseda universiteti', 'ja' => '早稲田大学'], 'field' => ['en' => 'Computer Science', 'uz' => 'Kompyuter fanlari', 'ja' => 'コンピュータサイエンス'], 'field_slug' => 'computer-science', 'region' => ['en' => 'Kanto', 'uz' => 'Kanto', 'ja' => '関東'], 'region_slug' => 'kanto', 'type' => 'Featured'],
-        ['name' => 'Aziza Murodova', 'role' => ['en' => 'Master’s Student', 'uz' => 'Magistrant', 'ja' => '修士課程'], 'affiliation' => ['en' => 'Kumamoto University', 'uz' => 'Kumamoto universiteti', 'ja' => '熊本大学'], 'field' => ['en' => 'Public Health', 'uz' => 'Jamoat soğliği', 'ja' => '公衆衛生'], 'field_slug' => 'public-health', 'region' => ['en' => 'Kyushu', 'uz' => 'Kyuşu', 'ja' => '九州'], 'region_slug' => 'kyushu', 'type' => 'General'],
-        ['name' => 'Bekzod Kholmatov', 'role' => ['en' => 'Research Associate', 'uz' => 'Ilmiy hamkor', 'ja' => '研究員'], 'affiliation' => ['en' => 'Kyoto University', 'uz' => 'Kioto universiteti', 'ja' => '京都大学'], 'field' => ['en' => 'International Relations', 'uz' => 'Xalqaro munosabatlar', 'ja' => '国際関係学'], 'field_slug' => 'international-relations', 'region' => ['en' => 'Kansai', 'uz' => 'Kansai', 'ja' => '関西'], 'region_slug' => 'kansai', 'type' => 'Featured'],
-        ['name' => 'Nilufar Ergasheva', 'role' => ['en' => 'Doctoral Researcher', 'uz' => 'Doktorant-tadqiqotçi', 'ja' => '博士研究員'], 'affiliation' => ['en' => 'Nagoya University', 'uz' => 'Nagoya universiteti', 'ja' => '名古屋大学'], 'field' => ['en' => 'Materials Science', 'uz' => 'Materialşunoslik', 'ja' => '材料科学'], 'field_slug' => 'materials-science', 'region' => ['en' => 'Chubu', 'uz' => 'Çubu', 'ja' => '中部'], 'region_slug' => 'chubu', 'type' => 'General'],
-        ['name' => 'Madina Khusanova', 'role' => ['en' => 'Doctoral Candidate', 'uz' => 'PhD doktorant', 'ja' => '博士課程'], 'affiliation' => ['en' => 'Hokkaido University', 'uz' => 'Hokkaydo universiteti', 'ja' => '北海道大学'], 'field' => ['en' => 'Environmental Policy', 'uz' => 'Ekologik siyosat', 'ja' => '環境政策'], 'field_slug' => 'environmental-policy', 'region' => ['en' => 'Tohoku / Hokkaido', 'uz' => 'Tohoku / Hokkaydo', 'ja' => '東北・北海道'], 'region_slug' => 'tohoku-hokkaido', 'type' => 'General'],
-        ['name' => 'Shahzod Mamatqulov', 'role' => ['en' => 'Postdoctoral Fellow', 'uz' => 'Postdoktorant', 'ja' => '博士研究員（ポスドク）'], 'affiliation' => ['en' => 'The University of Tokyo', 'uz' => 'Tokio universiteti', 'ja' => '東京大学'], 'field' => ['en' => 'Robotics', 'uz' => 'Robototexnika', 'ja' => 'ロボティクス'], 'field_slug' => 'robotics', 'region' => ['en' => 'Kanto', 'uz' => 'Kanto', 'ja' => '関東'], 'region_slug' => 'kanto', 'type' => 'General'],
-        ['name' => 'Gulrukh Mirzayeva', 'role' => ['en' => 'Graduate Researcher', 'uz' => 'Magistratura tadqiqotçisi', 'ja' => '大学院研究員'], 'affiliation' => ['en' => 'Osaka University', 'uz' => 'Osaka universiteti', 'ja' => '大阪大学'], 'field' => ['en' => 'Biotechnology', 'uz' => 'Biotexnologiya', 'ja' => 'バイオテクノロジー'], 'field_slug' => 'biotechnology', 'region' => ['en' => 'Kansai', 'uz' => 'Kansai', 'ja' => '関西'], 'region_slug' => 'kansai', 'type' => 'General'],
-        ['name' => 'Otabek Tursunov', 'role' => ['en' => 'Alumnus', 'uz' => 'Bitiruvçi', 'ja' => '卒業生'], 'affiliation' => ['en' => 'Formerly Tohoku University', 'uz' => 'Ilgari Tohoku universitetida', 'ja' => '元・東北大学'], 'field' => ['en' => 'Civil Engineering', 'uz' => 'Fuqarolik muhandisligi', 'ja' => '土木工学'], 'field_slug' => 'civil-engineering', 'region' => ['en' => 'Tohoku / Hokkaido', 'uz' => 'Tohoku / Hokkaydo', 'ja' => '東北・北海道'], 'region_slug' => 'tohoku-hokkaido', 'type' => 'Alumni'],
-        ['name' => 'Saida Kadirova', 'role' => ['en' => 'Alumna', 'uz' => 'Bitiruvçi', 'ja' => '卒業生'], 'affiliation' => ['en' => 'Formerly Kyushu University', 'uz' => 'Ilgari Kyuşu universitetida', 'ja' => '元・九州大学'], 'field' => ['en' => 'Economics', 'uz' => 'Iqtisodiyot', 'ja' => '経済学'], 'field_slug' => 'economics', 'region' => ['en' => 'Kyushu', 'uz' => 'Kyuşu', 'ja' => '九州'], 'region_slug' => 'kyushu', 'type' => 'Alumni'],
+        [
+            'name' => 'Umirdinov Alisher',
+            'photo' => null,
+            'role' => ['en' => 'Chief Advisor', 'uz' => 'Boş maslahatçi', 'ja' => '主席顧問'],
+            'affiliation' => ['en' => '', 'uz' => '', 'ja' => ''],
+            'type' => 'Executive',
+            'sort_order' => 1,
+        ],
+        [
+            'name' => 'Umida Ashurova',
+            'photo' => null,
+            'role' => ['en' => 'Advisor', 'uz' => 'Maslahatçi', 'ja' => '顧問'],
+            'affiliation' => ['en' => '', 'uz' => '', 'ja' => ''],
+            'type' => 'Executive',
+            'sort_order' => 2,
+        ],
+        [
+            'name' => 'Abdurashid Mavlanov',
+            'photo' => null,
+            'role' => ['en' => 'Advisor', 'uz' => 'Maslahatçi', 'ja' => '顧問'],
+            'affiliation' => ['en' => '', 'uz' => '', 'ja' => ''],
+            'type' => 'Executive',
+            'sort_order' => 3,
+        ],
+        [
+            'name' => 'Abdujabborov Ibrohimjon Baxtiyor oʻgʻli',
+            'photo' => 'images/members/ibrohimjon-abdujabborov.webp',
+            'role' => ['en' => 'Kanto Region Ambassador', 'uz' => 'Kanto hududi ambassadori', 'ja' => '関東地域アンバサダー'],
+            'affiliation' => [
+                'en' => 'Tokyo University of Foreign Studies',
+                'uz' => 'Tokio xorijiy tillar universiteti',
+                'ja' => '東京外国語大学',
+            ],
+            'bio' => [
+                'en' => "Born in Toʻraqoʻrgʻon District, Namangan Region. Completed bachelor's and master's studies at Tashkent State University of Oriental Studies.\n\nIn 2022, won the Japanese government's prestigious MEXT scholarship and continued master's studies at the Tokyo University of Foreign Studies.\n\nCurrently a doctoral student at the same university, researching the social adaptation, life satisfaction, and future career plans of Uzbek labour migrants in Japan.\n\nFounder and head of the JLPT MASTER Japanese language centre. Works across education, academic cooperation, and labour migration between Japan and Uzbekistan.",
+                'uz' => "Namangan viloyatining Töraqörğon tumanida tuğilgan. Toşkent davlat şarqşunoslik universitetida bakalavriat va magistratura bosqiçlarida tahsil olgan.\n\n2022-yilda Yaponiya hukumatining nufuzli MEXT stipendiyasi ğolibi bölib, Tokio xorijiy tillar universitetida (Tokyo University of Foreign Studies) magistratura bosqiçida öqişini davom ettirgan.\n\nHozirda mazkur universitetning doktorantura bosqiçida tahsil olib, Yaponiyadagi özbekistonlik mehnat migrantlarining ijtimoiy moslaşuvi, hayotdan qoniqiş darajasi va kelgusidagi kasbiy rejalari böyiça ilmiy izlanişlar olib bormoqda.\n\nJLPT MASTER yapon tili taʼlim markazi asosçisi va rahbari. Yaponiya va Özbekiston örtasidagi taʼlim, ilmiy-akademik hamkorlik hamda mehnat migratsiyasi sohalarida faoliyat yuritib kelmoqda.",
+                'ja' => "ナマンガン州トゥラコルゴン地区生まれ。タシケント国立東洋学大学で学士課程および修士課程を修了。\n\n2022年、日本政府の文部科学省（MEXT）奨学金に選ばれ、東京外国語大学の修士課程で学業を継続。\n\n現在は同大学の博士課程に在籍し、在日ウズベキスタン人労働移民の社会適応、生活満足度、今後のキャリア計画について研究を行っている。\n\n日本語教育機関「JLPT MASTER」の創設者兼代表。日本とウズベキスタンの間の教育、学術連携、労働移民の分野で活動している。",
+            ],
+            'region' => ['en' => 'Kanto', 'uz' => 'Kanto', 'ja' => '関東'],
+            'region_slug' => 'kanto',
+            'type' => 'Ambassador',
+            'sort_order' => 1,
+        ],
+        [
+            'name' => 'Otabek Buriev',
+            'photo' => null,
+            'role' => ['en' => 'Chubu Region Ambassador', 'uz' => 'Çubu hududi ambassadori', 'ja' => '中部地域アンバサダー'],
+            'affiliation' => ['en' => '', 'uz' => '', 'ja' => ''],
+            'region' => ['en' => 'Chubu', 'uz' => 'Çubu', 'ja' => '中部'],
+            'region_slug' => 'chubu',
+            'type' => 'Ambassador',
+            'sort_order' => 2,
+        ],
+        [
+            'name' => 'Nodira Umaralieva',
+            'photo' => null,
+            'role' => ['en' => 'Secretary', 'uz' => 'Kotib', 'ja' => '書記'],
+            'affiliation' => ['en' => '', 'uz' => '', 'ja' => ''],
+            'type' => 'Staff',
+            'sort_order' => 1,
+        ],
+        [
+            'name' => 'Raximov Anvarbek',
+            'photo' => null,
+            'role' => ['en' => 'Website Editor', 'uz' => 'Sayt muharriri', 'ja' => 'ウェブサイト編集担当'],
+            'affiliation' => ['en' => '', 'uz' => '', 'ja' => ''],
+            'type' => 'Staff',
+            'sort_order' => 2,
+        ],
+        [
+            'name' => 'Jamoliddinov Asadbek Odiljon öğli',
+            'photo' => 'images/members/asadbek-jamoliddinov.webp',
+            'role' => ['en' => 'External Relations', 'uz' => 'Taşqi aloqalar böyiça', 'ja' => '渉外担当'],
+            'affiliation' => [
+                'en' => 'Hitotsubashi University',
+                'uz' => 'Xitotsubaşi universiteti',
+                'ja' => '一橋大学',
+            ],
+            'bio' => [
+                'en' => "Born in 2001 in Rishton District, Fergana Region. Completed the IIGE program in international cooperation and joint education at Kansai University, Japan, in 2022. In 2023–2024, on the recommendation of the Embassy of Japan in the Republic of Uzbekistan, studied at Keio University on a MEXT scholarship from the Japanese government. Graduated from the Higher School of Japanese Studies at Tashkent State University of Oriental Studies in 2025, and since 2026 has been continuing research at Hitotsubashi University in Japan on a MEXT scholarship.\n\nWinner of national and international Japanese-language public speaking competitions, and a two-time Mitsubishi scholarship recipient.",
+                'uz' => "2001 yilda Farğona viloyatining Rişton tumanida tuğilgan. 2022 yilda Yaponiyaning Kansai universitetida xalqaro hamkorlik va qöşma taʼlimga asoslangan IIGE dasturini tamomlagan. 2023–2024 yillarda Özbekiston Respublikasidagi Yaponiya elçixonasining tavsiyasi asosida Yaponiya hukumatining MEXT stipendiyasi bilan Keyo universitetida tahsil olgan. 2025 yilda Toşkent davlat şarqşunoslik universitetining Yaponşunoslik oliy maktabini bitirib, 2026 yildan buyon MEXT stipendiyasi asosida Yaponiyaning Xitotsubaşi universitetida ilmiy izlanişlarini davom ettirmoqda.\n\nYapon tilida notiqlik sanʼati böyiça respublika va xalqaro tanlovlar ğolibi, 2 karra «Mitsubişi» stipendiyasi sohibi.",
+                'ja' => "2001年、フェルガナ州リシュタン地区生まれ。2022年、日本の関西大学で国際連携・共同教育に基づくIIGEプログラムを修了。2023〜2024年には、在ウズベキスタン日本国大使館の推薦により、日本政府のMEXT（文部科学省）奨学金で慶應義塾大学に留学。2025年にタシケント国立東洋学大学の日本学スクールを卒業し、2026年からはMEXT奨学金により日本の一橋大学で研究を続けている。\n\n日本語弁論の国内大会および国際大会での優勝者であり、三菱奨学金を2度受給。",
+            ],
+            'type' => 'Staff',
+            'sort_order' => 3,
+        ],
     ],
 
     'secretary_members' => [
@@ -746,6 +829,64 @@ return [
             ['name' => 'Japanese Universities Network', 'type' => ['en' => 'Academic Network', 'uz' => 'Ilmiy tarmoq', 'ja' => '学術ネットワーク'], 'description' => ['en' => 'A growing set of universities connected through regional chapter activities.', 'uz' => 'Mintaqaviy bölim faoliyati orqali boğlangan, ösib borayotgan universitetlar töplami.', 'ja' => '地域支部の活動を通じてつながる、拡大する大学群。']],
             ['name' => 'Research Institutes Alliance', 'type' => ['en' => 'Research Institute', 'uz' => 'Tadqiqot instituti', 'ja' => '研究機関'], 'description' => ['en' => 'Supports interdisciplinary engagement and applied research cooperation.', 'uz' => 'Fanlararo hamkorlik va amaliy tadqiqot kooperatsiyasini qöllab-quvvatlaydi.', 'ja' => '学際的な関与と応用研究協力を支援します。']],
             ['name' => 'International Scholar Partners', 'type' => ['en' => 'International Partner', 'uz' => 'Xalqaro hamkor', 'ja' => '国際パートナー'], 'description' => ['en' => 'Collaborates on knowledge-sharing, outreach, and mobility opportunities.', 'uz' => 'Bilim almaşiş, tarğibot va mobillik imkoniyatlari böyiça hamkorlik qiladi.', 'ja' => '知識共有、アウトリーチ、流動性の機会に関して協力します。']],
+        ],
+        'prospective' => [
+            [
+                'name' => [
+                    'en' => 'Embassy of the Republic of Uzbekistan in Japan',
+                    'uz' => 'Özbekiston Respublikasining Yaponiyadagi elçixonasi',
+                    'ja' => '在日ウズベキスタン共和国大使館',
+                ],
+                'type' => ['en' => 'Diplomatic Mission', 'uz' => 'Diplomatik vakolatxona', 'ja' => '外交使節団'],
+                'logo' => 'images/partners/embassy-of-uzbekistan-japan.webp',
+                'description' => [
+                    'en' => 'Hosts community gatherings and supports academic and cultural initiatives of Uzbek scholars in Japan.',
+                    'uz' => 'Hamjamiyat uçraşuvlarini qabul qiladi hamda Yaponiyadagi özbek olimlarining ilmiy va madaniy taşabbuslarini qöllab-quvvatlaydi.',
+                    'ja' => 'コミュニティの集まりを受け入れ、日本におけるウズベキスタン人研究者の学術・文化活動を支援しています。',
+                ],
+            ],
+            [
+                'name' => [
+                    'en' => 'Ministry of Higher Education, Science and Innovation of Uzbekistan',
+                    'uz' => 'Özbekiston Respublikasi Oliy taʼlim, fan va innovatsiyalar vazirligi',
+                    'ja' => 'ウズベキスタン共和国高等教育・科学・イノベーション省',
+                ],
+                'type' => ['en' => 'Government Institution', 'uz' => 'Davlat muassasasi', 'ja' => '政府機関'],
+                'logo' => 'images/partners/ministry-of-higher-education-uz.webp',
+                'description' => [
+                    'en' => 'Shapes higher education and research policy, and connects Uzbek universities with scholars abroad.',
+                    'uz' => 'Oliy taʼlim va ilm-fan siyosatini şakllantiradi hamda özbek universitetlarini xorijdagi olimlar bilan boğlaydi.',
+                    'ja' => '高等教育・研究政策を担い、ウズベキスタンの大学と海外の研究者をつなぎます。',
+                ],
+            ],
+            [
+                'name' => [
+                    'en' => '“Vatandoshlar” Public Foundation',
+                    'uz' => '“Vatandoşlar” jamoat fondi',
+                    'ja' => '「ヴァタンドシュラル」公共基金',
+                ],
+                'type' => ['en' => 'Public Foundation', 'uz' => 'Jamoat fondi', 'ja' => '公共基金'],
+                'logo' => 'images/partners/vatandoshlar-public-foundation.webp',
+                'description' => [
+                    'en' => 'Works with Uzbek communities abroad and supports compatriot initiatives, including academic networks.',
+                    'uz' => 'Xorijdagi özbek diasporasi bilan işlaydi va vatandoşlarning, jumladan ilmiy tarmoqlarning taşabbuslarini qöllab-quvvatlaydi.',
+                    'ja' => '海外のウズベキスタン人コミュニティと連携し、学術ネットワークを含む同胞の取り組みを支援しています。',
+                ],
+            ],
+            [
+                'name' => [
+                    'en' => 'WAYU — World Association of Uzbek Youth',
+                    'uz' => 'WAYU — Özbekiston Yoşlari Umumjahon Assotsiatsiyasi',
+                    'ja' => 'WAYU — ウズベキスタン青年世界協会',
+                ],
+                'type' => ['en' => 'Youth Association', 'uz' => 'Yoşlar assotsiatsiyasi', 'ja' => '青年協会'],
+                'logo' => 'images/partners/wayu-uzbekistan-youth-association.webp',
+                'description' => [
+                    'en' => 'Unites young Uzbeks worldwide through education, leadership, and international exchange programs.',
+                    'uz' => 'Dunyo böylab özbek yoşlarini taʼlim, liderlik va xalqaro almaşinuv dasturlari orqali birlaştiradi.',
+                    'ja' => '教育・リーダーシップ・国際交流のプログラムを通じて、世界中の若いウズベキスタン人をつないでいます。',
+                ],
+            ],
         ],
     ],
 

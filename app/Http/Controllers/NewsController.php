@@ -6,6 +6,15 @@ use App\Support\Content;
 
 class NewsController extends Controller
 {
+    public function index()
+    {
+        return view('pages.news.index', [
+            'pageTitle' => ui('pages.news_index.title'),
+            'metaDescription' => ui('pages.news_index.meta'),
+            'articles' => Content::newsArchive(),
+        ]);
+    }
+
     public function show(string $slug)
     {
         $news = Content::newsItem($slug);
