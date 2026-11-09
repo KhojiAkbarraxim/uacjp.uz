@@ -24,8 +24,13 @@
 
             @php
                 $locale   = app()->getLocale();
-                $events   = \App\Support\Content::events();
                 $now      = \Carbon\Carbon::now();
+                // Upcoming first (soonest to furthest), then past meetings newest to oldest.
+                [$past, $upcoming] = collect(\App\Support\Content::events())
+                    ->partition(fn (array $event) => \Carbon\Carbon::parse($event['date'])->isPast());
+                $events = $upcoming->sortBy('date')
+                    ->concat($past->sortByDesc('date'))
+                    ->values();
             @endphp
 
             <div class="space-y-3">
@@ -50,6 +55,15 @@
                             <span class="text-2xl font-bold leading-none">{{ $date->format('d') }}</span>
                             <span class="text-xs opacity-70">{{ $date->format('Y') }}</span>
                         </div>
+
+                        @if (! empty($event['image']))
+                            <img
+                                src="{{ asset($event['image']) }}"
+                                alt="{{ $title }}"
+                                loading="lazy"
+                                class="hidden h-16 w-20 shrink-0 rounded-xl object-cover sm:block"
+                            >
+                        @endif
 
                         {{-- Content --}}
                         <div class="min-w-0 flex-1">
@@ -77,7 +91,7 @@
                                 </span>
                             @else
                                 <p class="text-xs text-muted"><x-i18n :text="ui('pages.activities.days_away_prefix')" /></p>
-                                <p class="text-xl font-bold text-secondary">{{ $now->diffInDays($date) }}</p>
+                                <p class="text-xl font-bold text-secondary">{{ (int) ceil($now->diffInDays($date)) }}</p>
                                 <p class="text-xs text-muted"><x-i18n :text="ui('pages.activities.days_label')" /></p>
                             @endif
                         </div>

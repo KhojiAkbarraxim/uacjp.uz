@@ -117,6 +117,7 @@ class SeedStaticToDynamic extends Command
                     'type_en' => $this->i18n($eventData['type'] ?? null, 'en'),
                     'type_uz' => $this->i18n($eventData['type'] ?? null, 'uz'),
                     'type_ja' => $this->i18n($eventData['type'] ?? null, 'ja'),
+                    'image' => $eventData['image'] ?? null,
                     'is_past' => Carbon::parse($eventData['date'])->isPast(),
                 ]
             );

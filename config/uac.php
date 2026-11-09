@@ -56,6 +56,90 @@ return [
     // Seed source for `php artisan static:seed`; manage news in the admin panel afterwards.
     'latest_news' => [
         [
+            'slug' => '2026-04-11-meeting-at-the-embassy',
+            'title' => [
+                'en' => 'Meeting at the Embassy of Uzbekistan in Japan',
+                'uz' => 'Yaponiyadagi Özbekiston elçixonasida uçraşuv',
+                'ja' => '在日ウズベキスタン大使館での例会',
+            ],
+            'date' => ['en' => 'April 11, 2026', 'uz' => '2026-yil 11-aprel', 'ja' => '2026年4月11日'],
+            'type' => ['en' => 'Meeting', 'uz' => 'Uçraşuv', 'ja' => '例会'],
+            'image' => 'images/events/2026-04-11-embassy-group.webp',
+            'summary' => [
+                'en' => 'More than 50 compatriots gathered at the Embassy of Uzbekistan in Japan for an interactive discussion, book talks by our writers, and the launch of the Uzbek translation of “Gakumon no Susume”.',
+                'uz' => 'Yaponiyadagi Özbekiston elçixonasida 50 dan ortiq vatandoşimiz jam böldi: interaktiv muhokama, yozuvçilarimiz bilan kitob suhbati va “Gakumon no Susume” tarjimasining taqdimoti bölib ötdi.',
+                'ja' => '在日ウズベキスタン大使館に50名を超える同胞が集まり、双方向のディスカッション、作家による著書の紹介、『学問のすゝめ』ウズベク語訳の発表が行われました。',
+            ],
+            'body' => [
+                'en' => "Another rewarding meeting organised by the Uzbek Academic Club in Kanto was held today. It took place at the Embassy of Uzbekistan in Japan, and more than 50 of our compatriots came together.\n\nThe academic environment in Japan is orderly, rigorous, and inspiring. What is most heartening is that the number of young people in that environment who are hungry for knowledge and eager to do research keeps growing.\n\nIn the first part, the presentation took the form of an interactive discussion. Everyone present shared their own view, and the conversation was lively.\n\nIn the second part, our writers spoke about their books — what prompted them to write and what the central ideas are.\n\nThe third part was devoted to the launch of the Uzbek translation of “Gakumon no Susume” (An Encouragement of Learning). It was genuinely motivating.\n\nGatherings like this make you think again: the path of scholarship may be hard, but those who walk it are the strongest of all.\n\nApril 11, 2026 · Embassy of the Republic of Uzbekistan in Japan",
+                'uz' => "Bugun Kanto hududida “Uzbek Academic Club” tomonidan taşkil etilgan yana bir mazmunli tadbir bölib ötdi. Tadbir Yaponiyadagi Özbekiston elçixonasida ötkazildi va 50 dan ortiq vatandoşimiz jam böldi.\n\nYaponiyadagi ilmiy muhit tartibli, çuqur va ilhomlantiruvçi. Eng quvonarlisi esa, şu muhitda ilmga çanqoq, izlanayotgan yoşlarimiz tobora köpayib borayotgani.\n\nBirinçi qismda taqdimot interaktiv diskussiya şaklida ötdi. Har bir iştirokçi öz fikrini bildirib, jonli muhokama böldi.\n\nIkkinçi qismda yozuvçilarimiz kitoblari haqida, uni yoziş uçun nima turtki bölgani va asosiy ğoyalari bilan bölişdi.\n\nUçinçi qism esa “Gakumon no Susume” (“Ilmga çaqiriq”) kitobi tarjimasining taqdimotiga bağişlandi — haqiqiy motivatsiya berdi.\n\nŞunaqa uçraşuvlar insonni yana öylaşga majbur qiladi: ilm yöli oğir bölsa ham, şu yölda yurayotganlar — eng kuçlilar.\n\n2026-yil 11-aprel · Özbekiston Respublikasining Yaponiyadagi elçixonasi",
+                'ja' => "本日、Uzbek Academic Club in Kantoが主催する、実り多い例会が開催されました。会場は在日ウズベキスタン大使館で、50名を超える同胞が一堂に会しました。\n\n日本の学術環境は整然として奥深く、人を鼓舞するものがあります。なにより喜ばしいのは、そうした環境のなかで学問に飢え、研究に打ち込む若者が着実に増えていることです。\n\n第1部では、発表が双方向のディスカッション形式で行われました。参加者一人ひとりが自らの考えを述べ、活発な議論となりました。\n\n第2部では、作家の方々が自著について、執筆のきっかけと中心となる考えを語ってくださいました。\n\n第3部は、『学問のすゝめ』ウズベク語訳の発表に充てられました。まさに励みとなる内容でした。\n\nこうした集まりは、あらためて考えさせてくれます。学問の道は険しくとも、その道を歩む人々こそが最も強いのだと。\n\n2026年4月11日・在日ウズベキスタン共和国大使館",
+            ],
+        ],
+        [
+            'slug' => '2025-04-12-sixth-meeting-at-tsukuba',
+            'title' => [
+                'en' => 'Sixth Meeting at the University of Tsukuba',
+                'uz' => 'Tsukuba universitetida 6-uçraşuv',
+                'ja' => '筑波大学での第6回例会',
+            ],
+            'date' => ['en' => 'April 12, 2025', 'uz' => '2025-yil 12-aprel', 'ja' => '2025年4月12日'],
+            'type' => ['en' => 'Meeting', 'uz' => 'Uçraşuv', 'ja' => '例会'],
+            'image' => 'images/events/2025-04-12-tsukuba-group.webp',
+            'summary' => [
+                'en' => 'The University of Tsukuba hosted the club’s sixth meeting, bringing together more than 30 compatriots for talks on exchange-rate misalignment and on resilience in Central Eurasia.',
+                'uz' => 'Klubning 6-uçraşuviga Tsukuba universiteti mezbonlik qildi: 30 dan ortiq yurtdoşimiz yiğildi, valyuta kursidagi nomuvofiqliklar va Markaziy Yevrosiyodagi barqarorlik böyiça taqdimotlar tinglandi.',
+                'ja' => '筑波大学がクラブ第6回例会を主催し、30名を超える同胞が集まりました。為替レートの乖離と中央ユーラシアの安定性に関する発表が行われました。',
+            ],
+            'body' => [
+                'en' => "Uzbek Academic Club in Kanto has been running for nearly two years now, and this was the sixth meeting held in that time. The University of Tsukuba hosted it.\n\nBecause we announced the meeting late, I had expected a smaller turnout. Not so: more than 30 compatriots came today, and it was especially good to see newly arrived students among them. Representatives and students came from Tsukuba, Waseda, Keio, Nagoya, and Tokyo University of Foreign Studies, along with compatriots who are already working, students from Japanese language schools, and even a brother from Tajikistan.\n\nThe meeting began at 11 o’clock. Alisher Umirdinov, the founder of the club, came despite being unwell and opened the gathering.\n\nMurodjon then spoke about his research on how misalignments in the real exchange rate affect economic growth — a genuinely fascinating study.\n\nAfter him, Botirjon presented his research plan on the factors that shape strong and weak resilience in the countries of Central Eurasia. The theoretical grounding is solid, and it is fair to say that a fine scholar is coming of age for our country.\n\nAfter the presentations we exchanged thoughts and talked at length over tea, getting to know everyone.\n\nIt was a joy to see future scholars and young people with a real appetite for research.\n\nOur warm thanks to the students of the University of Tsukuba, who organised the meeting impeccably — and especially to Umidjon, who brought them all together.\n\nApril 12, 2025 · University of Tsukuba",
+                'uz' => "Uzbek Academic Club in Kanto taşkil etilganiga deyarli ikki yil böldi. Şu davr içida uçraşuv 6-marta ötkazildi. Bu galgi tadbirga Tsukuba universiteti mezbonlik qildi.\n\nEʼlonni keçroq berganimiz uçun talabalar kamroq yiğiladi deb öylagandim. Yöq, bugun 30 dan ortiq yurtdoşimiz keldi. Ular orasida yangi kelgan talabalarni köriş ayniqsa quvonarli. Tsukuba, Waseda, Keio, Nagoya va Tokio xorijiy tillar universitetidan vakillar va talabalar qatnaşdi. Bundan taşqari işlab yurgan yurtdoşlarimiz, yapon tili maktabi öquvçilari, hatto bir tojikistonlik qardoşimiz ham keldi.\n\nTadbir soat 11 da boşlandi. Kasal bölişiga qaramay kelgan klub asosçisi Alişer aka Umirdinov uçraşuvni oçib berdi.\n\nSöngra Murodjon aka valyutaning real almaşuv kursidagi nomuvofiqliklar iqtisodiy ösişga qanday taʼsir qilişi haqidagi tadqiqoti bilan taniştirdi. Juda qiziqarli tadqiqot ekan.\n\nUndan keyin Botirjon Markaziy Yevrosiyo mamlakatlarida kuçli va zaif barqarorlikni şakllantiruvçi omillar haqidagi tadqiqot rejasini namoyiş qildi. Nazariy asosi puxta — yurtimiz uçun ajoyib bir olim yetişib kelayotganini bemalol aytiş mumkin.\n\nTaqdimotlardan söng özaro fikr almaşib, çoy ustida miriqib suhbatlaşdik, hamma bilan tanişdik.\n\nBölajak olimlarni, ilmga intiluvçan yoşlarni körib xursand böldik.\n\nTadbirni mukammal taşkil etgan Tsukuba universiteti talabalariga katta rahmat! Xususan, ularni birlaştirgan Umidjonga alohida tahsin.\n\n2025-yil 12-aprel · Tsukuba universiteti",
+                'ja' => "Uzbek Academic Club in Kantoの設立からまもなく2年が経ち、今回がその間に開かれた6回目の例会となりました。会場は筑波大学です。\n\n告知が遅れたため参加者は少ないだろうと思っていましたが、今日は30名を超える同胞が集まりました。なかでも来日したばかりの学生の姿が見られたことは大きな喜びです。筑波大学、早稲田大学、慶應義塾大学、名古屋、東京外国語大学から教職員や学生が参加したほか、すでに就業している同胞、日本語学校の学生、さらにはタジキスタンから来た仲間も加わりました。\n\n例会は11時に始まりました。体調が優れないなか駆けつけたクラブ創設者のAlisher Umirdinov氏が開会の挨拶を述べました。\n\n続いてMurodjon氏が、実質為替レートの乖離が経済成長に与える影響についての研究を紹介しました。実に興味深い研究です。\n\nその後、Botirjon氏が中央ユーラシア諸国における強い安定性と弱い安定性を形づくる要因についての研究計画を発表しました。理論的な土台は堅固で、わが国にとって優れた研究者が育ちつつあると言ってよいでしょう。\n\n発表のあとは意見を交わし、お茶を囲んでじっくりと語り合い、参加者同士で親睦を深めました。\n\n未来の研究者たち、学問への意欲にあふれる若者たちの姿を見ることができ、うれしく思います。\n\n見事に運営してくださった筑波大学の学生の皆さま、そして皆をまとめてくださったUmidjon氏に、心より感謝申し上げます。\n\n2025年4月12日・筑波大学",
+            ],
+        ],
+        [
+            'slug' => '2025-01-25-first-meeting-of-the-year-at-yokohama',
+            'title' => [
+                'en' => 'Yokohama: First Meeting of the Year',
+                'uz' => 'Yokohamada yil hisobidagi birinçi uçraşuv',
+                'ja' => '横浜：今年最初の例会',
+            ],
+            'date' => ['en' => 'January 25, 2025', 'uz' => '2025-yil 25-yanvar', 'ja' => '2025年1月25日'],
+            'type' => ['en' => 'Meeting', 'uz' => 'Uçraşuv', 'ja' => '例会'],
+            'image' => 'images/events/2025-01-ynu-kanto-group.webp',
+            'summary' => [
+                'en' => 'More than 20 compatriots gathered at Yokohama National University for the first meeting of the year, with talks on circular economy research, a new career portal, and visa matters.',
+                'uz' => 'Yokohama milliy universitetida yil hisobidagi birinçi uçraşuv bölib ötdi: 20 dan ortiq yurtdoşimiz yiğildi, sirkulyar iqtisodiyot, Career portal loyihasi va viza masalalari böyiça taqdimotlar tinglandi.',
+                'ja' => '横浜国立大学にて今年最初の例会が開かれ、20名を超える同胞が集まりました。循環型経済の研究、新しいキャリアポータル、ビザに関する発表が行われました。',
+            ],
+            'body' => [
+                'en' => "The first meeting of the year of the Uzbek Academic Club was held at Yokohama National University. More than 20 of our compatriots took part: students came from Tsukuba, Waseda, Hitotsubashi, Toyo, Aichi, Tokyo University of Foreign Studies, and the host university.\n\nThree participants gave presentations. Elbek Ibrohimov, representing the host university, spoke first: after eight years of professional experience, he has taken up research on the circular economy, and he assured us that very promising work lies ahead.\n\nJurabek Khasanov then presented a newly launched project, a career portal. Do take a look at it yourself: https://japancareer.uz/uz — you will find answers to many questions about Japan there. A genuinely useful platform for our community is taking shape.\n\nTo close the meeting, Alisher Umirdinov shared practical information on visa matters. Many of us had not realised how straightforward it is to obtain a European visa from Japan. His experience and his eagerness to share knowledge are a constant inspiration.\n\nWith bright-eyed young men and women — and even a one-year-old girl — in the room, it was a warm and welcoming gathering. A setting like this is something special; it would be no surprise if the foundation for several future professors was laid here.\n\nOur thanks go to our friends in Yokohama for their excellent preparation.\n\nThe next meeting will be held on Saturday, April 12, at the University of Tsukuba. Do come along this time — you will not regret the time spent. See you at the next meeting!\n\nJanuary 25, 2025 · Yokohama National University (YNU)",
+                'uz' => "Uzbek Academic Clubning yil hisobidagi birinçi uçraşuvi Yokohama milliy universitetida bölib ötdi. Ilm majlisida 20 dan ortiq yurtdoşimiz iştirok etdi: Tsukuba, Waseda, Hitotsubaşi, Toyo, Aiçi, Tokio xorijiy tillar universiteti va mezbon universitetdan yigit-qizlar keldi.\n\nTadbirda uç nafar iştirokçi taqdimot qildi. Dastlab mezbon universitet vakili Elbek Ibrohimov söz oldi: u sakkiz yillik iş tajribasidan söng sirkulyar iqtisodiyot böyiça tadqiqotga qöl urgan ekan va juda istiqbolli iş kutilayotganini bildirdi.\n\nSöngra Jurabek Xasanov yangi boşlangan loyiha — Career portal taqdimotini qildi. Siz ham ushbu portalga kirib köring: https://japancareer.uz/uz — Yaponiya haqidagi köp savolga javob topasiz. Yurtdoşlarimiz uçun juda yaxşi platforma şakllanmoqda.\n\nTadbir yakunida ustoz Alişer Umirdinov viza masalalari böyiça maʼlumot berdi. Yaponiyadan Yevropaga viza oliş bu qadar oson ekanini köpçilik bilmas ekan. Bu insonning tajribasi va ilm ulaşişga bölgan intilişi doimo qoyil qoldiradi.\n\nKözi çaqnab turgan yigit-qizlar, hatto bir yoşli qizaloq bilan birga juda fayzli uçraşuv bölib ötdi. Bunday tadbir, bunday muhit baribir boşqaça — kelajakda şu yerda bir neça professor uçun tamal toşi qöyilgan bölsa ajab emas.\n\nYokohamadagi akalarga va ularning tayyorgarligiga katta rahmat.\n\nKeyingi tadbir 12-aprel, şanba kuni Tsukuba universitetida bölib ötadi. Bu safar albatta keling — vaqtingizga açinmaysiz. Keyingi uçraşuvda körişamiz!\n\n2025-yil 25-yanvar · Yokohama milliy universiteti (YNU)",
+                'ja' => "Uzbek Academic Clubの今年最初の例会が、横浜国立大学で開催されました。20名を超える同胞が参加し、筑波大学、早稲田大学、一橋大学、東洋大学、愛知の大学、東京外国語大学、そして会場校から学生が集まりました。\n\n当日は3名が発表を行いました。はじめに、会場校を代表してElbek Ibrohimov氏が登壇。8年間の実務経験を経て循環型経済の研究に取り組んでおり、今後の展開に大きな期待が寄せられていることを語りました。\n\n続いてJurabek Khasanov氏が、立ち上げたばかりのキャリアポータルについて発表しました。ぜひ一度ご覧ください：https://japancareer.uz/uz — 日本に関する多くの疑問への答えが見つかります。同胞のための実に有用なプラットフォームが形になりつつあります。\n\n最後に、Alisher Umirdinov氏がビザに関する実践的な情報を共有しました。日本からヨーロッパのビザを取得するのがこれほど容易だとは、多くの人が知りませんでした。氏の経験と、知識を惜しみなく分かち合う姿勢にはいつも感銘を受けます。\n\n目を輝かせた若者たち、そして1歳の女の子も加わり、とても和やかな集まりとなりました。こうした場はやはり特別で、将来の教授たちの礎がここで築かれたとしても不思議ではありません。\n\n入念に準備してくださった横浜の皆さまに、心より感謝申し上げます。\n\n次回の例会は4月12日（土）、筑波大学で開催されます。今回こそぜひご参加ください。きっと時間を惜しいとは思わないはずです。次回の例会でお会いしましょう！\n\n2025年1月25日・横浜国立大学（YNU）",
+            ],
+        ],
+        [
+            'slug' => '2024-11-30-final-meeting-of-the-year-in-kanto',
+            'title' => [
+                'en' => 'Kanto: Final Meeting of the Year',
+                'uz' => 'Kantoda yil hisobidagi oxirgi uçraşuv',
+                'ja' => '関東：今年度最後の例会',
+            ],
+            'date' => ['en' => 'November 30, 2024', 'uz' => '2024-yil 30-noyabr', 'ja' => '2024年11月30日'],
+            'type' => ['en' => 'Meeting', 'uz' => 'Uçraşuv', 'ja' => '例会'],
+            'image' => 'images/events/2024-11-30-tufs-kanto-group.webp',
+            'summary' => [
+                'en' => 'Around 40 compatriots gathered at TUFS for the fourth and final Kanto meeting of the year, featuring a road-safety research talk and an open Q&A session.',
+                'uz' => 'TUFSda yil hisobidagi törtinçi va oxirgi Kanto uçraşuvi bölib ötdi: 40 ga yaqin yurtdoşimiz yiğildi, yöl xavfsizligi böyiça tadqiqot taqdimoti va oçiq savol-javob sessiyasi ötkazildi.',
+                'ja' => '東京外国語大学（TUFS）にて、今年度4回目となる関東支部最後の例会が開かれ、約40名の同胞が集まりました。交通安全に関する研究発表と自由な質疑応答が行われました。',
+            ],
+            'body' => [
+                'en' => "On Saturday, November 30, the fourth meeting of the year was held at Tokyo University of Foreign Studies. Around 40 of our compatriots attended.\n\nBekzod Turatov, a master’s student at Yokohama National University, gave an excellent talk on road safety in Tashkent. The data he has collected and the way he works with it deserve particular attention. On that basis, research is taking shape that can meaningfully reduce the number of traffic accidents.\n\nIn the second part of the meeting, Alisher Umirdinov spoke with the participants and answered their questions. The drive and enthusiasm for scholarship among these young men and women is remarkable.\n\nIn a word, the meeting was both enjoyable and genuinely useful. The spark in the eyes of the students who came will bear fruit in the years ahead.\n\nThe next meeting will be held at Yokohama National University at the end of January 2025 — we have passed the baton to another university. Elbek and Bekzod will host it wonderfully.\n\nWe look forward to seeing you at our next academic gatherings!\n\nOur special thanks go to the students of Tokyo University of Foreign Studies for hosting this meeting.\n\nNovember 30, 2024 · Tokyo University of Foreign Studies (TUFS)",
+                'uz' => "30-noyabr, şanba kuni Tokio xorijiy tillar universitetida yil hisobidan 4-tadbir bölib ötdi. Tadbirga 40 ga yaqin yurtdoşimiz keldi.\n\nYokohama universiteti magistranti Bekzod Turatov Toşkentdagi yöl xavfsizligi mavzusida ajoyib çiqiş qildi. Uning töplagan maʼlumotlari va ular bilan işlaş uslubi alohida eʼtiborga loyiq. Şu asosda yöl-transport hodisalarini sezilarli darajada kamaytirişga xizmat qiladigan tadqiqot işi yetilib bormoqda.\n\nTadbirning ikkinçi qismida Alişer Umirdinov kelgan yurtdoşlar bilan suhbatlaşib, savollarga javob berdi. Yigit-qizlardagi ilmga bölgan şijoat va ğayrat juda kuçli.\n\nTadbir bir söz bilan aytganda, juda foydali bölib ötdi. Kelgan talabalar közidagi nur kelajakda öz samarasini beradi.\n\nKeyingi tadbir 2025-yil yanvar oyi oxirida Yokohama universitetida bölib ötadi — estafetani yana bir universitetga topşirdik. Elbek va Bekzod akalar mezbonlikni ajoyib tarzda ötkazişadi.\n\nSizni ham keyingi ilmiy uçraşuvlarimizda kutamiz!\n\nBugungi tadbir uçun Tokio xorijiy tillar universiteti talabalariga alohida minnatdorçilik bildiramiz.\n\n2024-yil 30-noyabr · Tokio xorijiy tillar universiteti (TUFS)",
+                'ja' => "11月30日（土）、東京外国語大学にて今年度4回目の例会が開催され、約40名の同胞が集まりました。\n\n横浜国立大学修士課程のBekzod Turatov氏が、タシケントの交通安全について素晴らしい発表を行いました。氏が集めたデータとその扱い方は特筆に値します。これを基に、交通事故の件数を大きく減らしうる研究が形になりつつあります。\n\n例会の後半では、Alisher Umirdinov氏が参加者と語り合い、質問に答えました。若い参加者たちの学問への意欲と熱意には目を見張るものがあります。\n\n一言で言えば、とても有意義な会となりました。集まった学生たちの眼差しに宿る輝きは、これからの年月で必ず実を結ぶことでしょう。\n\n次回の例会は2025年1月下旬、横浜国立大学で開催されます。バトンはまた別の大学へ渡りました。ElbekさんとBekzodさんが素晴らしい形で主催してくださることでしょう。\n\n次回の学術交流の場でも、皆さまのお越しをお待ちしています！\n\n今回の例会の開催にあたり、東京外国語大学の学生の皆さまに心より感謝申し上げます。\n\n2024年11月30日・東京外国語大学（TUFS）",
+            ],
+        ],
+        [
             'slug' => '2024-05-27-first-meeting-of-the-year',
             'title' => [
                 'en' => 'First Meeting of the Year',
@@ -713,7 +797,79 @@ return [
         ],
     ],
 
+    // Seed source for `php artisan static:seed`; manage events in the admin panel afterwards.
     'events' => [
+        [
+            'title' => ['en' => 'First Meeting of the Year', 'uz' => 'Bu yil hisobidan birinçi uçraşuv', 'ja' => '今年最初の例会'],
+            'date' => '2024-05-27',
+            'location' => [
+                'en' => 'Tokyo University of Foreign Studies (TUFS), Tokyo',
+                'uz' => 'Tokio xorijiy tillar universiteti (TUFS), Tokio',
+                'ja' => '東京外国語大学（TUFS）、東京',
+            ],
+            'type' => ['en' => 'Meeting', 'uz' => 'Uçraşuv', 'ja' => '例会'],
+            'image' => 'images/news/2024-05-27-tufs-meeting.webp',
+        ],
+        [
+            'title' => [
+                'en' => 'Kanto: Final Meeting of the Year',
+                'uz' => 'Kantoda yil hisobidagi oxirgi uçraşuv',
+                'ja' => '関東：今年度最後の例会',
+            ],
+            'date' => '2024-11-30',
+            'location' => [
+                'en' => 'Tokyo University of Foreign Studies (TUFS), Tokyo',
+                'uz' => 'Tokio xorijiy tillar universiteti (TUFS), Tokio',
+                'ja' => '東京外国語大学（TUFS）、東京',
+            ],
+            'type' => ['en' => 'Meeting', 'uz' => 'Uçraşuv', 'ja' => '例会'],
+            'image' => 'images/events/2024-11-30-tufs-kanto-group.webp',
+        ],
+        [
+            'title' => [
+                'en' => 'Yokohama: First Meeting of the Year',
+                'uz' => 'Yokohamada yil hisobidagi birinçi uçraşuv',
+                'ja' => '横浜：今年最初の例会',
+            ],
+            'date' => '2025-01-25',
+            'location' => [
+                'en' => 'Yokohama National University (YNU), Yokohama',
+                'uz' => 'Yokohama milliy universiteti (YNU), Yokohama',
+                'ja' => '横浜国立大学（YNU）、横浜',
+            ],
+            'type' => ['en' => 'Meeting', 'uz' => 'Uçraşuv', 'ja' => '例会'],
+            'image' => 'images/events/2025-01-ynu-kanto-group.webp',
+        ],
+        [
+            'title' => [
+                'en' => 'Sixth Meeting at the University of Tsukuba',
+                'uz' => 'Tsukuba universitetida 6-uçraşuv',
+                'ja' => '筑波大学での第6回例会',
+            ],
+            'date' => '2025-04-12',
+            'location' => [
+                'en' => 'University of Tsukuba, Ibaraki',
+                'uz' => 'Tsukuba universiteti, Ibaraki',
+                'ja' => '筑波大学、茨城',
+            ],
+            'type' => ['en' => 'Meeting', 'uz' => 'Uçraşuv', 'ja' => '例会'],
+            'image' => 'images/events/2025-04-12-tsukuba-group.webp',
+        ],
+        [
+            'title' => [
+                'en' => 'Meeting at the Embassy of Uzbekistan in Japan',
+                'uz' => 'Yaponiyadagi Özbekiston elçixonasida uçraşuv',
+                'ja' => '在日ウズベキスタン大使館での例会',
+            ],
+            'date' => '2026-04-11',
+            'location' => [
+                'en' => 'Embassy of the Republic of Uzbekistan in Japan, Tokyo',
+                'uz' => 'Özbekiston Respublikasining Yaponiyadagi elçixonasi, Tokio',
+                'ja' => '在日ウズベキスタン共和国大使館、東京',
+            ],
+            'type' => ['en' => 'Meeting', 'uz' => 'Uçraşuv', 'ja' => '例会'],
+            'image' => 'images/events/2026-04-11-embassy-group.webp',
+        ],
         ['title' => ['en' => 'Annual Scholar Symposium', 'uz' => 'Yillik olimlar simpoziumi', 'ja' => '年次学術シンポジウム'], 'date' => '2026-11-15', 'location' => ['en' => 'Tokyo', 'uz' => 'Tokio', 'ja' => '東京'], 'type' => ['en' => 'Symposium', 'uz' => 'Simpozium', 'ja' => 'シンポジウム']],
         ['title' => ['en' => 'Regional Chapter Meetup', 'uz' => 'Mintaqaviy uçraşuv', 'ja' => '地域支部ミートアップ'], 'date' => '2026-12-05', 'location' => ['en' => 'Osaka', 'uz' => 'Osaka', 'ja' => '大阪'], 'type' => ['en' => 'Meetup', 'uz' => 'Uçraşuv', 'ja' => 'ミートアップ']],
         ['title' => ['en' => 'Research Writing Workshop', 'uz' => 'Tadqiqot yoziş ustaxonasi', 'ja' => '研究執筆ワークショップ'], 'date' => '2027-01-20', 'location' => ['en' => 'Online', 'uz' => 'Onlayn', 'ja' => 'オンライン'], 'type' => ['en' => 'Workshop', 'uz' => 'Ustaxona', 'ja' => 'ワークショップ']],
@@ -721,11 +877,15 @@ return [
     ],
 
     'event_gallery' => [
-        'images/regions/kanto-hero.webp',
-        'images/regions/kansai-hero.webp',
-        'images/regions/chubu-hero.webp',
-        'images/regions/kyushu-hero.webp',
-        'images/regions/tohoku-hokkaido-hero.webp',
-        'images/home-hero.webp',
+        'images/events/2026-04-11-embassy-session.webp',
+        'images/events/2026-04-11-embassy-discussion.webp',
+        'images/events/2026-04-11-embassy-book.webp',
+        'images/events/2026-04-11-embassy-tea.webp',
+        'images/events/2025-04-12-tsukuba-campus.webp',
+        'images/events/2025-04-12-tsukuba-hall.webp',
+        'images/events/2025-04-12-tsukuba-whiteboard.webp',
+        'images/events/2025-01-ynu-kanto-talk.webp',
+        'images/events/2024-11-30-tufs-kanto-hall.webp',
+        'images/events/2024-11-30-tufs-kanto-discussion.webp',
     ],
 ];

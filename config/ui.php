@@ -57,7 +57,7 @@ return [
             'events_title' => ['en' => 'Upcoming events', 'uz' => 'Kelgusi tadbirlar', 'ja' => '今後のイベント'],
             'events_description' => ['en' => 'Stay ahead with the annual event calendar.', 'uz' => 'Yillik tadbirlar kalendari bilan oldindan kuzating.', 'ja' => '年間イベントカレンダーで先取り。'],
             'gallery_eyebrow' => ['en' => 'Past Events', 'uz' => 'Ötgan tadbirlar', 'ja' => '過去のイベント'],
-            'gallery_title' => ['en' => 'Moments from our community', 'uz' => 'Hamjamiyatimizdan lahzalar', 'ja' => 'コミュニティのひととき'],
+            'gallery_title' => ['en' => 'Moments from our events', 'uz' => 'Tadbirlardan lavhalar', 'ja' => 'イベントのひととき'],
             'regions_eyebrow' => ['en' => 'Regional Clubs', 'uz' => 'Mintaqaviy klublar', 'ja' => '地域クラブ'],
             'regions_title' => ['en' => 'Scholarly communities rooted across Japan', 'uz' => 'Yaponiya böylab ildiz otgan ilmiy hamjamiyatlar', 'ja' => '日本各地に根ざした学術コミュニティ'],
             'regions_description' => ['en' => 'Each chapter reflects local academic needs while remaining part of one national network. Explore active and emerging communities across the country.', 'uz' => 'Har bir bölim yagona milliy tarmoq qismi bölib qolgan holda mahalliy ilmiy ehtiyojlarni aks ettiradi. Mamlakat böylab faol va yangi şakllanayotgan hamjamiyatlarni köring.', 'ja' => '各支部は、一つの全国ネットワークの一部でありながら、地域の学術的ニーズを反映しています。全国の活動中および新興のコミュニティをご覧ください。'],

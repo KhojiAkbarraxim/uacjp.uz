@@ -7,6 +7,7 @@ use App\Models\Member;
 use App\Models\News;
 use App\Models\Region;
 use App\Models\SiteSetting;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Log;
 use Throwable;
@@ -42,6 +43,22 @@ class Content
             fn () => Event::orderBy('date')->get()->map->toFrontendArray()->all(),
             fn () => config('uac.events', []),
         );
+    }
+
+    /**
+     * Events that have not happened yet, soonest first. The home page advertises
+     * these as upcoming, so past meetings must not leak into it.
+     *
+     * @return array<int, array>
+     */
+    public static function upcomingEvents(?int $limit = null): array
+    {
+        $upcoming = array_values(array_filter(
+            self::events(),
+            fn (array $event) => ! Carbon::parse($event['date'])->isPast(),
+        ));
+
+        return $limit ? array_slice($upcoming, 0, $limit) : $upcoming;
     }
 
     public static function news(int $limit = 3): array

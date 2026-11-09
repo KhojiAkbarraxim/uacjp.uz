@@ -132,25 +132,26 @@
             />
             <div class="relative overflow-hidden rounded-[1.35rem] bg-primary" data-event-slider>
                 @php $galleryImages = config('uac.event_gallery'); @endphp
+                {{-- Spacer sets the height; every slide is absolutely positioned on top of it. --}}
+                <div class="h-[18rem] w-full sm:h-[22rem]"></div>
                 @foreach ($galleryImages as $img)
                     <img
                         src="{{ asset($img) }}"
                         alt="UAC event photo"
-                        class="absolute inset-0 h-full w-full object-cover transition-opacity duration-700"
+                        loading="{{ $loop->first ? 'eager' : 'lazy' }}"
+                        class="absolute inset-0 h-full w-full object-cover transition-opacity duration-700 {{ $loop->first ? 'opacity-100' : 'opacity-0' }}"
                         data-slide
-                        style="opacity: {{ $loop->first ? '1' : '0' }}; position: {{ $loop->first ? 'relative' : 'absolute' }}; height: 22rem;"
                     >
                 @endforeach
-                {{-- Height spacer --}}
-                <div class="h-[22rem] w-full"></div>
                 {{-- Gradient overlay --}}
                 <div class="pointer-events-none absolute inset-0 bg-gradient-to-t from-primary/60 via-transparent to-transparent"></div>
                 {{-- Dot indicators --}}
                 <div class="absolute inset-x-0 bottom-5 flex justify-center gap-2" data-slider-dots>
                     @foreach ($galleryImages as $i => $img)
                         <button
+                            type="button"
                             data-dot="{{ $i }}"
-                            class="h-2 w-2 rounded-full transition-all duration-300 {{ $loop->first ? 'bg-white w-6' : 'bg-white/40' }}"
+                            class="h-2 rounded-full transition-all duration-300 {{ $loop->first ? 'w-6 bg-white' : 'w-2 bg-white/40' }}"
                             aria-label="Slide {{ $loop->iteration }}"
                         ></button>
                     @endforeach
@@ -169,20 +170,28 @@
             let current = 0;
 
             function goTo(next) {
-                slides[current].style.opacity = '0';
-                slides[current].style.position = 'absolute';
-                dots[current].style.width = '';
-                dots[current].style.backgroundColor = '';
+                slides[current].classList.replace('opacity-100', 'opacity-0');
+                dots[current].classList.remove('w-6', 'bg-white');
+                dots[current].classList.add('w-2', 'bg-white/40');
 
                 current = next;
-                slides[current].style.opacity = '1';
-                slides[current].style.position = 'relative';
-                dots[current].style.width = '1.5rem';
-                dots[current].style.backgroundColor = 'white';
+                slides[current].classList.replace('opacity-0', 'opacity-100');
+                dots[current].classList.remove('w-2', 'bg-white/40');
+                dots[current].classList.add('w-6', 'bg-white');
             }
 
-            dots.forEach((dot, idx) => dot.addEventListener('click', () => goTo(idx)));
-            setInterval(() => goTo((current + 1) % slides.length), 4000);
+            let timer = setInterval(advance, 4000);
+
+            function advance() {
+                goTo((current + 1) % slides.length);
+            }
+
+            dots.forEach((dot, idx) => dot.addEventListener('click', () => {
+                // Restart the countdown so a manual pick is not cut short.
+                clearInterval(timer);
+                goTo(idx);
+                timer = setInterval(advance, 4000);
+            }));
         })();
     </script>
 
