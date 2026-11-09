@@ -122,7 +122,11 @@ jobs:
             FLAGS="$FLAGS --dry-run --itemize-changes"
             echo "::notice::Dry run - nothing will be written to the server."
           fi
+          # /.git must be excluded explicitly: the release tarball has no .git,
+          # so --delete would otherwise wipe the repository checked out on the
+          # server and break the manual deploy.sh fallback.
           rsync $FLAGS \
+            --exclude='/.git' \
             --exclude='/.env' \
             --exclude='/storage' \
             --exclude='/bootstrap/cache' \
