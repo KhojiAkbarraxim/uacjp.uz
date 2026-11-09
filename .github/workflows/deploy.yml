@@ -165,6 +165,15 @@ jobs:
 
             test -f public/build/manifest.json || { echo 'manifest.json missing after unpack'; exit 1; }
 
+            # bootstrap/cache is excluded from the release because it holds
+            # per-environment state, so the server keeps whatever package
+            # manifest it generated last. That manifest was written while dev
+            # dependencies were installed and still names laravel/pail, which
+            # the --no-dev release does not ship, so artisan would abort with
+            # 'Class Laravel\\Pail\\PailServiceProvider not found' before it
+            # could clear anything. Laravel regenerates these files on boot.
+            rm -f bootstrap/cache/*.php
+
             ${PHP_BIN} artisan migrate --force
             ${PHP_BIN} artisan optimize:clear
             ${PHP_BIN} artisan config:cache
