@@ -24,14 +24,14 @@
         <div class="academic-card p-6">
             <form action="{{ route('admin.join.index') }}" method="GET" class="grid gap-4 sm:grid-cols-4 lg:grid-cols-6">
                 <div>
-                    <label class="block text-sm font-medium text-primary mb-1">{{ i18n_text(['en' => 'Search', 'uz' => 'Qidirish', 'ja' => '検索']) }}</label>
+                    <label class="block text-sm font-medium text-primary mb-1">{{ i18n_text(['en' => 'Search', 'uz' => 'Qidiriş', 'ja' => '検索']) }}</label>
                     <input name="search" type="text" class="form-input w-full" placeholder="{{ i18n_text(['en' => 'Name or email', 'uz' => 'Ism yoki email', 'ja' => '名前またはメール']) }}" value="{{ old('search', request('search')) }}">
                 </div>
 
                 <div>
                     <label class="block text-sm font-medium text-primary mb-1">{{ i18n_text(['en' => 'Status', 'uz' => 'Holat', 'ja' => 'ステータス']) }}</label>
                     <select name="status" class="form-input w-full">
-                        <option value="">{{ i18n_text(['en' => 'All statuses', 'uz' => 'Barcha holatlar', 'ja' => 'すべてのステータス']) }}</option>
+                        <option value="">{{ i18n_text(['en' => 'All statuses', 'uz' => 'Barça holatlar', 'ja' => 'すべてのステータス']) }}</option>
                         @foreach (ui('admin.status') as $key => $label)
                             <option value="{{ $key }}" {{ request('status') === $key ? 'selected' : '' }}>{{ i18n_text($label) }}</option>
                         @endforeach
@@ -41,7 +41,7 @@
                 <div>
                     <label class="block text-sm font-medium text-primary mb-1">{{ i18n_text(['en' => 'Region', 'uz' => 'Mintaqa', 'ja' => '地域']) }}</label>
                     <select name="region" class="form-input w-full">
-                        <option value="">{{ i18n_text(['en' => 'All regions', 'uz' => 'Barcha mintaqalar', 'ja' => 'すべての地域']) }}</option>
+                        <option value="">{{ i18n_text(['en' => 'All regions', 'uz' => 'Barça mintaqalar', 'ja' => 'すべての地域']) }}</option>
                         @foreach ($regions as $region)
                             <option value="{{ $region }}" {{ request('region') === $region ? 'selected' : '' }}>{{ $region }}</option>
                         @endforeach
@@ -51,7 +51,7 @@
                 <div>
                     <label class="block text-sm font-medium text-primary mb-1">{{ i18n_text(['en' => 'Membership type', 'uz' => 'Aʼzo turi', 'ja' => '会員種別']) }}</label>
                     <select name="membership_type" class="form-input w-full">
-                        <option value="">{{ i18n_text(['en' => 'All types', 'uz' => 'Barcha turlar', 'ja' => 'すべての種類']) }}</option>
+                        <option value="">{{ i18n_text(['en' => 'All types', 'uz' => 'Barça turlar', 'ja' => 'すべての種類']) }}</option>
                         @foreach ($types as $type)
                             <option value="{{ $type }}" {{ request('membership_type') === $type ? 'selected' : '' }}>{{ $type }}</option>
                         @endforeach
@@ -66,7 +66,7 @@
 
                 @if (request()->hasAny(['search', 'status', 'region', 'membership_type']))
                     <a href="{{ route('admin.join.index') }}" class="text-sm text-secondary hover:text-primary underline">
-                        {{ i18n_text(['en' => 'Clear filters', 'uz' => 'Filtrlarni tozalash', 'ja' => 'フィルターをクリア']) }}
+                        {{ i18n_text(['en' => 'Clear filters', 'uz' => 'Filtrlarni tozalaş', 'ja' => 'フィルターをクリア']) }}
                     </a>
                 @endif
             </form>
@@ -107,7 +107,7 @@
                             <td class="py-4 px-6 text-sm text-muted">{{ $app->created_at->format('M d, Y') }}</td>
                             <td class="py-4 px-6 text-right space-x-2">
                                 <a href="{{ route('admin.join.show', $app->id) }}" class="text-xs bg-muted/50 text-muted border border-muted/20 rounded px-2 py-1 hover:bg-primary hover:text-white hover:border-primary transition-colors">
-                                    {{ i18n_text(['en' => 'View', 'uz' => 'Ko‘rish', 'ja' => '表示']) }}
+                                    {{ i18n_text(['en' => 'View', 'uz' => 'Köriş', 'ja' => '表示']) }}
                                 </a>
                                 @if ($app->status === 'pending')
                                     <form action="{{ route('admin.join.update', $app->id) }}" method="POST" class="inline">

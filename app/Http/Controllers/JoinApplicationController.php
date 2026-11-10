@@ -27,7 +27,7 @@ class JoinApplicationController extends Controller
         Mail::to(config('admin.notification_email', env('ADMIN_NOTIFICATION_EMAIL', 'admin@uacjp.uz')))
             ->send(new JoinApplicationReceived($application));
 
-        return back()->with('success', 'Arizangiz qabul qilindi! Tez orada siz bilan bog‘lanamiz.');
+        return back()->with('success', 'Arizangiz qabul qilindi! Tez orada siz bilan boğlanamiz.');
     }
 
     public function index(Request $request)

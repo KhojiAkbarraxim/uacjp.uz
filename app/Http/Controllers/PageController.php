@@ -16,11 +16,12 @@ class PageController extends Controller
             'metaDescription' => ui('pages.home.meta'),
             'regions' => $regions,
             'latestNews' => Content::news(),
-            'events' => Content::events(),
+            'events' => Content::upcomingEvents(4),
             'heroStats' => config('uac.hero_stats'),
             'mission' => config('uac.mission'),
             'vision' => config('uac.vision'),
             'partners' => config('uac.partners.sponsors'),
+            'prospectivePartners' => config('uac.partners.prospective'),
         ]);
     }
 
@@ -38,10 +39,15 @@ class PageController extends Controller
 
     public function about()
     {
+        // "Tariximiz" is a chronological timeline, so the archive is reversed:
+        // oldest meeting first, newest last.
+        $milestones = array_reverse(Content::newsArchive());
+
         return view('pages.about', [
             'pageTitle' => ui('pages.about.title'),
             'metaDescription' => ui('pages.about.meta'),
             'about' => config('uac.about'),
+            'milestones' => $milestones,
         ]);
     }
 

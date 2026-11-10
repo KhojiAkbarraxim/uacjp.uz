@@ -2,7 +2,7 @@
 
 @section('content')
     @php
-        $pageTitle = ['en' => 'Admin Login', 'uz' => 'Admin kirish', 'ja' => '管理者ログイン'];
+        $pageTitle = ['en' => 'Admin Login', 'uz' => 'Admin kiriş', 'ja' => '管理者ログイン'];
     @endphp
 
     <section class="section-shell pt-20">
@@ -32,7 +32,7 @@
                         <input name="password" type="password" required class="form-input w-full">
                     </div>
                     <button type="submit" class="btn-primary w-full">
-                        {{ i18n_text(['en' => 'Sign in', 'uz' => 'Kirish', 'ja' => 'サインイン']) }}
+                        {{ i18n_text(['en' => 'Sign in', 'uz' => 'Kiriş', 'ja' => 'サインイン']) }}
                     </button>
                 </form>
 

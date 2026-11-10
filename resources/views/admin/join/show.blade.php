@@ -36,7 +36,7 @@
                     </div>
                     <div class="flex items-start gap-4 border-b border-muted/10 pb-2">
                         <dt class="w-24 text-muted font-medium">{{ i18n_text(['en' => 'Affiliation', 'uz' => 'Affiliation', 'ja' => '所属']) }}</dt>
-                        <dd class="flex-1 text-muted">{{ $application->affiliation ?? i18n_text(['en' => 'Not specified', 'uz' => 'Koʻrsatilmagan', 'ja' => '未指定']) }}</dd>
+                        <dd class="flex-1 text-muted">{{ $application->affiliation ?? i18n_text(['en' => 'Not specified', 'uz' => 'Körsatilmagan', 'ja' => '未指定']) }}</dd>
                     </div>
                     <div class="flex items-start gap-4 border-b border-muted/10 pb-2">
                         <dt class="w-24 text-muted font-medium">{{ i18n_text(['en' => 'Submitted', 'uz' => 'Yuborilgan sana', 'ja' => '提出日']) }}</dt>
@@ -54,7 +54,7 @@
 
             <!-- Status action buttons -->
             <div class="academic-card p-6">
-                <h3 class="text-sm font-semibold mb-4">{{ i18n_text(['en' => 'Update Status', 'uz' => 'Holatni yangilash', 'ja' => 'ステータスを更新']) }}</h3>
+                <h3 class="text-sm font-semibold mb-4">{{ i18n_text(['en' => 'Update Status', 'uz' => 'Holatni yangilaş', 'ja' => 'ステータスを更新']) }}</h3>
                 <div class="space-y-3">
                     <form action="{{ route('admin.join.update', $application->id) }}" method="POST" class="inline">
                         @csrf
@@ -85,7 +85,7 @@
                 </div>
 
                 <a href="{{ route('admin.join.index') }}" class="mt-4 block text-center text-sm font-medium text-secondary hover:text-primary">
-                    ← {{ i18n_text(['en' => 'Back to applications list', 'uz' => 'Arizalar roʻyxatiga qaytish', 'ja' => '申請一覧に戻る']) }}
+                    ← {{ i18n_text(['en' => 'Back to applications list', 'uz' => 'Arizalar röyxatiga qaytiş', 'ja' => '申請一覧に戻る']) }}
                 </a>
             </div>
         </div>

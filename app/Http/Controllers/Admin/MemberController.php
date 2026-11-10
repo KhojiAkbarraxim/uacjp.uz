@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Admin\Concerns\HandlesImageUploads;
 use App\Http\Controllers\Controller;
 use App\Models\Member;
 use Illuminate\Http\Request;
@@ -9,7 +10,11 @@ use Illuminate\Support\Str;
 
 class MemberController extends Controller
 {
-    public const TYPES = ['Featured', 'General', 'Alumni'];
+    use HandlesImageUploads;
+
+    // The first three drive the public Members page sections; the rest are kept
+    // so profiles created before the leadership rework stay editable.
+    public const TYPES = ['Executive', 'Ambassador', 'Staff', 'Featured', 'General', 'Alumni'];
 
     public function index(Request $request)
     {
@@ -55,6 +60,7 @@ class MemberController extends Controller
 
     public function destroy(Member $member)
     {
+        $this->deleteUploadedImage($member->photo);
         $member->delete();
 
         return redirect()->route('admin.members.index')
@@ -71,6 +77,9 @@ class MemberController extends Controller
             'affiliation_en' => ['nullable', 'string', 'max:255'],
             'affiliation_uz' => ['nullable', 'string', 'max:255'],
             'affiliation_ja' => ['nullable', 'string', 'max:255'],
+            'bio_en' => ['nullable', 'string'],
+            'bio_uz' => ['nullable', 'string'],
+            'bio_ja' => ['nullable', 'string'],
             'field_en' => ['nullable', 'string', 'max:255'],
             'field_uz' => ['nullable', 'string', 'max:255'],
             'field_ja' => ['nullable', 'string', 'max:255'],
@@ -81,7 +90,11 @@ class MemberController extends Controller
             'region_slug' => ['nullable', 'string', 'max:255'],
             'type' => ['required', 'in:'.implode(',', self::TYPES)],
             'sort_order' => ['nullable', 'integer'],
+            'photo_file' => $this->imageRules(),
         ]);
+
+        unset($data['photo_file']);
+        $data['photo'] = $this->storeImage($request, 'photo_file', 'members', $member?->photo);
 
         $data['field_slug'] = Str::slug(($data['field_slug'] ?? null) ?: ($data['field_en'] ?? '')) ?: null;
         $data['region_slug'] = Str::slug(($data['region_slug'] ?? null) ?: ($data['region_en'] ?? '')) ?: null;

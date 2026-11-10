@@ -13,7 +13,7 @@
                 <x-i18n :text="ui('admin.dashboard.subtitle')" tag="p" class="mt-2 text-muted" />
             </div>
             <a href="{{ route('admin.join.index') }}" class="btn-secondary text-sm px-4 py-2">
-                {{ i18n_text(['en' => 'View Applications', 'uz' => 'Arizalarni ko‘rish', 'ja' => '申請を表示']) }}
+                {{ i18n_text(['en' => 'View Applications', 'uz' => 'Arizalarni köriş', 'ja' => '申請を表示']) }}
             </a>
         </div>
 
@@ -27,19 +27,19 @@
             <div class="academic-card p-6 border-l-4 border-yellow-500">
                 <x-i18n :text="ui('admin.status.pending')" tag="p" class="text-sm uppercase tracking-[0.15em] text-yellow-700 mb-2" />
                 <p class="text-3xl font-bold text-yellow-700">{{ number_format($stats['pending']) }}</p>
-                <p class="text-xs text-muted mt-1">{{ i18n_text(['en' => 'This week', 'uz' => 'Shu hafta', 'ja' => '今週']) }}: {{ $stats['this_week']['pending'] }}</p>
+                <p class="text-xs text-muted mt-1">{{ i18n_text(['en' => 'This week', 'uz' => 'Şu hafta', 'ja' => '今週']) }}: {{ $stats['this_week']['pending'] }}</p>
             </div>
 
             <div class="academic-card p-6 border-l-4 border-green-500">
                 <x-i18n :text="ui('admin.status.approved')" tag="p" class="text-sm uppercase tracking-[0.15em] text-green-700 mb-2" />
                 <p class="text-3xl font-bold text-green-700">{{ number_format($stats['approved']) }}</p>
-                <p class="text-xs text-muted mt-1">{{ i18n_text(['en' => 'This week', 'uz' => 'Shu hafta', 'ja' => '今週']) }}: {{ $stats['this_week']['approved'] }}</p>
+                <p class="text-xs text-muted mt-1">{{ i18n_text(['en' => 'This week', 'uz' => 'Şu hafta', 'ja' => '今週']) }}: {{ $stats['this_week']['approved'] }}</p>
             </div>
 
             <div class="academic-card p-6 border-l-4 border-red-500">
                 <x-i18n :text="ui('admin.status.rejected')" tag="p" class="text-sm uppercase tracking-[0.15em] text-red-700 mb-2" />
                 <p class="text-3xl font-bold text-red-700">{{ number_format($stats['rejected']) }}</p>
-                <p class="text-xs text-muted mt-1">{{ i18n_text(['en' => 'This week', 'uz' => 'Shu hafta', 'ja' => '今週']) }}: {{ $stats['this_week']['rejected'] }}</p>
+                <p class="text-xs text-muted mt-1">{{ i18n_text(['en' => 'This week', 'uz' => 'Şu hafta', 'ja' => '今週']) }}: {{ $stats['this_week']['rejected'] }}</p>
             </div>
         </div>
 
@@ -49,7 +49,7 @@
                 <a href="{{ route($item['route']) }}" class="academic-card block p-5">
                     <p class="text-sm uppercase tracking-[0.15em] text-muted">{{ $item['label'] }}</p>
                     <p class="mt-1 text-3xl font-bold text-primary">{{ number_format($item['count']) }}</p>
-                    <p class="mt-2 text-sm font-semibold text-secondary">{{ i18n_text(['en' => 'Manage', 'uz' => 'Boshqarish', 'ja' => '管理']) }} →</p>
+                    <p class="mt-2 text-sm font-semibold text-secondary">{{ i18n_text(['en' => 'Manage', 'uz' => 'Boşqariş', 'ja' => '管理']) }} →</p>
                 </a>
             @endforeach
         </div>
@@ -62,7 +62,7 @@
                     <p class="text-sm text-muted">{{ i18n_text(['en' => 'Latest membership applications', 'uz' => 'Oxirgi aʼzolik arizalari', 'ja' => '最新の参加申請']) }}</p>
                 </div>
                 <a href="{{ route('admin.join.index') }}" class="text-sm font-semibold text-secondary hover:text-primary">
-                    {{ i18n_text(['en' => 'See all', 'uz' => 'Hammasini ko‘rish', 'ja' => 'すべて表示']) }} →
+                    {{ i18n_text(['en' => 'See all', 'uz' => 'Hammasini köriş', 'ja' => 'すべて表示']) }} →
                 </a>
             </div>
 
