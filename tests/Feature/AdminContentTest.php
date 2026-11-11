@@ -104,7 +104,9 @@ class AdminContentTest extends TestCase
     {
         $this->post(route('admin.members.store'), [
             'name' => 'Laylo Karimova',
-            'type' => 'Featured',
+            // The members page renders Executive / Ambassador / Staff; a member
+            // saved under one of the legacy types would not appear at all.
+            'type' => 'Executive',
             'field_en' => 'Data Science',
             'region_en' => 'Kanto',
         ])->assertRedirect(route('admin.members.index'));
@@ -115,8 +117,8 @@ class AdminContentTest extends TestCase
 
         $this->get('/members')->assertOk()->assertSee('Laylo Karimova');
 
-        $this->put(route('admin.members.update', $member), ['name' => 'Laylo K.', 'type' => 'Alumni'])->assertRedirect();
-        $this->assertSame('Alumni', $member->fresh()->type);
+        $this->put(route('admin.members.update', $member), ['name' => 'Laylo K.', 'type' => 'Staff'])->assertRedirect();
+        $this->assertSame('Staff', $member->fresh()->type);
 
         $this->delete(route('admin.members.destroy', $member))->assertRedirect();
         $this->assertDatabaseCount('members', 0);
@@ -170,8 +172,7 @@ class AdminContentTest extends TestCase
     {
         $this->artisan('static:seed')->assertSuccessful();
 
-        $news = News::sole();
-        $this->assertSame('2024-05-27-first-meeting-of-the-year', $news->slug);
+        $news = News::where('slug', '2024-05-27-first-meeting-of-the-year')->sole();
         $this->assertFileExists(public_path($news->image));
         $this->get('/news/'.$news->slug)->assertOk()->assertSee('Tsukuba');
     }
