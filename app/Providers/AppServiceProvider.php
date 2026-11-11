@@ -2,8 +2,9 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
+use Anthropic\Client;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -12,7 +13,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        // Bound rather than constructed inline so tests can swap in a fake
+        // without ever reaching the network.
+        $this->app->singleton(Client::class, fn () => new Client(
+            apiKey: config('services.anthropic.key'),
+        ));
     }
 
     /**

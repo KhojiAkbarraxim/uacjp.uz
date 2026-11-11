@@ -113,6 +113,8 @@
             @endforeach
         </details>
 
+        <x-admin.translate-button context="a regional chapter page" />
+
         <x-admin.form-actions :cancel="route('admin.regions.index')" />
     </form>
 @endsection

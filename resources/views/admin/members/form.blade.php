@@ -55,6 +55,8 @@
             </div>
         </fieldset>
 
+        <x-admin.translate-button context="a member's profile" />
+
         <x-admin.form-actions :cancel="route('admin.members.index')" />
     </form>
 @endsection

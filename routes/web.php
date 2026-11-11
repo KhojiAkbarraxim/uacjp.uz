@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\MemberController as AdminMemberController;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\RegionController as AdminRegionController;
 use App\Http\Controllers\Admin\SiteSettingController;
+use App\Http\Controllers\Admin\TranslationController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ContactMessageController;
 use App\Http\Controllers\JoinApplicationController;
@@ -42,6 +43,10 @@ Route::middleware([EnsureAdminAuthenticated::class])->group(function () {
         Route::resource('members', AdminMemberController::class)->except('show');
         Route::resource('news', NewsController::class)->except('show')->parameters(['news' => 'news']);
         Route::resource('events', EventController::class)->except('show');
+        Route::post('translate', TranslationController::class)
+            ->middleware('throttle:20,1')
+            ->name('translate');
+
         Route::get('settings', [SiteSettingController::class, 'edit'])->name('settings.edit');
         Route::put('settings', [SiteSettingController::class, 'update'])->name('settings.update');
     });

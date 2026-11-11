@@ -24,6 +24,8 @@
             <x-admin.image-input name="image" label="Image (optional)" :current="$event->image" />
         </fieldset>
 
+        <x-admin.translate-button context="an event listing" />
+
         <x-admin.form-actions :cancel="route('admin.events.index')" />
     </form>
 @endsection

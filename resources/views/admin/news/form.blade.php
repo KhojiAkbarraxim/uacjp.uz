@@ -31,6 +31,8 @@
             <x-admin.image-input name="image" label="Image (optional)" :current="$news->image" />
         </fieldset>
 
+        <x-admin.translate-button context="a news article" />
+
         <x-admin.form-actions :cancel="route('admin.news.index')" />
     </form>
 @endsection
