@@ -51,46 +51,53 @@ class AdminContentTest extends TestCase
     public function test_region_can_be_created_with_secretaries_and_lists(): void
     {
         $this->post(route('admin.regions.store'), [
-            'name_en' => 'UAC Shikoku',
-            'short_name_en' => 'Shikoku',
-            'universities_en' => "Ehime University\nKochi University",
+            'name_uz' => 'UAC Şikoku',
+            'short_name_uz' => 'Şikoku',
+            'universities_uz' => "Ehime universiteti\nKoçi universiteti",
             'universities_ja' => "愛媛大学\n高知大学",
-            'activities' => '[{"title": {"en": "Meetup"}}]',
+            'activities' => '[{"title": {"uz": "Uçraşuv"}}]',
             'secretaries' => [
-                ['name' => 'Jasur Aliev', 'role_en' => 'Regional Secretary', 'telegram' => '@jasur'],
+                ['name' => 'Jasur Aliev', 'role_uz' => 'Mintaqaviy kotib', 'telegram' => '@jasur'],
                 ['name' => ''],
             ],
         ])->assertRedirect(route('admin.regions.index'));
 
-        $region = Region::where('slug', 'uac-shikoku')->firstOrFail();
-        $this->assertSame(['en' => 'Kochi University', 'uz' => 'Kochi University', 'ja' => '高知大学'], $region->universities[1]);
-        $this->assertSame('Meetup', $region->activities[0]['title']['en']);
+        // The slug is transliterated from the Uzbek name: S -> S, c -> c.
+        $region = Region::where('slug', 'uac-sikoku')->firstOrFail();
+
+        // Uzbek is the spine of the list; an untranslated line reuses it.
+        $this->assertSame(
+            ['uz' => 'Koçi universiteti', 'en' => 'Koçi universiteti', 'ja' => '高知大学'],
+            $region->universities[1],
+        );
+        $this->assertSame('Uçraşuv', $region->activities[0]['title']['uz']);
         $this->assertSame(['Jasur Aliev'], $region->secretaries->pluck('name')->all());
 
-        $this->get('/regions/uac-shikoku')->assertOk()->assertSee('UAC Shikoku')->assertSee('Jasur Aliev');
+        $this->get('/regions/uac-sikoku')->assertOk()->assertSee('UAC Şikoku')->assertSee('Jasur Aliev');
     }
 
     public function test_region_rejects_invalid_json_and_duplicate_slug(): void
     {
-        Region::create(['slug' => 'kanto', 'name_en' => 'UAC Kanto', 'short_name_en' => 'Kanto']);
+        Region::create(['slug' => 'kanto', 'name_uz' => 'UAC Kanto', 'short_name_uz' => 'Kanto']);
 
+        // A slug the admin typed is never renumbered - the clash is reported.
         $this->post(route('admin.regions.store'), [
             'slug' => 'kanto',
-            'name_en' => 'Another',
-            'short_name_en' => 'Another',
+            'name_uz' => 'Boşqa',
+            'short_name_uz' => 'Boşqa',
             'gallery' => '{not json',
         ])->assertSessionHasErrors(['slug', 'gallery']);
     }
 
     public function test_region_update_replaces_secretaries_and_delete_cascades(): void
     {
-        $region = Region::create(['slug' => 'kansai', 'name_en' => 'UAC Kansai', 'short_name_en' => 'Kansai']);
+        $region = Region::create(['slug' => 'kansai', 'name_uz' => 'UAC Kansai', 'short_name_uz' => 'Kansai']);
         $region->secretaries()->create(['name' => 'Old Person']);
 
         $this->put(route('admin.regions.update', $region), [
             'slug' => 'kansai',
-            'name_en' => 'UAC Kansai',
-            'short_name_en' => 'Kansai',
+            'name_uz' => 'UAC Kansai',
+            'short_name_uz' => 'Kansai',
             'secretaries' => [['name' => 'New Person']],
         ])->assertRedirect(route('admin.regions.index'));
 
@@ -107,12 +114,12 @@ class AdminContentTest extends TestCase
             // The members page renders Executive / Ambassador / Staff; a member
             // saved under one of the legacy types would not appear at all.
             'type' => 'Executive',
-            'field_en' => 'Data Science',
-            'region_en' => 'Kanto',
+            'field_uz' => 'Maʼlumotlar fani',
+            'region_uz' => 'Kanto',
         ])->assertRedirect(route('admin.members.index'));
 
         $member = Member::firstOrFail();
-        $this->assertSame('data-science', $member->field_slug);
+        $this->assertSame('malumotlar-fani', $member->field_slug);
         $this->assertSame('kanto', $member->region_slug);
 
         $this->get('/members')->assertOk()->assertSee('Laylo Karimova');
@@ -126,7 +133,7 @@ class AdminContentTest extends TestCase
 
     public function test_event_past_flag_follows_date(): void
     {
-        $base = ['title_en' => 'Forum', 'location_en' => 'Tokyo', 'type_en' => 'Forum'];
+        $base = ['title_uz' => 'Forum', 'location_uz' => 'Tokio', 'type_uz' => 'Forum'];
 
         $this->post(route('admin.events.store'), $base + ['date' => now()->subDay()->toDateString()]);
         $this->post(route('admin.events.store'), $base + ['date' => now()->addMonth()->toDateString()]);
@@ -138,7 +145,7 @@ class AdminContentTest extends TestCase
     public function test_news_image_upload_is_stored_and_removed(): void
     {
         $this->post(route('admin.news.store'), [
-            'title_en' => 'Big Announcement',
+            'title_uz' => 'Katta eʼlon',
             'date' => '2026-11-01',
             'image_file' => UploadedFile::fake()->createWithContent('cover.png', base64_decode(self::PNG)),
         ])->assertRedirect(route('admin.news.index'));
@@ -147,7 +154,7 @@ class AdminContentTest extends TestCase
         $this->assertStringStartsWith('uploads/news/', $news->image);
         $this->assertFileExists(public_path($news->image));
 
-        $this->get('/')->assertOk()->assertSee('Big Announcement');
+        $this->get('/')->assertOk()->assertSee('Katta eʼlon');
 
         $this->delete(route('admin.news.destroy', $news));
         $this->assertFileDoesNotExist(public_path($news->image));
@@ -156,16 +163,16 @@ class AdminContentTest extends TestCase
     public function test_news_article_page_shows_full_text(): void
     {
         $this->post(route('admin.news.store'), [
-            'title_en' => 'Spring Meetup',
+            'title_uz' => 'Bahorgi uçraşuv',
             'date' => '2026-04-01',
-            'summary_en' => 'Short card text.',
-            'body_en' => "First paragraph.\n\nSecond paragraph.",
+            'summary_uz' => 'Qisqa matn.',
+            'body_uz' => "Birinçi abzas.\n\nIkkinçi abzas.",
         ])->assertRedirect(route('admin.news.index'));
 
-        $this->assertSame('spring-meetup', News::firstOrFail()->slug);
+        $this->assertSame('bahorgi-ucrasuv', News::firstOrFail()->slug);
 
-        $this->get('/')->assertSee('Short card text.')->assertSee(route('news.show', 'spring-meetup'));
-        $this->get('/news/spring-meetup')->assertOk()->assertSee('Second paragraph.');
+        $this->get('/')->assertSee('Qisqa matn.')->assertSee(route('news.show', 'bahorgi-ucrasuv'));
+        $this->get('/news/bahorgi-ucrasuv')->assertOk()->assertSee('Ikkinçi abzas.');
     }
 
     public function test_static_seed_imports_the_real_article(): void

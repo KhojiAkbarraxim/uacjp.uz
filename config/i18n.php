@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'default' => 'en',
+    'default' => 'uz',
 
     'cookie' => 'locale',
 

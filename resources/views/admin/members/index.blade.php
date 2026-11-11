@@ -40,10 +40,10 @@
                     <tr>
                         <td class="text-muted">{{ $member->sort_order }}</td>
                         <td class="font-medium text-primary">{{ $member->name }}</td>
-                        <td>{{ $member->role_en }}</td>
-                        <td>{{ $member->affiliation_en }}</td>
-                        <td>{{ $member->field_en }}</td>
-                        <td>{{ $member->region_en }}</td>
+                        <td>{{ $member->authored('role') }}</td>
+                        <td>{{ $member->authored('affiliation') }}</td>
+                        <td>{{ $member->authored('field') }}</td>
+                        <td>{{ $member->authored('region') }}</td>
                         <td><span class="chip {{ $member->type === 'Executive' ? 'bg-secondary-soft text-secondary' : '' }}">{{ $member->type }}</span></td>
                         <td class="whitespace-nowrap text-right space-x-1">
                             <a href="{{ route('admin.members.edit', $member) }}" class="btn-small">Edit</a>

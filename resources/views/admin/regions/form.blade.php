@@ -9,7 +9,7 @@
 @endphp
 
 @section('content')
-    <x-admin.page-header :title="$region->exists ? 'Edit region: '.$region->name_en : 'New region'">
+    <x-admin.page-header :title="$region->exists ? 'Edit region: '.$region->authored('name') : 'New region'">
         @if ($region->exists)
             <a href="{{ route('regions.show', $region->slug) }}" target="_blank" class="btn-secondary">View page ↗</a>
         @endif
@@ -28,7 +28,7 @@
                 <div>
                     <label class="admin-label" for="slug">URL slug</label>
                     <input id="slug" name="slug" type="text" class="form-input" value="{{ old('slug', $region->slug) }}">
-                    <p class="admin-hint">Page address: /regions/<b>slug</b>. Leave empty to generate from the English name. Changing it breaks old links.</p>
+                    <p class="admin-hint">Page address: /regions/<b>slug</b>. Leave empty to generate from the Uzbek name. Changing it breaks old links.</p>
                 </div>
                 <div>
                     <label class="admin-label" for="sort_order">Sort order</label>
@@ -90,14 +90,14 @@
                 <div>
                     <p class="admin-label">{{ $label }}</p>
                     <div class="grid gap-3 lg:grid-cols-3">
-                        @foreach (['en', 'uz', 'ja'] as $locale)
+                        @foreach (\App\Support\Locales::ORDER as $locale)
                             <label class="block">
                                 <span class="admin-lang">{{ $locale }}</span>
                                 <textarea name="{{ $field }}_{{ $locale }}" rows="4" class="form-input mt-1">{{ $lines($field, $locale) }}</textarea>
                             </label>
                         @endforeach
                     </div>
-                    <p class="admin-hint">One item per line. Line 1 in each language belongs together; empty translations fall back to English.</p>
+                    <p class="admin-hint">One item per line, written in Uzbek. Line 1 in each language belongs together; a line left untranslated reuses the Uzbek text.</p>
                 </div>
             @endforeach
         </fieldset>

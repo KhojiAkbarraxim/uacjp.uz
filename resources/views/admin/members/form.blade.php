@@ -45,12 +45,12 @@
                 <div>
                     <label class="admin-label" for="field_slug">Field filter key</label>
                     <input id="field_slug" name="field_slug" type="text" class="form-input" value="{{ old('field_slug', $member->field_slug) }}">
-                    <p class="admin-hint">Members with the same key are grouped in the field filter. Leave empty to generate from the English field.</p>
+                    <p class="admin-hint">Members with the same key are grouped in the field filter. Leave empty to generate from the Uzbek field.</p>
                 </div>
                 <div>
                     <label class="admin-label" for="region_slug">Region filter key</label>
                     <input id="region_slug" name="region_slug" type="text" class="form-input" value="{{ old('region_slug', $member->region_slug) }}">
-                    <p class="admin-hint">Leave empty to generate from the English region.</p>
+                    <p class="admin-hint">Leave empty to generate from the Uzbek region.</p>
                 </div>
             </div>
         </fieldset>

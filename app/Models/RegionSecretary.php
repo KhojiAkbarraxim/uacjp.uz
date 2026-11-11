@@ -22,24 +22,6 @@ class RegionSecretary extends Model
         return $this->belongsTo(Region::class);
     }
 
-    public function role(): ?string
-    {
-        return match (app()->getLocale()) {
-            'uz' => $this->role_uz ?? $this->role_en,
-            'ja' => $this->role_ja ?? $this->role_en,
-            default => $this->role_en,
-        };
-    }
-
-    public function affiliation(): ?string
-    {
-        return match (app()->getLocale()) {
-            'uz' => $this->affiliation_uz ?? $this->affiliation_en,
-            'ja' => $this->affiliation_ja ?? $this->affiliation_en,
-            default => $this->affiliation_en,
-        };
-    }
-
     public function toFrontendArray(): array
     {
         return [

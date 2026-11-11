@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Concerns;
 
+use App\Support\Images;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
@@ -39,6 +40,6 @@ trait HandlesImageUploads
 
     protected function imageRules(): array
     {
-        return ['nullable', 'image', 'mimes:jpg,jpeg,png,webp', 'max:4096'];
+        return Images::rules();
     }
 }

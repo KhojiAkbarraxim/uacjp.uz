@@ -25,10 +25,10 @@
                         <td class="text-muted">{{ $region->sort_order }}</td>
                         <td>@if ($region->image)<img src="{{ asset($region->image) }}" alt="" class="admin-thumb">@endif</td>
                         <td class="whitespace-nowrap">
-                            <p class="font-medium text-primary">{{ $region->name_en }}</p>
+                            <p class="font-medium text-primary">{{ $region->authored('name') }}</p>
                             <p class="text-xs text-muted">/regions/{{ $region->slug }}</p>
                         </td>
-                        <td>{{ $region->status_en }}</td>
+                        <td>{{ $region->authored('status') }}</td>
                         <td>{{ $region->secretaries_count }}</td>
                         <td class="whitespace-nowrap text-right space-x-1">
                             <a href="{{ route('regions.show', $region->slug) }}" target="_blank" class="btn-small">View</a>

@@ -23,7 +23,7 @@
                 <div>
                     <label class="admin-label" for="slug">URL slug</label>
                     <input id="slug" name="slug" type="text" class="form-input" value="{{ old('slug', $news->slug) }}">
-                    <p class="admin-hint">Page address: /news/<b>slug</b>. Leave empty to generate from the English title.</p>
+                    <p class="admin-hint">Page address: /news/<b>slug</b>. Leave empty to generate from the Uzbek title.</p>
                 </div>
             </div>
             <x-admin.locale-input name="summary" label="Summary" :model="$news" textarea :rows="3" hint="Short text shown on the home page card." />

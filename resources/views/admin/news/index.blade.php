@@ -28,8 +28,8 @@
                     <tr>
                         <td class="whitespace-nowrap">{{ $item->date->format('M d, Y') }}</td>
                         <td>@if ($item->image)<img src="{{ asset($item->image) }}" alt="" class="admin-thumb">@endif</td>
-                        <td class="font-medium text-primary">{{ $item->title_en }}</td>
-                        <td>{{ $item->type_en }}</td>
+                        <td class="font-medium text-primary">{{ $item->authored('title') }}</td>
+                        <td>{{ $item->authored('type') }}</td>
                         <td class="whitespace-nowrap text-right space-x-1">
                             @if ($item->slug)
                                 <a href="{{ route('news.show', $item->slug) }}" target="_blank" class="btn-small">View</a>
