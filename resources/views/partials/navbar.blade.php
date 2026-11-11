@@ -1,18 +1,18 @@
 @php
     $navByRoute = collect($navigation)->keyBy('route');
 
-    $primaryLinks = collect(['home', 'activities', 'regions.index'])
+    // Client-specified top-level order. "about" renders as a dropdown holding
+    // Members and Partners; every other entry is a plain link.
+    $topLevel = collect(['home', 'about', 'news.index', 'activities', 'regions.index', 'contact'])
         ->map(fn ($route) => $navByRoute->get($route))
         ->filter()
         ->values();
 
-    $aboutItem = $navByRoute->get('about');
     $aboutChildren = collect(['members.index', 'partners'])
         ->map(fn ($route) => $navByRoute->get($route))
         ->filter()
         ->values();
 
-    $contactItem = $navByRoute->get('contact');
     $isAboutGroupActive = request()->routeIs(['about', 'members.*', 'partners']);
 @endphp
 
@@ -31,16 +31,15 @@
         </a>
 
         <nav class="hidden items-center gap-1 lg:flex" aria-label="Primary">
-            @foreach ($primaryLinks as $item)
+            @foreach ($topLevel as $item)
+            @if ($item['route'] !== 'about')
                 <x-i18n
                     :text="$item['label']"
                     tag="a"
                     href="{{ route($item['route']) }}"
                     class="nav-link {{ request()->routeIs($item['route']) ? 'nav-link-active' : '' }}"
                 />
-            @endforeach
-
-            @if ($aboutItem)
+            @else
                 <div class="relative" data-dropdown>
                     <button
                         type="button"
@@ -49,14 +48,14 @@
                         aria-haspopup="true"
                         aria-expanded="false"
                     >
-                        <x-i18n :text="$aboutItem['label']" tag="span" />
+                        <x-i18n :text="$item['label']" tag="span" />
                         <svg class="h-3.5 w-3.5" data-dropdown-chevron viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                             <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </button>
                     <div class="dropdown-panel left-0 hidden" data-dropdown-panel role="menu">
-                        <a href="{{ route($aboutItem['route']) }}" role="menuitem" class="dropdown-item {{ request()->routeIs($aboutItem['route']) ? 'is-active' : '' }}">
-                            <x-i18n :text="$aboutItem['label']" />
+                        <a href="{{ route($item['route']) }}" role="menuitem" class="dropdown-item {{ request()->routeIs($item['route']) ? 'is-active' : '' }}">
+                            <x-i18n :text="$item['label']" />
                         </a>
                         @foreach ($aboutChildren as $child)
                             <a href="{{ route($child['route']) }}" role="menuitem" class="dropdown-item {{ request()->routeIs($child['route']) ? 'is-active' : '' }}">
@@ -66,15 +65,7 @@
                     </div>
                 </div>
             @endif
-
-            @if ($contactItem)
-                <x-i18n
-                    :text="$contactItem['label']"
-                    tag="a"
-                    href="{{ route($contactItem['route']) }}"
-                    class="nav-link {{ request()->routeIs($contactItem['route']) ? 'nav-link-active' : '' }}"
-                />
-            @endif
+            @endforeach
         </nav>
 
         <div class="hidden items-center gap-3 lg:flex">
@@ -148,16 +139,15 @@
         </div>
 
         <nav class="flex flex-1 flex-col gap-2" aria-label="Mobile primary">
-            @foreach ($primaryLinks as $item)
+            @foreach ($topLevel as $item)
+            @if ($item['route'] !== 'about')
                 <x-i18n
                     :text="$item['label']"
                     tag="a"
                     href="{{ route($item['route']) }}"
                     class="rounded-2xl px-4 py-3 text-base font-medium {{ request()->routeIs($item['route']) ? 'bg-secondary-soft text-secondary' : 'text-primary hover:bg-slate-50' }}"
                 />
-            @endforeach
-
-            @if ($aboutItem)
+            @else
                 <div data-dropdown>
                     <button
                         type="button"
@@ -166,14 +156,14 @@
                         aria-haspopup="true"
                         aria-expanded="false"
                     >
-                        <x-i18n :text="$aboutItem['label']" tag="span" />
+                        <x-i18n :text="$item['label']" tag="span" />
                         <svg class="h-4 w-4" data-dropdown-chevron viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
                             <path d="M6 9l6 6 6-6" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </button>
                     <div class="dropdown-panel dropdown-panel--inline hidden" data-dropdown-panel role="menu">
-                        <a href="{{ route($aboutItem['route']) }}" role="menuitem" class="dropdown-item {{ request()->routeIs($aboutItem['route']) ? 'is-active' : '' }}">
-                            <x-i18n :text="$aboutItem['label']" />
+                        <a href="{{ route($item['route']) }}" role="menuitem" class="dropdown-item {{ request()->routeIs($item['route']) ? 'is-active' : '' }}">
+                            <x-i18n :text="$item['label']" />
                         </a>
                         @foreach ($aboutChildren as $child)
                             <a href="{{ route($child['route']) }}" role="menuitem" class="dropdown-item {{ request()->routeIs($child['route']) ? 'is-active' : '' }}">
@@ -183,15 +173,7 @@
                     </div>
                 </div>
             @endif
-
-            @if ($contactItem)
-                <x-i18n
-                    :text="$contactItem['label']"
-                    tag="a"
-                    href="{{ route($contactItem['route']) }}"
-                    class="rounded-2xl px-4 py-3 text-base font-medium {{ request()->routeIs($contactItem['route']) ? 'bg-secondary-soft text-secondary' : 'text-primary hover:bg-slate-50' }}"
-                />
-            @endif
+            @endforeach
         </nav>
 
         <div class="relative mt-6 flex justify-center self-center" data-dropdown data-lang-dropdown>

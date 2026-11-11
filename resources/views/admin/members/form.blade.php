@@ -6,7 +6,7 @@
     <x-admin.page-header :title="$member->exists ? 'Edit member' : 'New member'" />
 
     <form action="{{ $member->exists ? route('admin.members.update', $member) : route('admin.members.store') }}"
-          method="POST" class="space-y-6">
+          method="POST" enctype="multipart/form-data" class="space-y-6">
         @csrf
         @if ($member->exists) @method('PUT') @endif
 
@@ -33,6 +33,8 @@
             </div>
             <x-admin.locale-input name="role" label="Role" :model="$member" hint="e.g. Ph.D. Candidate, Research Associate" />
             <x-admin.locale-input name="affiliation" label="Affiliation" :model="$member" hint="University or organization" />
+            <x-admin.image-input name="photo" label="Photo (optional)" :current="$member->photo" />
+            <x-admin.locale-input name="bio" label="Biography" :model="$member" textarea :rows="6" hint="Optional. Shown behind a “Read more” toggle on the Members page. Separate paragraphs with an empty line." />
         </fieldset>
 
         <fieldset class="admin-fieldset">

@@ -77,3 +77,27 @@ Static sample content for the site lives in [config/uac.php](/home/khojiakbar/pr
 - [resources/views](/home/khojiakbar/projects/uacjp/resources/views): layouts, partials, components, and page templates
 - [resources/css/app.css](/home/khojiakbar/projects/uacjp/resources/css/app.css): Tailwind theme tokens and shared component classes
 - [resources/js/app.js](/home/khojiakbar/projects/uacjp/resources/js/app.js): mobile menu, FAQ accordion, and member filter behavior
+
+## Production: apex domain TLS
+
+`https://uacjp.uz` (without `www`) fails with `NET::ERR_CERT_COMMON_NAME_INVALID`.
+DNS is not the problem — both names already resolve to the same host:
+
+```
+uacjp.uz      A  95.46.96.12
+www.uacjp.uz  A  95.46.96.12
+```
+
+The certificate is issued for `www.uacjp.uz` alone:
+
+```
+subject=CN = www.uacjp.uz
+X509v3 Subject Alternative Name: DNS:www.uacjp.uz
+```
+
+This is DirectAdmin shared hosting with no root access, so the certificate is
+reissued from the panel, not with `certbot`. See **DEPLOY.md → TLS** for the
+steps; `public/.htaccess` already keeps `/.well-known/` reachable so the
+Let's Encrypt challenge is not blocked.
+
+Verify afterwards with `curl -sSI https://uacjp.uz | head -1`.

@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [App\Http\Controllers\PageController::class, 'home'])->name('home');
 Route::get('/regions', [App\Http\Controllers\RegionController::class, 'index'])->name('regions.index');
 Route::get('/regions/{slug}', [App\Http\Controllers\RegionController::class, 'show'])->name('regions.show');
+Route::get('/news', [App\Http\Controllers\NewsController::class, 'index'])->name('news.index');
 Route::get('/news/{slug}', [App\Http\Controllers\NewsController::class, 'show'])->name('news.show');
 Route::get('/activities', [App\Http\Controllers\PageController::class, 'activities'])->name('activities');
 Route::get('/members', [App\Http\Controllers\MemberController::class, 'index'])->name('members.index');

@@ -7,7 +7,7 @@ return [
 
     'locales' => [
         'en' => 'English',
-        'uz' => 'Oʻzbekcha',
+        'uz' => 'Özbekça',
         'ja' => '日本語',
     ],
 ];

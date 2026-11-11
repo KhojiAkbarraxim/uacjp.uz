@@ -39,7 +39,7 @@ class JoinApplicationController extends Controller
             ]);
         }
 
-        return back()->with('success', 'Arizangiz qabul qilindi! Tez orada siz bilan bog‘lanamiz.');
+        return back()->with('success', 'Arizangiz qabul qilindi! Tez orada siz bilan boğlanamiz.');
     }
 
     public function index(Request $request)
