@@ -79,21 +79,26 @@ class SeedStaticToDynamic extends Command
                 ]
             );
 
-            $region->secretaries()->delete();
-
+            // Seeding is additive on purpose. Wiping the relation here would
+            // destroy secretaries an admin added through the panel, and this
+            // command is re-runnable. RegionController does delete-then-recreate,
+            // but there the submitted form IS the full list, so it is authoritative;
+            // the static config is not.
             foreach ($regionData['secretaries'] ?? [] as $sec) {
-                $region->secretaries()->create([
-                    'name' => $sec['name'],
-                    'role_en' => $this->i18n($sec['role'] ?? null, 'en'),
-                    'role_uz' => $this->i18n($sec['role'] ?? null, 'uz'),
-                    'role_ja' => $this->i18n($sec['role'] ?? null, 'ja'),
-                    'affiliation_en' => $this->i18n($sec['affiliation'] ?? null, 'en'),
-                    'affiliation_uz' => $this->i18n($sec['affiliation'] ?? null, 'uz'),
-                    'affiliation_ja' => $this->i18n($sec['affiliation'] ?? null, 'ja'),
-                    'email' => $sec['email'] ?? null,
-                    'phone' => $sec['phone'] ?? null,
-                    'telegram' => $sec['telegram'] ?? null,
-                ]);
+                $region->secretaries()->updateOrCreate(
+                    ['name' => $sec['name']],
+                    [
+                        'role_en' => $this->i18n($sec['role'] ?? null, 'en'),
+                        'role_uz' => $this->i18n($sec['role'] ?? null, 'uz'),
+                        'role_ja' => $this->i18n($sec['role'] ?? null, 'ja'),
+                        'affiliation_en' => $this->i18n($sec['affiliation'] ?? null, 'en'),
+                        'affiliation_uz' => $this->i18n($sec['affiliation'] ?? null, 'uz'),
+                        'affiliation_ja' => $this->i18n($sec['affiliation'] ?? null, 'ja'),
+                        'email' => $sec['email'] ?? null,
+                        'phone' => $sec['phone'] ?? null,
+                        'telegram' => $sec['telegram'] ?? null,
+                    ]
+                );
             }
 
             $this->info("Created region: {$region->name_en}");

@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\JoinApplicationReceived;
 use App\Models\JoinApplication;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use Throwable;
 
 class JoinApplicationController extends Controller
 {
@@ -24,8 +27,17 @@ class JoinApplicationController extends Controller
             'status' => 'pending',
         ]);
 
-        Mail::to(config('admin.notification_email', env('ADMIN_NOTIFICATION_EMAIL', 'admin@uacjp.uz')))
-            ->send(new JoinApplicationReceived($application));
+        // The application is already saved. A mail failure - no SMTP configured,
+        // a rejected relay, a timeout - must never turn a successful submission
+        // into an error page the applicant reads as "it did not work".
+        try {
+            Mail::to(config('admin.notification_email'))
+                ->send(new JoinApplicationReceived($application));
+        } catch (Throwable $e) {
+            Log::error('Join application notification could not be sent: '.$e->getMessage(), [
+                'application_id' => $application->id,
+            ]);
+        }
 
         return back()->with('success', 'Arizangiz qabul qilindi! Tez orada siz bilan boğlanamiz.');
     }

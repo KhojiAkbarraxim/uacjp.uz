@@ -176,6 +176,8 @@ return [
             'topic_partnership' => ['en' => 'Partnership', 'uz' => 'Hamkorlik', 'ja' => 'パートナーシップ'],
             'topic_event' => ['en' => 'Event collaboration', 'uz' => 'Tadbir hamkorligi', 'ja' => 'イベント協力'],
             'submit_button' => ['en' => 'Send inquiry', 'uz' => 'Sörovni yuboriş', 'ja' => '送信する'],
+            'send_success' => ['en' => 'Thank you. Your message has been sent.', 'uz' => 'Rahmat. Xabaringiz yuborildi.', 'ja' => 'ありがとうございます。メッセージを送信しました。'],
+            'send_failed' => ['en' => 'Sorry, the message could not be sent. Please email us directly.', 'uz' => 'Keçirasiz, xabar yuborilmadi. Iltimos, töğridan-töğri email yozing.', 'ja' => '申し訳ございません。送信できませんでした。直接メールでご連絡ください。'],
             'general_contact_heading' => ['en' => 'General contact', 'uz' => 'Umumiy aloqa', 'ja' => '一般連絡先'],
             'regional_contacts_heading' => ['en' => 'Regional contacts', 'uz' => 'Mintaqaviy aloqalar', 'ja' => '地域別連絡先'],
             'social_media_heading' => ['en' => 'Social media', 'uz' => 'Ijtimoiy tarmoqlar', 'ja' => 'ソーシャルメディア'],

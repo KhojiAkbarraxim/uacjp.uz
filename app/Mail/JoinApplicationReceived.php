@@ -31,7 +31,7 @@ class JoinApplicationReceived extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.join_application_received',
+            markdown: 'emails.join_application_received',
         );
     }
 
