@@ -17,7 +17,12 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->encryptCookies(except: ['locale']);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
+        // Laravel's own rule is $request->expectsJson(); replacing it outright
+        // meant no route outside api/* could ever answer an XHR with JSON - a
+        // validation failure came back as a redirect instead of a 422. Keep the
+        // api/* guarantee and restore the default alongside it. HTML form posts
+        // do not ask for JSON, so admin forms still get session errors.
         $exceptions->shouldRenderJsonWhen(
-            fn (Request $request) => $request->is('api/*'),
+            fn (Request $request) => $request->is('api/*') || $request->expectsJson(),
         );
     })->create();
