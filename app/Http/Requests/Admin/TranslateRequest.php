@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
 class TranslateRequest extends FormRequest
@@ -25,17 +26,16 @@ class TranslateRequest extends FormRequest
         ];
     }
 
-    public function after(): array
+    public function withValidator(Validator $validator): void
     {
-        return [
-            function ($validator) {
-                $total = collect($this->input('fields', []))->sum(fn ($value) => mb_strlen((string) $value));
+        $validator->after(function (Validator $validator) {
+            $total = collect($this->input('fields', []))
+                ->sum(fn ($value) => is_scalar($value) ? mb_strlen((string) $value) : 0);
 
-                if ($total > self::MAX_CHARS) {
-                    $validator->errors()->add('fields', 'Too much text to translate in one go.');
-                }
-            },
-        ];
+            if ($total > self::MAX_CHARS) {
+                $validator->errors()->add('fields', 'Too much text to translate in one go.');
+            }
+        });
     }
 
     /** @return array<string, string> */
