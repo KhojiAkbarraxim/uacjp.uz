@@ -12,9 +12,11 @@ class MemberController extends Controller
 {
     use HandlesImageUploads;
 
-    // The first three drive the public Members page sections; the rest are kept
-    // so profiles created before the leadership rework stay editable.
-    public const TYPES = ['Executive', 'Ambassador', 'Staff', 'Featured', 'General', 'Alumni'];
+    // These are exactly the sections the public Members page renders. Nothing
+    // else may be offered here: a member saved under a type the page does not
+    // group would simply never appear on the site. The legacy Featured, General
+    // and Alumni types were folded into Staff by the 2026_11_11 migration.
+    public const TYPES = ['Executive', 'Ambassador', 'Staff'];
 
     public function index(Request $request)
     {
@@ -34,7 +36,7 @@ class MemberController extends Controller
 
     public function create()
     {
-        return view('admin.members.create', ['member' => new Member(['type' => 'General'])]);
+        return view('admin.members.create', ['member' => new Member(['type' => 'Staff'])]);
     }
 
     public function store(Request $request)

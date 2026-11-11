@@ -3,7 +3,7 @@
 @section('title', 'Members')
 
 @section('content')
-    <x-admin.page-header title="Members" subtitle="The public member directory. Featured members are highlighted at the top.">
+    <x-admin.page-header title="Members" subtitle="The public member directory, grouped into Executive, Ambassador and Staff.">
         <a href="{{ route('admin.members.create') }}" class="btn-primary">+ New member</a>
     </x-admin.page-header>
 
@@ -44,7 +44,7 @@
                         <td>{{ $member->affiliation_en }}</td>
                         <td>{{ $member->field_en }}</td>
                         <td>{{ $member->region_en }}</td>
-                        <td><span class="chip {{ $member->type === 'Featured' ? 'bg-secondary-soft text-secondary' : '' }}">{{ $member->type }}</span></td>
+                        <td><span class="chip {{ $member->type === 'Executive' ? 'bg-secondary-soft text-secondary' : '' }}">{{ $member->type }}</span></td>
                         <td class="whitespace-nowrap text-right space-x-1">
                             <a href="{{ route('admin.members.edit', $member) }}" class="btn-small">Edit</a>
                             <x-admin.delete-button :action="route('admin.members.destroy', $member)" />

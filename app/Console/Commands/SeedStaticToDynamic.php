@@ -185,7 +185,7 @@ class SeedStaticToDynamic extends Command
                     'region_en' => $this->i18n($member['region'] ?? null, 'en'),
                     'region_uz' => $this->i18n($member['region'] ?? null, 'uz'),
                     'region_ja' => $this->i18n($member['region'] ?? null, 'ja'),
-                    'type' => $member['type'] ?? 'General',
+                    'type' => $member['type'] ?? 'Staff',
                     'sort_order' => $member['sort_order'] ?? $sort,
                 ]
             );
