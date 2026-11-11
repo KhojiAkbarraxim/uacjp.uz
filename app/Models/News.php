@@ -22,32 +22,11 @@ class News extends Model
         'date' => 'date',
     ];
 
-    public function title(): string
-    {
-        return match (app()->getLocale()) {
-            'uz' => $this->title_uz ?? $this->title_en,
-            'ja' => $this->title_ja ?? $this->title_en,
-            default => $this->title_en,
-        };
-    }
-
-    public function summary(): ?string
-    {
-        return match (app()->getLocale()) {
-            'uz' => $this->summary_uz ?? $this->summary_en,
-            'ja' => $this->summary_ja ?? $this->summary_en,
-            default => $this->summary_en,
-        };
-    }
-
-    public function type(): ?string
-    {
-        return match (app()->getLocale()) {
-            'uz' => $this->type_uz ?? $this->type_en,
-            'ja' => $this->type_ja ?? $this->type_en,
-            default => $this->type_en,
-        };
-    }
+    /** Carbon's uz_Latn month names are not dependable on every host. */
+    private const UZBEK_MONTHS = [
+        1 => 'yanvar', 'fevral', 'mart', 'aprel', 'may', 'iyun',
+        'iyul', 'avgust', 'sentabr', 'oktabr', 'noyabr', 'dekabr',
+    ];
 
     public function dateDict(): array
     {
@@ -55,7 +34,7 @@ class News extends Model
 
         return [
             'en' => $date->copy()->locale('en')->translatedFormat('F j, Y'),
-            'uz' => $date->copy()->locale('uz_Latn')->translatedFormat('Y-\\y\\i\\l j-F'),
+            'uz' => $date->year.'-yil '.$date->day.'-'.self::UZBEK_MONTHS[(int) $date->month],
             'ja' => $date->copy()->locale('ja')->translatedFormat('Y年n月j日'),
         ];
     }

@@ -36,7 +36,7 @@
             <div>
                 <p class="admin-label">Hero image caption</p>
                 <div class="grid gap-3 lg:grid-cols-3">
-                    @foreach (['en', 'uz', 'ja'] as $locale)
+                    @foreach (\App\Support\Locales::ORDER as $locale)
                         <label class="block">
                             <span class="admin-lang">{{ $locale }}</span>
                             <textarea name="hero_caption_{{ $locale }}" rows="3" class="form-input mt-1">{{ old("hero_caption_{$locale}", $settings['hero_caption'][$locale] ?? '') }}</textarea>

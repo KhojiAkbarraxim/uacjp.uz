@@ -4,21 +4,14 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Admin\Concerns\HandlesImageUploads;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\RegionRequest;
 use App\Models\Region;
-use Illuminate\Http\Request;
+use App\Support\Locales;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
-use Illuminate\Validation\Rule;
 
 class RegionController extends Controller
 {
     use HandlesImageUploads;
-
-    /** Lists of {en, uz, ja} strings, edited as one item per line per language. */
-    private const LINE_LISTS = ['universities', 'plans'];
-
-    /** Nested structures, edited as raw JSON. */
-    private const JSON_FIELDS = ['activities', 'gallery'];
 
     public function index()
     {
@@ -32,17 +25,17 @@ class RegionController extends Controller
         return view('admin.regions.create', ['region' => new Region]);
     }
 
-    public function store(Request $request)
+    public function store(RegionRequest $request)
     {
         $region = DB::transaction(function () use ($request) {
-            $region = Region::create($this->validated($request));
+            $region = Region::create($this->payload($request));
             $this->syncSecretaries($request, $region);
 
             return $region;
         });
 
         return redirect()->route('admin.regions.index')
-            ->with('success', "Region '{$region->name_en}' created.");
+            ->with('success', "Region '{$this->label($region)}' created.");
     }
 
     public function edit(Region $region)
@@ -52,77 +45,41 @@ class RegionController extends Controller
         return view('admin.regions.edit', compact('region'));
     }
 
-    public function update(Request $request, Region $region)
+    public function update(RegionRequest $request, Region $region)
     {
         DB::transaction(function () use ($request, $region) {
-            $region->update($this->validated($request, $region));
+            $region->update($this->payload($request, $region));
             $this->syncSecretaries($request, $region);
         });
 
         return redirect()->route('admin.regions.index')
-            ->with('success', "Region '{$region->name_en}' updated.");
+            ->with('success', "Region '{$this->label($region)}' updated.");
     }
 
     public function destroy(Region $region)
     {
-        $name = $region->name_en;
+        $label = $this->label($region);
         $this->deleteUploadedImage($region->image);
         $this->deleteUploadedImage($region->hero_image);
         $region->delete();
 
         return redirect()->route('admin.regions.index')
-            ->with('success', "Region '{$name}' deleted.");
+            ->with('success', "Region '{$label}' deleted.");
     }
 
-    private function validated(Request $request, ?Region $region = null): array
+    /**
+     * How to name a region in a message. Records written while English was the
+     * authored language have no Uzbek value, so fall back rather than print
+     * an empty string.
+     */
+    private function label(Region $region): string
     {
-        $request->merge(['slug' => Str::slug($request->input('slug') ?: $request->input('name_en', ''))]);
+        return $region->authored('name') ?: $region->slug;
+    }
 
-        $rules = [
-            'slug' => ['required', 'string', 'max:255', Rule::unique('regions', 'slug')->ignore($region)],
-            'name_en' => ['required', 'string', 'max:255'],
-            'short_name_en' => ['required', 'string', 'max:255'],
-            'email' => ['nullable', 'email', 'max:255'],
-            'phone' => ['nullable', 'string', 'max:255'],
-            'sort_order' => ['nullable', 'integer', 'min:0'],
-            'image_file' => $this->imageRules(),
-            'hero_image_file' => $this->imageRules(),
-            'secretaries' => ['nullable', 'array'],
-            'secretaries.*.name' => ['nullable', 'string', 'max:255'],
-            'secretaries.*.email' => ['nullable', 'email', 'max:255'],
-            'secretaries.*.phone' => ['nullable', 'string', 'max:255'],
-            'secretaries.*.telegram' => ['nullable', 'string', 'max:255'],
-        ];
-
-        foreach (['name_uz', 'name_ja', 'short_name_uz', 'short_name_ja'] as $field) {
-            $rules[$field] = ['nullable', 'string', 'max:255'];
-        }
-
-        foreach (['status', 'members_count', 'city', 'locations'] as $base) {
-            foreach (['en', 'uz', 'ja'] as $locale) {
-                $rules["{$base}_{$locale}"] = ['nullable', 'string', 'max:255'];
-                $rules["secretaries.*.role_{$locale}"] = ['nullable', 'string', 'max:255'];
-                $rules["secretaries.*.affiliation_{$locale}"] = ['nullable', 'string', 'max:255'];
-            }
-        }
-
-        foreach (['summary', 'excerpt', 'about'] as $base) {
-            foreach (['en', 'uz', 'ja'] as $locale) {
-                $rules["{$base}_{$locale}"] = ['nullable', 'string'];
-            }
-        }
-
-        foreach (self::LINE_LISTS as $field) {
-            foreach (['en', 'uz', 'ja'] as $locale) {
-                $rules["{$field}_{$locale}"] = ['nullable', 'string'];
-            }
-        }
-
-        foreach (self::JSON_FIELDS as $field) {
-            $rules[$field] = ['nullable', 'json'];
-        }
-
-        $data = collect($request->validate($rules))
+    private function payload(RegionRequest $request, ?Region $region = null): array
+    {
+        $data = collect($request->validated())
             ->only((new Region)->getFillable())
             ->all();
 
@@ -130,7 +87,7 @@ class RegionController extends Controller
         $data['image'] = $this->storeImage($request, 'image_file', 'regions', $region?->image);
         $data['hero_image'] = $this->storeImage($request, 'hero_image_file', 'regions', $region?->hero_image);
 
-        foreach (self::LINE_LISTS as $field) {
+        foreach (RegionRequest::LINE_LISTS as $field) {
             $data[$field] = $this->zipLines($request, $field);
         }
 
@@ -161,26 +118,29 @@ class RegionController extends Controller
     }
 
     /**
-     * Turn three per-language textareas into [{en, uz, ja}, ...], pairing by line number.
+     * Turn the per-language textareas into [{uz, en, ja}, ...], pairing by line
+     * number. The authored language is the spine: it decides how many items
+     * there are and which rows survive. It used to be English, which silently
+     * dropped every row an admin had only written in Uzbek.
      */
-    private function zipLines(Request $request, string $field): array
+    private function zipLines(RegionRequest $request, string $field): array
     {
-        $lines = collect(['en', 'uz', 'ja'])->mapWithKeys(fn (string $locale) => [
+        $lines = collect(Locales::ORDER)->mapWithKeys(fn (string $locale) => [
             $locale => preg_split('/\R/', trim((string) $request->input("{$field}_{$locale}"))),
         ]);
 
-        return collect($lines['en'])
-            ->map(fn (string $en, int $i) => [
-                'en' => trim($en),
-                'uz' => trim($lines['uz'][$i] ?? '') ?: trim($en),
-                'ja' => trim($lines['ja'][$i] ?? '') ?: trim($en),
+        return collect($lines[Locales::SOURCE])
+            ->map(fn (string $source, int $i) => [
+                'uz' => trim($source),
+                'en' => trim($lines['en'][$i] ?? '') ?: trim($source),
+                'ja' => trim($lines['ja'][$i] ?? '') ?: trim($source),
             ])
-            ->filter(fn (array $item) => $item['en'] !== '')
+            ->filter(fn (array $item) => $item[Locales::SOURCE] !== '')
             ->values()
             ->all();
     }
 
-    private function syncSecretaries(Request $request, Region $region): void
+    private function syncSecretaries(RegionRequest $request, Region $region): void
     {
         $region->secretaries()->delete();
 

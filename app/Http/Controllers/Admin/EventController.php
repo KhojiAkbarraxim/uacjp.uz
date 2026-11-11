@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Admin\Concerns\HandlesImageUploads;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\EventRequest;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -29,9 +30,9 @@ class EventController extends Controller
         return view('admin.events.create', ['event' => new Event(['date' => today()])]);
     }
 
-    public function store(Request $request)
+    public function store(EventRequest $request)
     {
-        Event::create($this->validated($request));
+        Event::create($this->payload($request));
 
         return redirect()->route('admin.events.index')
             ->with('success', 'Event created.');
@@ -42,9 +43,9 @@ class EventController extends Controller
         return view('admin.events.edit', compact('event'));
     }
 
-    public function update(Request $request, Event $event)
+    public function update(EventRequest $request, Event $event)
     {
-        $event->update($this->validated($request, $event));
+        $event->update($this->payload($request, $event));
 
         return redirect()->route('admin.events.index')
             ->with('success', 'Event updated.');
@@ -59,21 +60,9 @@ class EventController extends Controller
             ->with('success', 'Event deleted.');
     }
 
-    private function validated(Request $request, ?Event $event = null): array
+    private function payload(EventRequest $request, ?Event $event = null): array
     {
-        $data = $request->validate([
-            'title_en' => ['required', 'string', 'max:255'],
-            'title_uz' => ['nullable', 'string', 'max:255'],
-            'title_ja' => ['nullable', 'string', 'max:255'],
-            'date' => ['required', 'date'],
-            'location_en' => ['required', 'string', 'max:255'],
-            'location_uz' => ['nullable', 'string', 'max:255'],
-            'location_ja' => ['nullable', 'string', 'max:255'],
-            'type_en' => ['required', 'string', 'max:255'],
-            'type_uz' => ['nullable', 'string', 'max:255'],
-            'type_ja' => ['nullable', 'string', 'max:255'],
-            'image_file' => $this->imageRules(),
-        ]);
+        $data = $request->validated();
 
         unset($data['image_file']);
         $data['image'] = $this->storeImage($request, 'image_file', 'events', $event?->image);

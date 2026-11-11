@@ -8,6 +8,7 @@ use App\Models\News;
 use App\Models\Region;
 use App\Models\SiteSetting;
 use Carbon\Carbon;
+use App\Support\Locales;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 
@@ -134,7 +135,7 @@ class SeedStaticToDynamic extends Command
     {
         foreach ($items as $item) {
             News::updateOrCreate(
-                ['slug' => $item['slug'] ?? Str::slug($item['title']['en'])],
+                ['slug' => $item['slug'] ?? Str::slug($this->i18n($item['title'], Locales::SOURCE) ?? '')],
                 [
                     'title_en' => $item['title']['en'],
                     'title_uz' => $item['title']['uz'] ?? null,
@@ -181,7 +182,7 @@ class SeedStaticToDynamic extends Command
                     'field_en' => $this->i18n($member['field'] ?? null, 'en'),
                     'field_uz' => $this->i18n($member['field'] ?? null, 'uz'),
                     'field_ja' => $this->i18n($member['field'] ?? null, 'ja'),
-                    'field_slug' => $member['field_slug'] ?? Str::slug($this->i18n($member['field'] ?? null, 'en') ?? ''),
+                    'field_slug' => $member['field_slug'] ?? Str::slug($this->i18n($member['field'] ?? null, Locales::SOURCE) ?? ''),
                     'region_en' => $this->i18n($member['region'] ?? null, 'en'),
                     'region_uz' => $this->i18n($member['region'] ?? null, 'uz'),
                     'region_ja' => $this->i18n($member['region'] ?? null, 'ja'),

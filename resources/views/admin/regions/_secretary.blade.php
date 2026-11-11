@@ -26,7 +26,7 @@
         <div>
             <p class="admin-label">{{ $label }}</p>
             <div class="grid gap-3 sm:grid-cols-3">
-                @foreach (['en', 'uz', 'ja'] as $locale)
+                @foreach (\App\Support\Locales::ORDER as $locale)
                     <label class="block">
                         <span class="admin-lang">{{ $locale }}</span>
                         <input name="secretaries[{{ $i }}][{{ $base }}_{{ $locale }}]" type="text" class="form-input mt-1" value="{{ $s["{$base}_{$locale}"] ?? '' }}">

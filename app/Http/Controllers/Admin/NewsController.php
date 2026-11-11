@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Admin\Concerns\HandlesImageUploads;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\NewsRequest;
 use App\Models\News;
+use App\Support\Locales;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use Illuminate\Validation\Rule;
 
 class NewsController extends Controller
 {
@@ -16,7 +16,14 @@ class NewsController extends Controller
     public function index(Request $request)
     {
         $news = News::query()
-            ->when($request->filled('search'), fn ($q) => $q->where('title_en', 'like', '%'.$request->input('search').'%'))
+            ->when($request->filled('search'), function ($q) use ($request) {
+                $term = '%'.$request->input('search').'%';
+                $q->where(function ($q) use ($term) {
+                    foreach (Locales::ORDER as $locale) {
+                        $q->orWhere("title_{$locale}", 'like', $term);
+                    }
+                });
+            })
             ->orderByDesc('date')
             ->paginate(20)
             ->withQueryString();
@@ -29,9 +36,9 @@ class NewsController extends Controller
         return view('admin.news.create', ['news' => new News(['date' => today()])]);
     }
 
-    public function store(Request $request)
+    public function store(NewsRequest $request)
     {
-        News::create($this->validated($request));
+        News::create($this->payload($request));
 
         return redirect()->route('admin.news.index')
             ->with('success', 'News created.');
@@ -42,9 +49,9 @@ class NewsController extends Controller
         return view('admin.news.edit', compact('news'));
     }
 
-    public function update(Request $request, News $news)
+    public function update(NewsRequest $request, News $news)
     {
-        $news->update($this->validated($request, $news));
+        $news->update($this->payload($request, $news));
 
         return redirect()->route('admin.news.index')
             ->with('success', 'News updated.');
@@ -59,27 +66,9 @@ class NewsController extends Controller
             ->with('success', 'News deleted.');
     }
 
-    private function validated(Request $request, ?News $news = null): array
+    private function payload(NewsRequest $request, ?News $news = null): array
     {
-        $request->merge(['slug' => Str::slug($request->input('slug') ?: $request->input('title_en', ''))]);
-
-        $data = $request->validate([
-            'slug' => ['required', 'string', 'max:255', Rule::unique('news', 'slug')->ignore($news)],
-            'title_en' => ['required', 'string', 'max:255'],
-            'title_uz' => ['nullable', 'string', 'max:255'],
-            'title_ja' => ['nullable', 'string', 'max:255'],
-            'type_en' => ['nullable', 'string', 'max:255'],
-            'type_uz' => ['nullable', 'string', 'max:255'],
-            'type_ja' => ['nullable', 'string', 'max:255'],
-            'date' => ['required', 'date'],
-            'summary_en' => ['nullable', 'string'],
-            'summary_uz' => ['nullable', 'string'],
-            'summary_ja' => ['nullable', 'string'],
-            'body_en' => ['nullable', 'string'],
-            'body_uz' => ['nullable', 'string'],
-            'body_ja' => ['nullable', 'string'],
-            'image_file' => $this->imageRules(),
-        ]);
+        $data = $request->validated();
 
         unset($data['image_file']);
         $data['image'] = $this->storeImage($request, 'image_file', 'news', $news?->image);
