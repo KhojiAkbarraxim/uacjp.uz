@@ -165,6 +165,14 @@ jobs:
 
             test -f public/build/manifest.json || { echo 'manifest.json missing after unpack'; exit 1; }
 
+            # public/uploads holds admin-uploaded images and is excluded from the
+            # tarball (see above), so ~/public_html never got a symlink to it when
+            # the account was first set up - that directory didn't exist until the
+            # first upload. Create it only if missing, so a real directory or an
+            # existing symlink is never replaced.
+            mkdir -p public/uploads
+            [ -e ~/public_html/uploads ] || ln -s '${DEPLOY_PATH}/public/uploads' ~/public_html/uploads
+
             # bootstrap/cache is excluded from the release because it holds
             # per-environment state, so the server keeps whatever package
             # manifest it generated last. That manifest was written while dev
@@ -234,4 +242,4 @@ jobs:
       - name: Remind about the manual step
         if: ${{ !(inputs.dry_run || false) }}
         run: |
-          echo "::warning::Code and assets are uploaded. Migrations and Laravel caches were NOT refreshed - FTP cannot run artisan. Run them from the panel, or switch DEPLOY_METHOD to 'ssh'."
+          echo "::warning::Code and assets are uploaded. Migrations and Laravel caches were NOT refreshed - FTP cannot run artisan. Run them from the panel, or switch DEPLOY_METHOD to 'ssh'. Also confirm ~/public_html/uploads exists (a symlink to laravel_app/public/uploads) - FTP cannot create it either, and admin-uploaded images 404 without it."
