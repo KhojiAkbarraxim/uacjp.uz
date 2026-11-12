@@ -3,9 +3,9 @@
 namespace App\Support;
 
 /**
- * Converts Uzbek text from the old Latin alphabet (oʻ, gʻ, sh, ch) to the
- * new one (ö, ğ, ş, ç). Idempotent: text already in the new alphabet is
- * returned unchanged. URLs and email addresses are left untouched.
+ * Converts Uzbek text between the old Latin alphabet (oʻ, gʻ, sh, ch) and the
+ * new one (ö, ğ, ş, ç). toNew() is idempotent: text already in the new
+ * alphabet is returned unchanged. URLs and email addresses are left untouched.
  */
 class UzbekLatin
 {
@@ -26,6 +26,26 @@ class UzbekLatin
                 : self::word($m[0]),
             $text,
         );
+    }
+
+    /**
+     * The reverse, for services that only know the old alphabet. Lossless,
+     * since every new letter has exactly one old spelling.
+     */
+    public static function toOld(?string $text): ?string
+    {
+        if ($text === null || $text === '') {
+            return $text;
+        }
+
+        return preg_replace_callback('~\p{L}+~u', function (array $m) {
+            $caps = mb_strtoupper($m[0]) === $m[0] && mb_strlen($m[0]) > 1;
+
+            return strtr($m[0], [
+                'ö' => 'oʻ', 'Ö' => 'Oʻ', 'ğ' => 'gʻ', 'Ğ' => 'Gʻ',
+                'ş' => 'sh', 'Ş' => $caps ? 'SH' : 'Sh', 'ç' => 'ch', 'Ç' => $caps ? 'CH' : 'Ch',
+            ]);
+        }, $text);
     }
 
     private static function word(string $word): string
