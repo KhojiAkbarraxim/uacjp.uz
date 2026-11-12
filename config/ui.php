@@ -162,7 +162,7 @@ return [
             'hero_title' => ['en' => 'Reach the UAC Japan team', 'uz' => 'UAC Japan jamoasi bilan boğlaning', 'ja' => 'UAC Japanチームへのお問い合わせ'],
             'hero_description' => ['en' => 'Send a general inquiry, contact a regional chapter, or get in touch about partnerships, events, and membership.', 'uz' => 'Umumiy sörov yuboring, mintaqaviy bölim bilan boğlaning yoki hamkorlik, tadbirlar va aʼzolik böyiça murojaat qiling.', 'ja' => '一般的なお問い合わせ、地域支部への連絡、または提携・イベント・会員登録に関するご相談はこちらから。'],
             'form_heading' => ['en' => 'Contact form', 'uz' => 'Murojaat formasi', 'ja' => 'お問い合わせフォーム'],
-            'form_description' => ['en' => 'The form is UI-ready and structured for validation. Backend delivery can be connected later.', 'uz' => 'Forma interfeys jihatidan tayyor va validatsiya uçun tuzilgan. Backend orqali yuboriş keyinroq ulanişi mumkin.', 'ja' => 'このフォームはUIとして準備済みで、バリデーション用に構造化されています。バックエンド連携は今後追加予定です。'],
+            'form_description' => ['en' => 'Send us a message and the UAC team will reply by email.', 'uz' => 'Bizga xabar yuboring, UAC jamoasi sizga email orqali javob beradi.', 'ja' => 'メッセージをお送りください。UACチームがメールでご返信します。'],
             'label_full_name' => ['en' => 'Full name', 'uz' => 'Töliq ism', 'ja' => '氏名'],
             'label_email' => ['en' => 'Email address', 'uz' => 'Email manzil', 'ja' => 'メールアドレス'],
             'label_topic' => ['en' => 'Topic', 'uz' => 'Mavzu', 'ja' => '件名'],

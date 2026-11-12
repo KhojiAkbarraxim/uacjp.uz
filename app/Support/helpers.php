@@ -33,7 +33,7 @@ if (! function_exists('i18n_dict')) {
             // Nothing in the known languages: take whatever the value does hold
             // rather than render an empty element.
             foreach ($value as $fallback) {
-                if (filled($fallback)) {
+                if (is_scalar($fallback) && filled($fallback)) {
                     return (string) $fallback;
                 }
             }

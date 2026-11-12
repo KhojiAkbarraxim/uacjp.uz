@@ -89,6 +89,7 @@
                     </div>
                 </div>
 
+                @if ($contact['socials'])
                 <div class="academic-card p-8">
                     <x-i18n :text="ui('pages.contact.social_media_heading')" tag="h2" class="text-2xl" />
                     <div class="mt-5 flex flex-wrap gap-3">
@@ -97,6 +98,7 @@
                         @endforeach
                     </div>
                 </div>
+                @endif
             </div>
         </div>
     </section>
