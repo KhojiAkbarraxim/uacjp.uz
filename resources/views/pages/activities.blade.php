@@ -61,7 +61,7 @@
                                 src="{{ asset($event['thumbnail']) }}"
                                 alt="{{ $title }}"
                                 loading="lazy"
-                                class="hidden h-16 w-20 shrink-0 rounded-xl object-cover sm:block"
+                                class="hidden h-20 w-28 shrink-0 rounded-xl object-cover sm:block"
                             >
                         @endif
 

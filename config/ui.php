@@ -42,6 +42,7 @@ return [
             'read_more' => ['en' => 'Read more →', 'uz' => 'Batafsil →', 'ja' => '続きを読む →'],
             'back' => ['en' => '← Back to home', 'uz' => '← Boş sahifaga', 'ja' => '← ホームへ戻る'],
             'empty' => ['en' => 'News will be posted here soon.', 'uz' => 'Yangiliklar tez orada şu yerda eʼlon qilinadi.', 'ja' => 'ニュースは近日公開予定です。'],
+            'gallery_heading' => ['en' => 'Photos from the event', 'uz' => 'Tadbir rasmlari', 'ja' => 'イベントの写真'],
         ],
 
         'news_index' => [
@@ -75,6 +76,7 @@ return [
             'news_eyebrow' => ['en' => 'Latest News', 'uz' => 'Sönggi yangiliklar', 'ja' => '最新ニュース'],
             'news_title' => ['en' => 'Recent updates, events, and opportunities', 'uz' => 'Sönggi yangiliklar, tadbirlar va imkoniyatlar', 'ja' => '最新のアップデート・イベント・機会'],
             'news_description' => ['en' => 'A snapshot of what the community is organising right now across its chapters and academic programs.', 'uz' => 'Hamjamiyat hozirda bölimlari va ilmiy dasturlari böylab nimalarni taşkil qilayotganining qisqaça körinişi.', 'ja' => '各支部や学術プログラムでコミュニティが現在企画している内容のスナップショット。'],
+            'news_view_all' => ['en' => 'See all news', 'uz' => 'Barça yangiliklarni köriş', 'ja' => 'すべてのニュースを見る'],
             'prospective_eyebrow' => ['en' => 'Prospective Partners', 'uz' => 'Kutilayotgan hamkorlar', 'ja' => '連携予定のパートナー'],
             'prospective_title' => ['en' => 'Organizations we plan to work with', 'uz' => 'Hamkorlik qilişni rejalaştirgan taşkilotlarimiz', 'ja' => '今後の連携を予定している団体'],
             'prospective_description' => ['en' => 'Cooperation with these institutions is still being discussed — no agreement has been signed yet.', 'uz' => 'Uşbu muassasalar bilan hamkorlik hozirça kelişuv jarayonida — rasmiy kelişuvga hali erişilmagan.', 'ja' => 'これらの機関との協力は現在協議中で、まだ正式な合意には至っていません。'],

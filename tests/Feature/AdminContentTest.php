@@ -198,7 +198,7 @@ class AdminContentTest extends TestCase
             $this->assertFileExists(public_path($image->path));
         }
 
-        $this->get('/news/'.$news->slug)->assertOk();
+        $this->get('/news/'.$news->slug)->assertOk()->assertSee('Tadbir rasmlari');
 
         $firstImage = $news->images->first();
         $this->put(route('admin.news.update', $news), [

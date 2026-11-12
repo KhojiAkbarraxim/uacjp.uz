@@ -231,14 +231,17 @@
     </section>
 
     <section class="section-shell">
-        <div class="container-shell grid gap-10 lg:grid-cols-[0.8fr,1.2fr]">
-            <x-section-title
-                :eyebrow="ui('pages.home.news_eyebrow')"
-                :title="ui('pages.home.news_title')"
-                :description="ui('pages.home.news_description')"
-            />
+        <div class="container-shell space-y-10">
+            <div class="flex flex-wrap items-end justify-between gap-6">
+                <x-section-title
+                    :eyebrow="ui('pages.home.news_eyebrow')"
+                    :title="ui('pages.home.news_title')"
+                    :description="ui('pages.home.news_description')"
+                />
+                <x-i18n :text="ui('pages.home.news_view_all')" tag="a" href="{{ route('news.index') }}" class="shrink-0 text-sm font-semibold text-secondary hover:text-primary" />
+            </div>
 
-            <div class="space-y-5">
+            <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
                 @forelse ($latestNews as $news)
                     <x-news-card :news="$news" />
                 @empty
