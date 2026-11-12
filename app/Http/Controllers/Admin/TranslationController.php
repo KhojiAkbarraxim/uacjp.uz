@@ -21,9 +21,17 @@ class TranslationController extends Controller
         // Validated by hand: the app only renders JSON errors for api/* routes.
         $validator = Validator::make($request->all(), [
             'text' => ['required', 'string', 'max:10000'],
+            'from' => ['required', 'string', Rule::in(Locales::ORDER)],
             'to' => ['sometimes', 'array'],
-            'to.*' => ['string', Rule::in(array_diff(Locales::ORDER, [Locales::SOURCE]))],
+            'to.*' => ['string', Rule::in(Locales::ORDER)],
         ]);
+
+        $validator->after(function ($validator) use ($request) {
+            // Can't express "to excludes from" as a static rule - from is part of the same payload.
+            if (in_array($request->input('from'), (array) $request->input('to', []), true)) {
+                $validator->errors()->add('to', 'A field cannot be translated into itself.');
+            }
+        });
 
         if ($validator->fails()) {
             return response()->json([
@@ -33,6 +41,7 @@ class TranslationController extends Controller
         }
 
         $data = $validator->validated();
+        $from = $data['from'];
         $to = array_values(array_unique($data['to'] ?? []));
 
         if ($to && ! Translator::configured()) {
@@ -41,14 +50,14 @@ class TranslationController extends Controller
 
         // Rewriting the source itself in the new alphabet is free local text
         // processing - no Azure call, so it runs even without a target locale
-        // or a configured key.
-        $translations = Locales::SOURCE === 'uz'
-            ? [Locales::SOURCE => UzbekLatin::toDisplay($data['text'])]
+        // or a configured key. Only Uzbek has an old/new alphabet to rewrite.
+        $translations = $from === 'uz'
+            ? [$from => UzbekLatin::toDisplay($data['text'])]
             : [];
 
         if ($to) {
             try {
-                $translations += $translator->translate($data['text'], Locales::SOURCE, $to);
+                $translations += $translator->translate($data['text'], $from, $to);
             } catch (RequestException|ConnectionException $e) {
                 Log::warning('Azure translation failed: '.$e->getMessage());
 
