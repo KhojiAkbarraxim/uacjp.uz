@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers\Admin\Concerns;
 
+use App\Support\ImageConverter;
 use App\Support\Images;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
+use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
@@ -20,11 +22,27 @@ trait HandlesImageUploads
             return $current;
         }
 
-        $file = $request->file($field);
-        $name = Str::uuid().'.'.$file->extension();
-        $file->move(public_path("uploads/{$folder}"), $name);
+        $path = $this->storeUploadedFile($request->file($field), $folder);
 
         $this->deleteUploadedImage($current);
+
+        return $path;
+    }
+
+    /** Every upload is converted to WebP when possible; see ImageConverter. */
+    private function storeUploadedFile(UploadedFile $file, string $folder): string
+    {
+        $dir = public_path("uploads/{$folder}");
+        $name = (string) Str::uuid();
+
+        $webpName = ImageConverter::available() ? ImageConverter::convert($file, $dir, $name) : null;
+
+        if ($webpName !== null) {
+            return "uploads/{$folder}/{$webpName}";
+        }
+
+        $name .= '.'.$file->extension();
+        $file->move($dir, $name);
 
         return "uploads/{$folder}/{$name}";
     }
@@ -57,9 +75,7 @@ trait HandlesImageUploads
                 continue;
             }
 
-            $name = Str::uuid().'.'.$file->extension();
-            $file->move(public_path("uploads/{$folder}"), $name);
-            $paths[] = "uploads/{$folder}/{$name}";
+            $paths[] = $this->storeUploadedFile($file, $folder);
         }
 
         return $paths;

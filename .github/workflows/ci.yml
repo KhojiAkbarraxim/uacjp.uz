@@ -27,6 +27,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: ${{ vars.PHP_VERSION || '8.4' }}
+          extensions: gd
           coverage: none
 
       - name: Validate composer.json / composer.lock

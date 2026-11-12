@@ -7,6 +7,7 @@ use App\Models\Member;
 use App\Models\News;
 use App\Models\Region;
 use App\Models\SiteSetting;
+use App\Support\ImageConverter;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\File;
@@ -158,6 +159,24 @@ class AdminContentTest extends TestCase
 
         $this->delete(route('admin.news.destroy', $news));
         $this->assertFileDoesNotExist(public_path($news->thumbnail));
+    }
+
+    public function test_uploaded_images_are_converted_to_webp(): void
+    {
+        if (! ImageConverter::available()) {
+            $this->markTestSkipped('GD with WebP support is not installed here.');
+        }
+
+        $this->post(route('admin.news.store'), [
+            'title_uz' => 'WebP sinovi',
+            'date' => '2026-11-01',
+            'thumbnail_file' => UploadedFile::fake()->createWithContent('cover.png', base64_decode(self::PNG)),
+        ])->assertRedirect(route('admin.news.index'));
+
+        $news = News::firstOrFail();
+        $this->assertStringEndsWith('.webp', $news->thumbnail);
+        $this->assertFileExists(public_path($news->thumbnail));
+        $this->assertSame('image/webp', mime_content_type(public_path($news->thumbnail)));
     }
 
     public function test_news_gallery_images_are_added_and_removed(): void
