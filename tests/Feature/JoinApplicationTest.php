@@ -77,6 +77,20 @@ class JoinApplicationTest extends TestCase
         $this->assertSame('approved', $application->fresh()->status);
     }
 
+    public function test_admin_can_list_and_filter_applications(): void
+    {
+        JoinApplication::create([...$this->payload, 'status' => 'pending']);
+
+        $response = $this->withSession(['admin_authenticated' => true])
+            ->get('/admin/join-applications?status=pending')
+            ->assertOk()
+            ->assertSee('Aziz Karimov');
+
+        foreach (config('ui.admin.status') as $key => $label) {
+            $response->assertSee('value="'.$key.'"', false)->assertSee($label['uz']);
+        }
+    }
+
     public function test_applications_are_not_public(): void
     {
         $application = JoinApplication::create([...$this->payload, 'status' => 'pending']);

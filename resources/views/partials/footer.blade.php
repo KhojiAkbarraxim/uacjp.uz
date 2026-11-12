@@ -42,10 +42,12 @@
                 </div>
             </div>
 
+            @php($socials = \App\Support\Content::socials())
+            @if ($socials)
             <div>
                 <x-i18n :text="ui('footer.community_heading')" tag="h2" class="mb-4 text-xs font-semibold uppercase tracking-[0.24em] text-white/80" />
                 <div class="space-y-3">
-                    @foreach (\App\Support\Content::socials() as $social)
+                    @foreach ($socials as $social)
                         <a href="{{ $social['url'] }}" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 text-sm leading-6 text-white/70 transition-colors duration-200 hover:text-[#a3f69c]">
                             <span class="inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/5 text-white/80 transition-colors duration-200 hover:bg-white/10">
                                 @if (($social['platform'] ?? '') === 'facebook')
@@ -61,16 +63,13 @@
                     @endforeach
                 </div>
             </div>
+            @endif
         </div>
     </div>
 
     <div class="border-t border-white/10">
         <div class="mx-auto flex max-w-7xl flex-col gap-3 px-6 py-5 text-sm text-white/70 sm:flex-row sm:items-center sm:justify-between lg:px-8">
             <x-i18n :text="ui('footer.copyright')" tag="p" />
-            <div class="flex flex-wrap items-center gap-4">
-                <x-i18n :text="ui('footer.privacy_policy')" tag="a" href="#" class="transition-colors duration-200 hover:text-white" />
-                <x-i18n :text="ui('footer.terms')" tag="a" href="#" class="transition-colors duration-200 hover:text-white" />
-            </div>
         </div>
     </div>
 </footer>

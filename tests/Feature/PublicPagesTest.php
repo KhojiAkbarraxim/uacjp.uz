@@ -24,7 +24,7 @@ class PublicPagesTest extends TestCase
         ];
 
         foreach ($routes as $route) {
-            $this->get($route)->assertOk();
+            $this->get($route)->assertOk()->assertDontSee('href="#"', false);
         }
     }
 

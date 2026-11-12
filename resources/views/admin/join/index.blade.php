@@ -32,7 +32,7 @@
                     <label class="block text-sm font-medium text-primary mb-1">{{ i18n_text(['en' => 'Status', 'uz' => 'Holat', 'ja' => 'ステータス']) }}</label>
                     <select name="status" class="form-input w-full">
                         <option value="">{{ i18n_text(['en' => 'All statuses', 'uz' => 'Barça holatlar', 'ja' => 'すべてのステータス']) }}</option>
-                        @foreach (ui('admin.status') as $key => $label)
+                        @foreach (config('ui.admin.status') as $key => $label)
                             <option value="{{ $key }}" {{ request('status') === $key ? 'selected' : '' }}>{{ i18n_text($label) }}</option>
                         @endforeach
                     </select>

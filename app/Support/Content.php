@@ -116,6 +116,9 @@ class Content
 
                 return $url ? [...$social, 'url' => $url] : $social;
             })
+            // The config ships '#' placeholders; a link to nowhere is worse than none.
+            ->filter(fn (array $social) => filled($social['url']) && $social['url'] !== '#')
+            ->values()
             ->all();
     }
 
