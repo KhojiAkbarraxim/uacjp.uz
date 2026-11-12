@@ -825,16 +825,10 @@ return [
     ],
 
     'partners' => [
-        'sponsors' => [
-            ['name' => 'Academic Bridges Foundation', 'type' => ['en' => 'Sponsor', 'uz' => 'Homiy', 'ja' => 'スポンサー'], 'description' => ['en' => 'Supports scholar mobility and student-facing academic initiatives.', 'uz' => 'Olimlar mobilligini va talabalarga yönaltirilgan ilmiy taşabbuslarni qöllab-quvvatlaydi.', 'ja' => '研究者の流動性と学生向けの学術イニシアチブを支援します。']],
-            ['name' => 'Future Research Lab', 'type' => ['en' => 'Sponsor', 'uz' => 'Homiy', 'ja' => 'スポンサー'], 'description' => ['en' => 'Provides outreach support for seminars and collaboration sessions.', 'uz' => 'Seminar va hamkorlik sessiyalari uçun tarğibot yordamini taqdim etadi.', 'ja' => 'セミナーや協力セッションのためのアウトリーチ支援を提供します。']],
-            ['name' => 'Japan-Uzbek Innovation Forum', 'type' => ['en' => 'Sponsor', 'uz' => 'Homiy', 'ja' => 'スポンサー'], 'description' => ['en' => 'Connects researchers with innovation and policy stakeholders.', 'uz' => 'Tadqiqotçilarni innovatsiya va siyosat manfaatdor tomonlari bilan boğlaydi.', 'ja' => '研究者をイノベーションおよび政策の関係者と結びつけます。']],
-        ],
-        'networks' => [
-            ['name' => 'Japanese Universities Network', 'type' => ['en' => 'Academic Network', 'uz' => 'Ilmiy tarmoq', 'ja' => '学術ネットワーク'], 'description' => ['en' => 'A growing set of universities connected through regional chapter activities.', 'uz' => 'Mintaqaviy bölim faoliyati orqali boğlangan, ösib borayotgan universitetlar töplami.', 'ja' => '地域支部の活動を通じてつながる、拡大する大学群。']],
-            ['name' => 'Research Institutes Alliance', 'type' => ['en' => 'Research Institute', 'uz' => 'Tadqiqot instituti', 'ja' => '研究機関'], 'description' => ['en' => 'Supports interdisciplinary engagement and applied research cooperation.', 'uz' => 'Fanlararo hamkorlik va amaliy tadqiqot kooperatsiyasini qöllab-quvvatlaydi.', 'ja' => '学際的な関与と応用研究協力を支援します。']],
-            ['name' => 'International Scholar Partners', 'type' => ['en' => 'International Partner', 'uz' => 'Xalqaro hamkor', 'ja' => '国際パートナー'], 'description' => ['en' => 'Collaborates on knowledge-sharing, outreach, and mobility opportunities.', 'uz' => 'Bilim almaşiş, tarğibot va mobillik imkoniyatlari böyiça hamkorlik qiladi.', 'ja' => '知識共有、アウトリーチ、流動性の機会に関して協力します。']],
-        ],
+        // UAC Japan has no signed sponsors or networks yet - only the
+        // organizations below, which are still in discussion. Listing
+        // invented placeholder sponsors here would be dishonest, so there is
+        // deliberately nothing between this comment and 'prospective'.
         'prospective' => [
             [
                 'name' => [

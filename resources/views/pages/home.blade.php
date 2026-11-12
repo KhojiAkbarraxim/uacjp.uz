@@ -251,28 +251,6 @@
     <section class="section-shell bg-white/45">
         <div class="container-shell space-y-10">
             <x-section-title
-                :eyebrow="ui('pages.home.partners_eyebrow')"
-                :title="ui('pages.home.partners_title')"
-                :description="ui('pages.home.partners_description')"
-                align="center"
-            />
-
-            <div class="grid gap-6 md:grid-cols-3">
-                @foreach ($partners as $partner)
-                    <div class="academic-card flex min-h-40 items-center justify-center p-6 text-center">
-                        <div>
-                            <x-i18n :text="$partner['type']" tag="p" class="text-xs uppercase tracking-[0.22em] text-muted" />
-                            <h3 class="mt-3 text-2xl">{{ $partner['name'] }}</h3>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-    </section>
-
-    <section class="section-shell">
-        <div class="container-shell space-y-10">
-            <x-section-title
                 :eyebrow="ui('pages.home.prospective_eyebrow')"
                 :title="ui('pages.home.prospective_title')"
                 :description="ui('pages.home.prospective_description')"

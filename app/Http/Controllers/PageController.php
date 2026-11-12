@@ -20,7 +20,6 @@ class PageController extends Controller
             'heroStats' => config('uac.hero_stats'),
             'mission' => config('uac.mission'),
             'vision' => config('uac.vision'),
-            'partners' => config('uac.partners.sponsors'),
             'prospectivePartners' => config('uac.partners.prospective'),
         ]);
     }
