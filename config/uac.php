@@ -67,7 +67,8 @@ return [
             ],
             'date' => ['en' => 'April 11, 2026', 'uz' => '2026-yil 11-aprel', 'ja' => '2026年4月11日'],
             'type' => ['en' => 'Meeting', 'uz' => 'Uçraşuv', 'ja' => '例会'],
-            'image' => 'images/events/2026-04-11-embassy-group.webp',
+            'thumbnail' => 'images/events/2026-04-11-embassy-group.webp',
+            'images' => [],
             'summary' => [
                 'en' => 'More than 50 compatriots gathered at the Embassy of Uzbekistan in Japan for an interactive discussion, book talks by our writers, and the launch of the Uzbek translation of “Gakumon no Susume”.',
                 'uz' => 'Yaponiyadagi Özbekiston elçixonasida 50 dan ortiq vatandoşimiz jam böldi: interaktiv muhokama, yozuvçilarimiz bilan kitob suhbati va “Gakumon no Susume” tarjimasining taqdimoti bölib ötdi.',
@@ -88,7 +89,8 @@ return [
             ],
             'date' => ['en' => 'April 12, 2025', 'uz' => '2025-yil 12-aprel', 'ja' => '2025年4月12日'],
             'type' => ['en' => 'Meeting', 'uz' => 'Uçraşuv', 'ja' => '例会'],
-            'image' => 'images/events/2025-04-12-tsukuba-group.webp',
+            'thumbnail' => 'images/events/2025-04-12-tsukuba-group.webp',
+            'images' => [],
             'summary' => [
                 'en' => 'The University of Tsukuba hosted the club’s sixth meeting, bringing together more than 30 compatriots for talks on exchange-rate misalignment and on resilience in Central Eurasia.',
                 'uz' => 'Klubning 6-uçraşuviga Tsukuba universiteti mezbonlik qildi: 30 dan ortiq yurtdoşimiz yiğildi, valyuta kursidagi nomuvofiqliklar va Markaziy Yevrosiyodagi barqarorlik böyiça taqdimotlar tinglandi.',
@@ -109,7 +111,8 @@ return [
             ],
             'date' => ['en' => 'January 25, 2025', 'uz' => '2025-yil 25-yanvar', 'ja' => '2025年1月25日'],
             'type' => ['en' => 'Meeting', 'uz' => 'Uçraşuv', 'ja' => '例会'],
-            'image' => 'images/events/2025-01-ynu-kanto-group.webp',
+            'thumbnail' => 'images/events/2025-01-ynu-kanto-group.webp',
+            'images' => [],
             'summary' => [
                 'en' => 'More than 20 compatriots gathered at Yokohama National University for the first meeting of the year, with talks on circular economy research, a new career portal, and visa matters.',
                 'uz' => 'Yokohama milliy universitetida yil hisobidagi birinçi uçraşuv bölib ötdi: 20 dan ortiq yurtdoşimiz yiğildi, sirkulyar iqtisodiyot, Career portal loyihasi va viza masalalari böyiça taqdimotlar tinglandi.',
@@ -130,7 +133,8 @@ return [
             ],
             'date' => ['en' => 'November 30, 2024', 'uz' => '2024-yil 30-noyabr', 'ja' => '2024年11月30日'],
             'type' => ['en' => 'Meeting', 'uz' => 'Uçraşuv', 'ja' => '例会'],
-            'image' => 'images/events/2024-11-30-tufs-kanto-group.webp',
+            'thumbnail' => 'images/events/2024-11-30-tufs-kanto-group.webp',
+            'images' => [],
             'summary' => [
                 'en' => 'Around 40 compatriots gathered at TUFS for the fourth and final Kanto meeting of the year, featuring a road-safety research talk and an open Q&A session.',
                 'uz' => 'TUFSda yil hisobidagi törtinçi va oxirgi Kanto uçraşuvi bölib ötdi: 40 ga yaqin yurtdoşimiz yiğildi, yöl xavfsizligi böyiça tadqiqot taqdimoti va oçiq savol-javob sessiyasi ötkazildi.',
@@ -151,7 +155,8 @@ return [
             ],
             'date' => ['en' => 'May 27, 2024', 'uz' => '2024-yil 27-may', 'ja' => '2024年5月27日'],
             'type' => ['en' => 'Meeting', 'uz' => 'Uçraşuv', 'ja' => '例会'],
-            'image' => 'images/news/2024-05-27-tufs-meeting.webp',
+            'thumbnail' => 'images/news/2024-05-27-tufs-meeting.webp',
+            'images' => [],
             'summary' => [
                 'en' => 'The Academic Club of young Uzbek researchers in Tokyo met at TUFS and welcomed new talent from across the Kanto region.',
                 'uz' => 'Tokiodagi özbekistonlik yoş tadqiqotçilarning Akademik klubi TUFSda yiğilib, Kanto mintaqasidan kelgan yangi iqtidorlar bilan tanişdi.',
@@ -949,7 +954,8 @@ return [
                 'ja' => '東京外国語大学（TUFS）、東京',
             ],
             'type' => ['en' => 'Meeting', 'uz' => 'Uçraşuv', 'ja' => '例会'],
-            'image' => 'images/news/2024-05-27-tufs-meeting.webp',
+            'thumbnail' => 'images/news/2024-05-27-tufs-meeting.webp',
+            'images' => [],
         ],
         [
             'title' => [
@@ -964,7 +970,8 @@ return [
                 'ja' => '東京外国語大学（TUFS）、東京',
             ],
             'type' => ['en' => 'Meeting', 'uz' => 'Uçraşuv', 'ja' => '例会'],
-            'image' => 'images/events/2024-11-30-tufs-kanto-group.webp',
+            'thumbnail' => 'images/events/2024-11-30-tufs-kanto-group.webp',
+            'images' => [],
         ],
         [
             'title' => [
@@ -979,7 +986,8 @@ return [
                 'ja' => '横浜国立大学（YNU）、横浜',
             ],
             'type' => ['en' => 'Meeting', 'uz' => 'Uçraşuv', 'ja' => '例会'],
-            'image' => 'images/events/2025-01-ynu-kanto-group.webp',
+            'thumbnail' => 'images/events/2025-01-ynu-kanto-group.webp',
+            'images' => [],
         ],
         [
             'title' => [
@@ -994,7 +1002,8 @@ return [
                 'ja' => '筑波大学、茨城',
             ],
             'type' => ['en' => 'Meeting', 'uz' => 'Uçraşuv', 'ja' => '例会'],
-            'image' => 'images/events/2025-04-12-tsukuba-group.webp',
+            'thumbnail' => 'images/events/2025-04-12-tsukuba-group.webp',
+            'images' => [],
         ],
         [
             'title' => [
@@ -1009,7 +1018,8 @@ return [
                 'ja' => '在日ウズベキスタン共和国大使館、東京',
             ],
             'type' => ['en' => 'Meeting', 'uz' => 'Uçraşuv', 'ja' => '例会'],
-            'image' => 'images/events/2026-04-11-embassy-group.webp',
+            'thumbnail' => 'images/events/2026-04-11-embassy-group.webp',
+            'images' => [],
         ],
         ['title' => ['en' => 'Annual Scholar Symposium', 'uz' => 'Yillik olimlar simpoziumi', 'ja' => '年次学術シンポジウム'], 'date' => '2026-11-15', 'location' => ['en' => 'Tokyo', 'uz' => 'Tokio', 'ja' => '東京'], 'type' => ['en' => 'Symposium', 'uz' => 'Simpozium', 'ja' => 'シンポジウム']],
         ['title' => ['en' => 'Regional Chapter Meetup', 'uz' => 'Mintaqaviy uçraşuv', 'ja' => '地域支部ミートアップ'], 'date' => '2026-12-05', 'location' => ['en' => 'Osaka', 'uz' => 'Osaka', 'ja' => '大阪'], 'type' => ['en' => 'Meetup', 'uz' => 'Uçraşuv', 'ja' => 'ミートアップ']],

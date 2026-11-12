@@ -111,7 +111,6 @@
             const to = targets.filter((locale) => ! fields[locale].value.trim());
             const names = (locales) => locales.map((l) => l.toUpperCase()).join(', ');
             if (! text) return say('Write the ' + source.toUpperCase() + ' text first.', true);
-            if (! to.length) return say(names(targets) + ' are already filled. Clear one to translate it again.');
 
             button.disabled = true;
             say('Translating…');
@@ -128,8 +127,14 @@
                 const data = await response.json().catch(() => ({}));
                 if (! response.ok) throw new Error(data.message || 'Translation failed.');
                 if (! data.translations) throw new Error('Your session may have expired. Reload the page and log in again.');
-                Object.entries(data.translations).forEach(([locale, value]) => { if (fields[locale]) fields[locale].value = value; });
-                say('Translated ' + names(to) + '. Review before saving.');
+
+                // The source field is always rewritten in the new alphabet; a
+                // target field only when it was empty (to already filters those).
+                const updated = Object.entries(data.translations)
+                    .filter(([locale, value]) => value !== undefined && value !== null && fields[locale] && (locale === source || to.includes(locale)))
+                    .map(([locale, value]) => { fields[locale].value = value; return locale; });
+
+                say(updated.length ? 'Updated ' + names(updated) + '. Review before saving.' : names(targets) + ' are already filled. Clear one to translate it again.');
             } catch (error) {
                 say(error.message, true);
             } finally {

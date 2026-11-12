@@ -21,7 +21,8 @@
                        value="{{ old('date', $event->date?->format('Y-m-d')) }}">
                 <p class="admin-hint">Events before today are shown as past automatically.</p>
             </div>
-            <x-admin.image-input name="image" label="Image (optional)" :current="$event->image" />
+            <x-admin.image-input name="thumbnail" label="Thumbnail (shown in lists and cards)" :current="$event->thumbnail" />
+            <x-admin.gallery-input :images="$event->exists ? $event->images : []" />
         </fieldset>
 
         <x-admin.form-actions :cancel="route('admin.events.index')" />

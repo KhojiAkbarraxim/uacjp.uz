@@ -7,14 +7,15 @@ use App\Models\Member;
 use App\Models\News;
 use App\Models\Region;
 use App\Models\SiteSetting;
-use Carbon\Carbon;
 use App\Support\Locales;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
 
 class SeedStaticToDynamic extends Command
 {
     protected $signature = 'static:seed';
+
     protected $description = 'Migrate static config data to dynamic database tables';
 
     public function handle()
@@ -109,7 +110,7 @@ class SeedStaticToDynamic extends Command
     private function seedEvents(array $events): void
     {
         foreach ($events as $eventData) {
-            Event::updateOrCreate(
+            $event = Event::updateOrCreate(
                 [
                     'title_en' => $eventData['title']['en'],
                     'date' => $eventData['date'],
@@ -123,18 +124,29 @@ class SeedStaticToDynamic extends Command
                     'type_en' => $this->i18n($eventData['type'] ?? null, 'en'),
                     'type_uz' => $this->i18n($eventData['type'] ?? null, 'uz'),
                     'type_ja' => $this->i18n($eventData['type'] ?? null, 'ja'),
-                    'image' => $eventData['image'] ?? null,
+                    'thumbnail' => $eventData['thumbnail'] ?? null,
                     'is_past' => Carbon::parse($eventData['date'])->isPast(),
                 ]
             );
+            $this->seedGallery($event, $eventData['images'] ?? []);
             $this->info('Created event: '.$eventData['title']['en']);
+        }
+    }
+
+    /** Replaces a record's gallery with the paths listed in its config entry, in order. */
+    private function seedGallery(Event|News $model, array $paths): void
+    {
+        $model->images()->delete();
+
+        foreach (array_values($paths) as $i => $path) {
+            $model->images()->create(['path' => $path, 'sort_order' => $i]);
         }
     }
 
     private function seedNews(array $items): void
     {
         foreach ($items as $item) {
-            News::updateOrCreate(
+            $news = News::updateOrCreate(
                 ['slug' => $item['slug'] ?? Str::slug($this->i18n($item['title'], Locales::SOURCE) ?? '')],
                 [
                     'title_en' => $item['title']['en'],
@@ -150,9 +162,10 @@ class SeedStaticToDynamic extends Command
                     'body_en' => $this->i18n($item['body'] ?? null, 'en'),
                     'body_uz' => $this->i18n($item['body'] ?? null, 'uz'),
                     'body_ja' => $this->i18n($item['body'] ?? null, 'ja'),
-                    'image' => $item['image'] ?? null,
+                    'thumbnail' => $item['thumbnail'] ?? null,
                 ]
             );
+            $this->seedGallery($news, $item['images'] ?? []);
             $this->info('Created news: '.$item['title']['en']);
         }
     }

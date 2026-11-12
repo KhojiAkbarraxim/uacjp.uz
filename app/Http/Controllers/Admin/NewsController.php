@@ -38,7 +38,8 @@ class NewsController extends Controller
 
     public function store(NewsRequest $request)
     {
-        News::create($this->payload($request));
+        $news = News::create($this->payload($request));
+        $this->syncGalleryImages($request, $news, 'news');
 
         return redirect()->route('admin.news.index')
             ->with('success', 'News created.');
@@ -52,6 +53,7 @@ class NewsController extends Controller
     public function update(NewsRequest $request, News $news)
     {
         $news->update($this->payload($request, $news));
+        $this->syncGalleryImages($request, $news, 'news');
 
         return redirect()->route('admin.news.index')
             ->with('success', 'News updated.');
@@ -59,7 +61,8 @@ class NewsController extends Controller
 
     public function destroy(News $news)
     {
-        $this->deleteUploadedImage($news->image);
+        $this->deleteUploadedImage($news->thumbnail);
+        $this->deleteGalleryImages($news);
         $news->delete();
 
         return redirect()->route('admin.news.index')
@@ -70,8 +73,8 @@ class NewsController extends Controller
     {
         $data = $request->validated();
 
-        unset($data['image_file']);
-        $data['image'] = $this->storeImage($request, 'image_file', 'news', $news?->image);
+        unset($data['thumbnail_file'], $data['gallery_images'], $data['delete_images']);
+        $data['thumbnail'] = $this->storeImage($request, 'thumbnail_file', 'news', $news?->thumbnail);
 
         return $data;
     }

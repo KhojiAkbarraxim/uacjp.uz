@@ -37,17 +37,10 @@ class Translator
         $translations = [];
         foreach ($response->json('0.translations', []) as $item) {
             $translations[$item['to']] = $item['to'] === 'uz'
-                ? $this->normalizeUzbek($item['text'])
+                ? UzbekLatin::toDisplay($item['text'])
                 : $item['text'];
         }
 
         return $translations;
-    }
-
-    // Azure answers in the old alphabet with ASCII apostrophes; the site uses
-    // the new alphabet and ʼ for the tutuq belgisi (Aʼzolar, Eʼlon).
-    private function normalizeUzbek(string $text): string
-    {
-        return preg_replace("~(?<=\\p{L})['’](?=\\p{L})~u", 'ʼ', UzbekLatin::toNew($text));
     }
 }

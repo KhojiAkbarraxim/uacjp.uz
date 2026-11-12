@@ -3,8 +3,8 @@
 @php $newsUrl = ! empty($news['slug']) ? route('news.show', $news['slug']) : null; @endphp
 
 <article class="academic-card overflow-hidden sm:flex">
-    @if (! empty($news['image']))
-        <img src="{{ asset($news['image']) }}" alt="" loading="lazy" class="h-48 w-full object-cover sm:h-auto sm:w-56 sm:shrink-0">
+    @if (! empty($news['thumbnail']))
+        <img src="{{ asset($news['thumbnail']) }}" alt="" loading="lazy" class="h-48 w-full object-cover sm:h-auto sm:w-56 sm:shrink-0">
     @endif
     <div class="p-6">
         <div class="mb-4 flex flex-wrap items-center gap-2">

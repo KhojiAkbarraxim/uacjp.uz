@@ -27,7 +27,7 @@
                 @forelse ($news as $item)
                     <tr>
                         <td class="whitespace-nowrap">{{ $item->date->format('M d, Y') }}</td>
-                        <td>@if ($item->image)<img src="{{ asset($item->image) }}" alt="" class="admin-thumb">@endif</td>
+                        <td>@if ($item->thumbnail)<img src="{{ asset($item->thumbnail) }}" alt="" class="admin-thumb">@endif</td>
                         <td class="font-medium text-primary">{{ $item->authored('title') }}</td>
                         <td>{{ $item->authored('type') }}</td>
                         <td class="whitespace-nowrap text-right space-x-1">

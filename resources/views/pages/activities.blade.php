@@ -56,9 +56,9 @@
                             <span class="text-xs opacity-70">{{ $date->format('Y') }}</span>
                         </div>
 
-                        @if (! empty($event['image']))
+                        @if (! empty($event['thumbnail']))
                             <img
-                                src="{{ asset($event['image']) }}"
+                                src="{{ asset($event['thumbnail']) }}"
                                 alt="{{ $title }}"
                                 loading="lazy"
                                 class="hidden h-16 w-20 shrink-0 rounded-xl object-cover sm:block"
@@ -96,6 +96,16 @@
                             @endif
                         </div>
                     </div>
+
+                    @if (! empty($event['images']))
+                        <div class="-mt-1 flex flex-wrap gap-2 pl-[4.75rem]">
+                            @foreach ($event['images'] as $image)
+                                <a href="{{ asset($image) }}" target="_blank" rel="noopener noreferrer" class="block h-14 w-14 shrink-0 overflow-hidden rounded-lg border border-line">
+                                    <img src="{{ asset($image) }}" alt="" loading="lazy" class="h-full w-full object-cover">
+                                </a>
+                            @endforeach
+                        </div>
+                    @endif
                 @endforeach
             </div>
         </div>

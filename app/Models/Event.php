@@ -14,13 +14,19 @@ class Event extends Model
         'title_en', 'title_uz', 'title_ja',
         'date', 'location_en', 'location_uz', 'location_ja',
         'type_en', 'type_uz', 'type_ja',
-        'is_past', 'image',
+        'is_past', 'thumbnail',
     ];
 
     protected $casts = [
         'date' => 'date',
         'is_past' => 'boolean',
     ];
+
+    /** Up to 7 photos shown alongside the event, in upload order. */
+    public function images()
+    {
+        return $this->hasMany(EventImage::class)->orderBy('sort_order');
+    }
 
     public function scopeUpcoming($query)
     {
@@ -40,7 +46,8 @@ class Event extends Model
             'location' => $this->localeField('location'),
             'type' => $this->localeField('type'),
             'is_past' => $this->is_past,
-            'image' => $this->image,
+            'thumbnail' => $this->thumbnail,
+            'images' => $this->images->pluck('path')->all(),
         ];
     }
 }

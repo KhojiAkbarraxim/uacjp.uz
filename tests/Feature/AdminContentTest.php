@@ -147,17 +147,71 @@ class AdminContentTest extends TestCase
         $this->post(route('admin.news.store'), [
             'title_uz' => 'Katta eʼlon',
             'date' => '2026-11-01',
-            'image_file' => UploadedFile::fake()->createWithContent('cover.png', base64_decode(self::PNG)),
+            'thumbnail_file' => UploadedFile::fake()->createWithContent('cover.png', base64_decode(self::PNG)),
         ])->assertRedirect(route('admin.news.index'));
 
         $news = News::firstOrFail();
-        $this->assertStringStartsWith('uploads/news/', $news->image);
-        $this->assertFileExists(public_path($news->image));
+        $this->assertStringStartsWith('uploads/news/', $news->thumbnail);
+        $this->assertFileExists(public_path($news->thumbnail));
 
         $this->get('/')->assertOk()->assertSee('Katta eʼlon');
 
         $this->delete(route('admin.news.destroy', $news));
-        $this->assertFileDoesNotExist(public_path($news->image));
+        $this->assertFileDoesNotExist(public_path($news->thumbnail));
+    }
+
+    public function test_news_gallery_images_are_added_and_removed(): void
+    {
+        $this->post(route('admin.news.store'), [
+            'title_uz' => 'Galereyali maqola',
+            'date' => '2026-11-01',
+            'gallery_images' => [
+                UploadedFile::fake()->createWithContent('a.png', base64_decode(self::PNG)),
+                UploadedFile::fake()->createWithContent('b.png', base64_decode(self::PNG)),
+                UploadedFile::fake()->createWithContent('c.png', base64_decode(self::PNG)),
+            ],
+        ])->assertRedirect(route('admin.news.index'));
+
+        $news = News::firstOrFail();
+        $this->assertCount(3, $news->images);
+        $this->assertSame([1, 2, 3], $news->images->pluck('sort_order')->all());
+        foreach ($news->images as $image) {
+            $this->assertFileExists(public_path($image->path));
+        }
+
+        $this->get('/news/'.$news->slug)->assertOk();
+
+        $firstImage = $news->images->first();
+        $this->put(route('admin.news.update', $news), [
+            'title_uz' => 'Galereyali maqola',
+            'date' => '2026-11-01',
+            'delete_images' => [$firstImage->id],
+        ])->assertRedirect(route('admin.news.index'));
+
+        $news->refresh();
+        $this->assertCount(2, $news->images);
+        $this->assertFileDoesNotExist(public_path($firstImage->path));
+
+        $this->delete(route('admin.news.destroy', $news));
+        foreach ($news->images as $image) {
+            $this->assertFileDoesNotExist(public_path($image->path));
+        }
+    }
+
+    public function test_news_gallery_is_capped_at_seven_images(): void
+    {
+        $files = array_map(
+            fn ($i) => UploadedFile::fake()->createWithContent("g{$i}.png", base64_decode(self::PNG)),
+            range(1, 8),
+        );
+
+        $this->post(route('admin.news.store'), [
+            'title_uz' => 'Toʻlib ketgan galereya',
+            'date' => '2026-11-01',
+            'gallery_images' => $files,
+        ])->assertSessionHasErrors(['gallery_images']);
+
+        $this->assertSame(0, News::count());
     }
 
     public function test_news_article_page_shows_full_text(): void
@@ -180,7 +234,7 @@ class AdminContentTest extends TestCase
         $this->artisan('static:seed')->assertSuccessful();
 
         $news = News::where('slug', '2024-05-27-first-meeting-of-the-year')->sole();
-        $this->assertFileExists(public_path($news->image));
+        $this->assertFileExists(public_path($news->thumbnail));
         $this->get('/news/'.$news->slug)->assertOk()->assertSee('Tsukuba');
     }
 

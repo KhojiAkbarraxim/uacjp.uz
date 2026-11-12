@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Services\Translator;
 use App\Support\Locales;
+use App\Support\UzbekLatin;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Client\RequestException;
 use Illuminate\Http\JsonResponse;
@@ -17,14 +18,10 @@ class TranslationController extends Controller
 {
     public function __invoke(Request $request, Translator $translator): JsonResponse
     {
-        if (! Translator::configured()) {
-            return response()->json(['message' => 'Translation is not configured on this server.'], 503);
-        }
-
         // Validated by hand: the app only renders JSON errors for api/* routes.
         $validator = Validator::make($request->all(), [
             'text' => ['required', 'string', 'max:10000'],
-            'to' => ['required', 'array', 'min:1'],
+            'to' => ['sometimes', 'array'],
             'to.*' => ['string', Rule::in(array_diff(Locales::ORDER, [Locales::SOURCE]))],
         ]);
 
@@ -36,13 +33,27 @@ class TranslationController extends Controller
         }
 
         $data = $validator->validated();
+        $to = array_values(array_unique($data['to'] ?? []));
 
-        try {
-            $translations = $translator->translate($data['text'], Locales::SOURCE, array_values(array_unique($data['to'])));
-        } catch (RequestException|ConnectionException $e) {
-            Log::warning('Azure translation failed: '.$e->getMessage());
+        if ($to && ! Translator::configured()) {
+            return response()->json(['message' => 'Translation is not configured on this server.'], 503);
+        }
 
-            return response()->json(['message' => 'The translation service did not respond. Try again later.'], 502);
+        // Rewriting the source itself in the new alphabet is free local text
+        // processing - no Azure call, so it runs even without a target locale
+        // or a configured key.
+        $translations = Locales::SOURCE === 'uz'
+            ? [Locales::SOURCE => UzbekLatin::toDisplay($data['text'])]
+            : [];
+
+        if ($to) {
+            try {
+                $translations += $translator->translate($data['text'], Locales::SOURCE, $to);
+            } catch (RequestException|ConnectionException $e) {
+                Log::warning('Azure translation failed: '.$e->getMessage());
+
+                return response()->json(['message' => 'The translation service did not respond. Try again later.'], 502);
+            }
         }
 
         return response()->json(['translations' => $translations]);
