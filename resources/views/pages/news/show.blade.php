@@ -16,7 +16,7 @@
             </div>
 
             @if (! empty($news['thumbnail']))
-                <img src="{{ asset($news['thumbnail']) }}" alt="" class="max-h-[32rem] w-full rounded-[var(--radius-card)] border border-line object-cover shadow-paper">
+                <img src="{{ asset($news['thumbnail']) }}" alt="" class="max-h-[32rem] w-full rounded-[var(--radius-card)] border border-line bg-surface-soft object-contain shadow-paper">
             @endif
 
             <div class="mx-auto max-w-3xl">
