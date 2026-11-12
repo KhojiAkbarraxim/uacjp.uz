@@ -21,8 +21,8 @@
         <p class="admin-label">{{ $label }} @if ($required)<span class="text-red-600">*</span>@endif</p>
         @if (Translator::configured())
             <button type="button" class="btn-small mb-1" data-translate data-source="{{ Locales::SOURCE }}" data-targets="{{ implode(',', $targets) }}"
-                title="Fill empty {{ $targetLabel }} fields from the {{ strtoupper(Locales::SOURCE) }} text">
-                Translate {{ strtoupper(Locales::SOURCE) }} → {{ $targetLabel }}
+                title="Rewrites {{ strtoupper(Locales::SOURCE) }} in the new alphabet and fills empty {{ $targetLabel }} fields from it">
+                Translate (new) {{ strtoupper(Locales::SOURCE) }} → {{ $targetLabel }}
             </button>
         @endif
     </div>

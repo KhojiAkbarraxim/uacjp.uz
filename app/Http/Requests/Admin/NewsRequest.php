@@ -29,11 +29,28 @@ class NewsRequest extends FormRequest
         return [
             'slug' => ['required', 'string', 'max:255', Rule::unique('news', 'slug')->ignore($this->article())],
             'date' => ['required', 'date'],
-            'image_file' => Images::rules(),
+            'thumbnail_file' => Images::rules(),
+            'gallery_images' => ['nullable', 'array', $this->galleryCountRule()],
+            'gallery_images.*' => Images::rules(),
+            'delete_images' => ['nullable', 'array'],
+            'delete_images.*' => ['integer', Rule::exists('news_images', 'id')->where('news_id', $this->article()?->id)],
             ...$this->localeRules(['title'], required: true),
             ...$this->localeRules(['type']),
             ...$this->localeRules(['summary', 'body'], ['nullable', 'string']),
         ];
+    }
+
+    /** At most 7 gallery images total, counting what stays after deletions plus what's uploaded now. */
+    private function galleryCountRule(): \Closure
+    {
+        return function (string $attribute, array $value, \Closure $fail) {
+            $existing = $this->article()?->images()->count() ?? 0;
+            $deleting = count(array_filter((array) $this->input('delete_images', [])));
+
+            if ($existing - $deleting + count($value) > 7) {
+                $fail('A news article can have at most 7 gallery images in total.');
+            }
+        };
     }
 
     /**

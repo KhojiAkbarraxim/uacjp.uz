@@ -32,7 +32,8 @@ class EventController extends Controller
 
     public function store(EventRequest $request)
     {
-        Event::create($this->payload($request));
+        $event = Event::create($this->payload($request));
+        $this->syncGalleryImages($request, $event, 'events');
 
         return redirect()->route('admin.events.index')
             ->with('success', 'Event created.');
@@ -46,6 +47,7 @@ class EventController extends Controller
     public function update(EventRequest $request, Event $event)
     {
         $event->update($this->payload($request, $event));
+        $this->syncGalleryImages($request, $event, 'events');
 
         return redirect()->route('admin.events.index')
             ->with('success', 'Event updated.');
@@ -53,7 +55,8 @@ class EventController extends Controller
 
     public function destroy(Event $event)
     {
-        $this->deleteUploadedImage($event->image);
+        $this->deleteUploadedImage($event->thumbnail);
+        $this->deleteGalleryImages($event);
         $event->delete();
 
         return redirect()->route('admin.events.index')
@@ -64,8 +67,8 @@ class EventController extends Controller
     {
         $data = $request->validated();
 
-        unset($data['image_file']);
-        $data['image'] = $this->storeImage($request, 'image_file', 'events', $event?->image);
+        unset($data['thumbnail_file'], $data['gallery_images'], $data['delete_images']);
+        $data['thumbnail'] = $this->storeImage($request, 'thumbnail_file', 'events', $event?->thumbnail);
         $data['is_past'] = Carbon::parse($data['date'])->startOfDay()->lt(today());
 
         return $data;

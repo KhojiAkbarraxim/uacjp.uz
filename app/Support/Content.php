@@ -40,7 +40,7 @@ class Content
     {
         return self::fromTable(
             Event::class,
-            fn () => Event::orderBy('date')->get()->map->toFrontendArray()->all(),
+            fn () => Event::with('images')->orderBy('date')->get()->map->toFrontendArray()->all(),
             fn () => config('uac.events', []),
         );
     }
@@ -65,7 +65,7 @@ class Content
     {
         return self::fromTable(
             News::class,
-            fn () => News::orderByDesc('date')->take($limit)->get()->map->toFrontendArray()->all(),
+            fn () => News::with('images')->orderByDesc('date')->take($limit)->get()->map->toFrontendArray()->all(),
             fn () => array_slice(config('uac.latest_news', []), 0, $limit),
         );
     }
@@ -80,7 +80,7 @@ class Content
     {
         return self::fromTable(
             News::class,
-            fn () => News::orderByDesc('date')->get()->map->toFrontendArray()->all(),
+            fn () => News::with('images')->orderByDesc('date')->get()->map->toFrontendArray()->all(),
             fn () => config('uac.latest_news', []),
         );
     }
@@ -89,7 +89,7 @@ class Content
     {
         return self::fromTable(
             News::class,
-            fn () => News::where('slug', $slug)->first()?->toFrontendArray() ?? [],
+            fn () => News::with('images')->where('slug', $slug)->first()?->toFrontendArray() ?? [],
             fn () => collect(config('uac.latest_news', []))->firstWhere('slug', $slug) ?? [],
         ) ?: null;
     }

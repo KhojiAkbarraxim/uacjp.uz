@@ -28,7 +28,8 @@
             </div>
             <x-admin.locale-input name="summary" label="Summary" :model="$news" textarea :rows="3" hint="Short text shown on the home page card." />
             <x-admin.locale-input name="body" label="Full text" :model="$news" textarea :rows="10" hint="Shown on the article page. Separate paragraphs with an empty line." />
-            <x-admin.image-input name="image" label="Image (optional)" :current="$news->image" />
+            <x-admin.image-input name="thumbnail" label="Thumbnail (shown in lists and cards)" :current="$news->thumbnail" />
+            <x-admin.gallery-input :images="$news->exists ? $news->images : []" />
         </fieldset>
 
         <x-admin.form-actions :cancel="route('admin.news.index')" />

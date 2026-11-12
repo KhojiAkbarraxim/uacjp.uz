@@ -48,6 +48,17 @@ class UzbekLatin
         }, $text);
     }
 
+    /**
+     * toNew() plus the ASCII apostrophe fix for the tutuq belgisi. The full
+     * pipeline from typed or Azure-returned Uzbek to what the site displays.
+     */
+    public static function toDisplay(?string $text): ?string
+    {
+        $text = self::toNew($text);
+
+        return $text === null ? null : preg_replace("~(?<=\\p{L})['’](?=\\p{L})~u", 'ʼ', $text);
+    }
+
     private static function word(string $word): string
     {
         $word = preg_replace(['~O'.self::MARK.'~u', '~o'.self::MARK.'~u', '~G'.self::MARK.'~u', '~g'.self::MARK.'~u'], ['Ö', 'ö', 'Ğ', 'ğ'], $word);

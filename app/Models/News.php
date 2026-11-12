@@ -15,7 +15,7 @@ class News extends Model
         'slug', 'title_en', 'title_uz', 'title_ja',
         'type_en', 'type_uz', 'type_ja',
         'date', 'summary_en', 'summary_uz', 'summary_ja',
-        'body_en', 'body_uz', 'body_ja', 'image',
+        'body_en', 'body_uz', 'body_ja', 'thumbnail',
     ];
 
     protected $casts = [
@@ -27,6 +27,12 @@ class News extends Model
         1 => 'yanvar', 'fevral', 'mart', 'aprel', 'may', 'iyun',
         'iyul', 'avgust', 'sentabr', 'oktabr', 'noyabr', 'dekabr',
     ];
+
+    /** Up to 7 photos shown on the article page, in upload order. */
+    public function images()
+    {
+        return $this->hasMany(NewsImage::class)->orderBy('sort_order');
+    }
 
     public function dateDict(): array
     {
@@ -48,7 +54,8 @@ class News extends Model
             'date' => $this->dateDict(),
             'summary' => $this->localeField('summary'),
             'body' => $this->localeField('body'),
-            'image' => $this->image,
+            'thumbnail' => $this->thumbnail,
+            'images' => $this->images->pluck('path')->all(),
         ];
     }
 }
