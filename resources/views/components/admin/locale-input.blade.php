@@ -11,18 +11,15 @@
 @php
     use App\Services\Translator;
     use App\Support\Locales;
-
-    $targets = array_values(array_diff(Locales::ORDER, [Locales::SOURCE]));
-    $targetLabel = strtoupper(implode(', ', $targets));
 @endphp
 
 <div data-locale-input>
     <div class="flex items-center justify-between gap-3">
         <p class="admin-label">{{ $label }} @if ($required)<span class="text-red-600">*</span>@endif</p>
         @if (Translator::configured())
-            <button type="button" class="btn-small mb-1" data-translate data-source="{{ Locales::SOURCE }}" data-targets="{{ implode(',', $targets) }}"
-                title="Rewrites {{ strtoupper(Locales::SOURCE) }} in the new alphabet and fills empty {{ $targetLabel }} fields from it">
-                Translate (new) {{ strtoupper(Locales::SOURCE) }} → {{ $targetLabel }}
+            <button type="button" class="btn-small mb-1" data-translate data-locales="{{ implode(',', Locales::ORDER) }}"
+                title="Detects whichever field has text and fills the other two from it">
+                Auto-translate other fields
             </button>
         @endif
     </div>

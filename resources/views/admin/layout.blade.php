@@ -105,12 +105,16 @@
                 status.classList.toggle('text-red-600', isError);
             };
 
-            const source = button.dataset.source;
-            const targets = button.dataset.targets.split(',');
-            const text = fields[source].value.trim();
-            const to = targets.filter((locale) => ! fields[locale].value.trim());
+            // Auto-detect the source: whichever field has text, in UZ, EN, JA
+            // priority (UZ is the language content is normally authored in).
+            const order = button.dataset.locales.split(',');
             const names = (locales) => locales.map((l) => l.toUpperCase()).join(', ');
-            if (! text) return say('Write the ' + source.toUpperCase() + ' text first.', true);
+            const source = order.find((locale) => fields[locale].value.trim());
+            if (! source) return say('Write some text in any language first.', true);
+
+            const text = fields[source].value.trim();
+            const otherLocales = order.filter((locale) => locale !== source);
+            const to = otherLocales.filter((locale) => ! fields[locale].value.trim());
 
             button.disabled = true;
             say('Translating…');
@@ -122,19 +126,20 @@
                         'Accept': 'application/json',
                         'X-CSRF-TOKEN': document.querySelector('input[name="_token"]').value,
                     },
-                    body: JSON.stringify({ text, to }),
+                    body: JSON.stringify({ text, from: source, to }),
                 });
                 const data = await response.json().catch(() => ({}));
                 if (! response.ok) throw new Error(data.message || 'Translation failed.');
                 if (! data.translations) throw new Error('Your session may have expired. Reload the page and log in again.');
 
-                // The source field is always rewritten in the new alphabet; a
-                // target field only when it was empty (to already filters those).
+                // The source field is rewritten only when it's Uzbek (the new
+                // alphabet); a target field only when it was empty (to already
+                // filters those).
                 const updated = Object.entries(data.translations)
                     .filter(([locale, value]) => value !== undefined && value !== null && fields[locale] && (locale === source || to.includes(locale)))
                     .map(([locale, value]) => { fields[locale].value = value; return locale; });
 
-                say(updated.length ? 'Updated ' + names(updated) + '. Review before saving.' : names(targets) + ' are already filled. Clear one to translate it again.');
+                say(updated.length ? 'Updated ' + names(updated) + '. Review before saving.' : names(otherLocales) + ' are already filled. Clear one to translate it again.');
             } catch (error) {
                 say(error.message, true);
             } finally {

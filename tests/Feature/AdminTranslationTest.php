@@ -34,7 +34,7 @@ class AdminTranslationTest extends TestCase
         ]])]);
 
         $this->asAdmin()
-            ->postJson(route('admin.translate'), ['text' => "O'zbek tadqiqotchilari: e'lon", 'to' => ['en', 'ja']])
+            ->postJson(route('admin.translate'), ['text' => "O'zbek tadqiqotchilari: e'lon", 'from' => 'uz', 'to' => ['en', 'ja']])
             ->assertOk()
             ->assertExactJson(['translations' => [
                 'uz' => 'Özbek tadqiqotçilari: eʼlon',
@@ -48,12 +48,46 @@ class AdminTranslationTest extends TestCase
             && $request->data() === [['Text' => "O'zbek tadqiqotchilari: e'lon"]]);
     }
 
+    public function test_translates_from_english_without_rewriting_an_alphabet(): void
+    {
+        Http::fake(['translator.test/*' => Http::response([[
+            'translations' => [
+                ['text' => "Yangiliklar e'lon qilindi", 'to' => 'uz'],
+                ['text' => 'お知らせが発表されました', 'to' => 'ja'],
+            ],
+        ]])]);
+
+        $this->asAdmin()
+            ->postJson(route('admin.translate'), ['text' => 'Announcement published', 'from' => 'en', 'to' => ['uz', 'ja']])
+            ->assertOk()
+            ->assertExactJson(['translations' => [
+                'uz' => 'Yangiliklar eʼlon qilindi',
+                'ja' => 'お知らせが発表されました',
+            ]]);
+
+        Http::assertSent(fn (Request $request) => $request->url() === 'https://translator.test/translate?api-version=3.0&from=en&to=uz&to=ja'
+            && $request->data() === [['Text' => 'Announcement published']]);
+    }
+
+    public function test_translates_from_japanese(): void
+    {
+        Http::fake(['translator.test/*' => Http::response([['translations' => [['text' => 'Event', 'to' => 'en']]]])]);
+
+        $this->asAdmin()
+            ->postJson(route('admin.translate'), ['text' => 'イベント', 'from' => 'ja', 'to' => ['en']])
+            ->assertOk()
+            ->assertExactJson(['translations' => ['en' => 'Event']]);
+
+        Http::assertSent(fn (Request $request) => str_ends_with($request->url(), 'from=ja&to=en')
+            && $request->data() === [['Text' => 'イベント']]);
+    }
+
     public function test_only_requested_locales_are_sent(): void
     {
         Http::fake(['translator.test/*' => Http::response([['translations' => [['text' => 'イベント', 'to' => 'ja']]]])]);
 
         $this->asAdmin()
-            ->postJson(route('admin.translate'), ['text' => 'Tadbir', 'to' => ['ja']])
+            ->postJson(route('admin.translate'), ['text' => 'Tadbir', 'from' => 'uz', 'to' => ['ja']])
             ->assertOk()
             ->assertExactJson(['translations' => ['uz' => 'Tadbir', 'ja' => 'イベント']]);
 
@@ -66,7 +100,7 @@ class AdminTranslationTest extends TestCase
         Http::fake();
 
         $this->asAdmin()
-            ->postJson(route('admin.translate'), ['text' => "G'alaba kuni, o'qituvchi"])
+            ->postJson(route('admin.translate'), ['text' => "G'alaba kuni, o'qituvchi", 'from' => 'uz'])
             ->assertOk()
             ->assertExactJson(['translations' => ['uz' => 'Ğalaba kuni, öqituvçi']]);
 
@@ -78,9 +112,26 @@ class AdminTranslationTest extends TestCase
         Http::fake();
 
         $this->asAdmin()
-            ->postJson(route('admin.translate'), ['text' => '', 'to' => ['uz']])
+            ->postJson(route('admin.translate'), ['text' => '', 'from' => 'uz', 'to' => ['uz']])
             ->assertUnprocessable()
-            ->assertJsonValidationErrors(['text', 'to.0']);
+            ->assertJsonValidationErrors(['text', 'to']);
+
+        Http::assertNothingSent();
+    }
+
+    public function test_rejects_a_missing_or_unknown_source_language(): void
+    {
+        Http::fake();
+
+        $this->asAdmin()
+            ->postJson(route('admin.translate'), ['text' => 'Salom', 'to' => ['en']])
+            ->assertUnprocessable()
+            ->assertJsonValidationErrors(['from']);
+
+        $this->asAdmin()
+            ->postJson(route('admin.translate'), ['text' => 'Salom', 'from' => 'fr', 'to' => ['en']])
+            ->assertUnprocessable()
+            ->assertJsonValidationErrors(['from']);
 
         Http::assertNothingSent();
     }
@@ -90,7 +141,7 @@ class AdminTranslationTest extends TestCase
         Http::fake(['translator.test/*' => Http::response(['error' => ['code' => 403000]], 403)]);
 
         $this->asAdmin()
-            ->postJson(route('admin.translate'), ['text' => 'Salom', 'to' => ['en']])
+            ->postJson(route('admin.translate'), ['text' => 'Salom', 'from' => 'uz', 'to' => ['en']])
             ->assertStatus(502);
     }
 
@@ -100,7 +151,7 @@ class AdminTranslationTest extends TestCase
         Http::fake();
 
         $this->asAdmin()
-            ->postJson(route('admin.translate'), ['text' => 'Salom', 'to' => ['en']])
+            ->postJson(route('admin.translate'), ['text' => 'Salom', 'from' => 'uz', 'to' => ['en']])
             ->assertStatus(503);
 
         Http::assertNothingSent();
@@ -110,7 +161,7 @@ class AdminTranslationTest extends TestCase
     {
         Http::fake();
 
-        $this->postJson(route('admin.translate'), ['text' => 'Salom', 'to' => ['en']])
+        $this->postJson(route('admin.translate'), ['text' => 'Salom', 'from' => 'uz', 'to' => ['en']])
             ->assertRedirect(route('admin.login'));
 
         Http::assertNothingSent();
