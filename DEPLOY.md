@@ -7,6 +7,14 @@ The site runs on a DirectAdmin shared hosting account (`uacjpuz` on
 `storage/` unreachable from the internet. Do not move the application into
 `public_html`.
 
+`public/uploads` (admin-uploaded images - thumbnails, galleries, region and
+member photos) is excluded from every release and never shipped via git, so
+it did not exist when those symlinks were first set up and `public_html` had
+no entry for it. The SSH deploy now creates `~/public_html/uploads ->
+laravel_app/public/uploads` itself if that entry is still missing (see
+`deploy.yml`), so this is self-healing from here on. If uploaded images
+ever 404 on a fresh account, check for that symlink first.
+
 ## How a change reaches production
 
 1. Push to a branch, open a pull request. `.github/workflows/ci.yml` installs
