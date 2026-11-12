@@ -22,6 +22,7 @@ Route::get('/activities', [App\Http\Controllers\PageController::class, 'activiti
 Route::get('/members', [App\Http\Controllers\MemberController::class, 'index'])->name('members.index');
 Route::get('/members/secretary', [App\Http\Controllers\MemberController::class, 'secretary'])->name('members.secretary');
 Route::get('/about', [App\Http\Controllers\PageController::class, 'about'])->name('about');
+Route::get('/about/tariximiz', [App\Http\Controllers\PageController::class, 'history'])->name('about.history');
 Route::get('/partners', [App\Http\Controllers\PageController::class, 'partners'])->name('partners');
 Route::get('/contact', [App\Http\Controllers\PageController::class, 'contact'])->name('contact');
 Route::get('/join', [App\Http\Controllers\PageController::class, 'join'])->name('join');

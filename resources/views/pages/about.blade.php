@@ -52,56 +52,13 @@
             <div class="academic-card p-8">
                 <x-i18n :text="ui('pages.about.history_heading')" tag="h2" class="text-3xl" />
                 <x-i18n :text="$about['history']" tag="p" class="mt-4 text-base leading-8 text-muted" />
+                <x-i18n
+                    :text="ui('pages.history.about_teaser_cta')"
+                    tag="a"
+                    href="{{ route('about.history') }}"
+                    class="mt-4 inline-block text-sm font-semibold text-secondary hover:text-primary"
+                />
             </div>
-        </div>
-    </section>
-
-    {{-- Tariximiz: the club's meetings in chronological order, each with the
-         photo taken at that meeting next to its text. --}}
-    <section class="section-shell bg-white/45" id="tariximiz">
-        <div class="container-shell space-y-10">
-            <x-section-title
-                :eyebrow="ui('pages.about.history_section_eyebrow')"
-                :title="ui('pages.about.history_section_title')"
-                :description="ui('pages.about.history_section_description')"
-            />
-
-            <ol class="relative space-y-6 border-l border-line pl-6 sm:pl-10">
-                @forelse ($milestones as $milestone)
-                    <li class="relative">
-                        <span class="absolute -left-[1.6rem] top-7 h-3 w-3 rounded-full border-2 border-white bg-secondary sm:-left-[2.6rem]" aria-hidden="true"></span>
-                        <article class="academic-card overflow-hidden sm:flex">
-                            @if (! empty($milestone['image']))
-                                <img
-                                    src="{{ asset($milestone['image']) }}"
-                                    alt=""
-                                    loading="lazy"
-                                    decoding="async"
-                                    class="h-48 w-full object-cover sm:h-auto sm:w-64 sm:shrink-0"
-                                >
-                            @endif
-                            <div class="p-6">
-                                <div class="mb-3 flex flex-wrap items-center gap-2">
-                                    <x-i18n :text="$milestone['date']" tag="span" class="eyebrow" />
-                                    <x-i18n :text="$milestone['type']" tag="span" class="chip" />
-                                </div>
-                                <x-i18n :text="$milestone['title']" tag="h3" class="text-2xl leading-snug" />
-                                <x-i18n :text="$milestone['summary']" tag="p" class="mt-3 text-sm leading-7 text-muted" />
-                                @if (! empty($milestone['slug']))
-                                    <x-i18n
-                                        :text="ui('pages.news.read_more')"
-                                        tag="a"
-                                        href="{{ route('news.show', $milestone['slug']) }}"
-                                        class="mt-4 inline-block text-sm font-semibold text-secondary hover:text-primary"
-                                    />
-                                @endif
-                            </div>
-                        </article>
-                    </li>
-                @empty
-                    <x-i18n :text="ui('pages.about.history_empty')" tag="p" class="academic-card p-6 text-muted" />
-                @endforelse
-            </ol>
         </div>
     </section>
 

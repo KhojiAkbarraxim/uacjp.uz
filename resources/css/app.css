@@ -255,4 +255,24 @@
     .admin-main .academic-card:hover {
         @apply translate-y-0 shadow-paper;
     }
+
+    /* Tariximiz timeline: each entry starts faded and offset, then settles
+       into place as it scrolls into view (resources/js/app.js adds
+       is-visible via IntersectionObserver). prefers-reduced-motion skips
+       straight to the visible state - see the media query below. */
+    [data-history-item] {
+        @apply opacity-0 translate-y-8 transition duration-700 ease-out;
+    }
+
+    [data-history-item].is-visible {
+        @apply opacity-100 translate-y-0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    [data-history-item] {
+        opacity: 1;
+        transform: none;
+        transition: none;
+    }
 }

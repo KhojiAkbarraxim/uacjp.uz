@@ -17,6 +17,7 @@ class PublicPagesTest extends TestCase
             '/members',
             '/members/secretary',
             '/about',
+            '/about/tariximiz',
             '/partners',
             '/contact',
             '/join',

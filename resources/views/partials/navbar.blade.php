@@ -8,12 +8,12 @@
         ->filter()
         ->values();
 
-    $aboutChildren = collect(['members.index', 'partners'])
+    $aboutChildren = collect(['about.history', 'members.index', 'partners'])
         ->map(fn ($route) => $navByRoute->get($route))
         ->filter()
         ->values();
 
-    $isAboutGroupActive = request()->routeIs(['about', 'members.*', 'partners']);
+    $isAboutGroupActive = request()->routeIs(['about', 'about.history', 'members.*', 'partners']);
 @endphp
 
 <header class="fixed inset-x-0 top-0 z-50 border-b border-white/70 bg-white/80 backdrop-blur">
