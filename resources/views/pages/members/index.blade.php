@@ -18,7 +18,7 @@
                 <x-i18n :text="ui('pages.members_index.executive_description')" tag="p" class="mt-3 text-base leading-8 text-muted" />
             </div>
 
-            <div class="grid gap-6 lg:grid-cols-3">
+            <div class="grid items-start gap-6 lg:grid-cols-3">
                 @foreach ($executives as $member)
                     <x-member-card :member="$member" />
                 @endforeach
@@ -33,7 +33,7 @@
                 <x-i18n :text="ui('pages.members_index.ambassadors_description')" tag="p" class="mt-3 text-base leading-8 text-muted" />
             </div>
 
-            <div class="grid gap-6 lg:grid-cols-3">
+            <div class="grid items-start gap-6 lg:grid-cols-3">
                 @foreach ($ambassadors as $member)
                     <x-member-card :member="$member" />
                 @endforeach
@@ -63,7 +63,7 @@
                 <x-i18n :text="ui('pages.members_index.staff_description')" tag="p" class="mt-3 text-base leading-8 text-muted" />
             </div>
 
-            <div class="grid gap-6 lg:grid-cols-3">
+            <div class="grid items-start gap-6 lg:grid-cols-3">
                 @foreach ($staff as $member)
                     <x-member-card :member="$member" />
                 @endforeach
