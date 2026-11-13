@@ -23,6 +23,7 @@ return [
     'navigation' => [
         ['label' => ['en' => 'Home', 'uz' => 'Boş sahifa', 'ja' => 'ホーム'], 'route' => 'home'],
         ['label' => ['en' => 'About UAC', 'uz' => 'UAC haqida', 'ja' => 'UACについて'], 'route' => 'about'],
+        ['label' => ['en' => 'Our History', 'uz' => 'Tariximiz', 'ja' => '私たちの歩み'], 'route' => 'about.history'],
         ['label' => ['en' => 'News', 'uz' => 'Yangiliklar', 'ja' => 'ニュース'], 'route' => 'news.index'],
         ['label' => ['en' => 'Activities', 'uz' => 'Tadbirlar', 'ja' => '活動'], 'route' => 'activities'],
         ['label' => ['en' => 'Regions', 'uz' => 'Regionlar', 'ja' => '地域'], 'route' => 'regions.index'],

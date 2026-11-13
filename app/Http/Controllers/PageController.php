@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Support\Content;
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
 
 class PageController extends Controller
@@ -39,15 +40,31 @@ class PageController extends Controller
 
     public function about()
     {
-        // "Tariximiz" is a chronological timeline, so the archive is reversed:
-        // oldest meeting first, newest last.
-        $milestones = array_reverse(Content::newsArchive());
-
         return view('pages.about', [
             'pageTitle' => ui('pages.about.title'),
             'metaDescription' => ui('pages.about.meta'),
             'about' => config('uac.about'),
-            'milestones' => $milestones,
+        ]);
+    }
+
+    /**
+     * "Tariximiz": every meeting in chronological order, grouped by year.
+     * The archive is reversed (oldest first) since news is newest-first.
+     */
+    public function history()
+    {
+        $milestones = array_reverse(Content::newsArchive());
+
+        $byYear = collect($milestones)->groupBy(
+            fn (array $milestone) => Carbon::parse($milestone['date']['en'])->year
+        );
+
+        return view('pages.history', [
+            'pageTitle' => ui('pages.history.title'),
+            'metaDescription' => ui('pages.history.meta'),
+            'milestonesByYear' => $byYear,
+            'meetingCount' => count($milestones),
+            'yearCount' => $byYear->count(),
         ]);
     }
 

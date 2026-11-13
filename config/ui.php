@@ -115,6 +115,15 @@ return [
             'charter_placeholder' => ['en' => 'Downloadable charter/bylaws placeholder. Replace this with a PDF link or public document when available.', 'uz' => 'Yuklab olinadigan ustav/qoidalar örniga vaqtinçalik matn. Mavjud bölganda buni PDF havolasi yoki oçiq hujjat bilan almaştiring.', 'ja' => 'ダウンロード可能な会則・規約のプレースホルダーです。準備が整い次第、PDFリンクまたは公開文書に置き換えてください。'],
         ],
 
+        'history' => [
+            'title' => ['en' => 'Our History', 'uz' => 'Tariximiz', 'ja' => '私たちの歩み'],
+            'meta' => ['en' => 'Every UAC Japan meeting in chronological order, from the first gathering to today.', 'uz' => 'UAC Japanning birinçi uçraşuvidan bugungi kungaça bölib ötgan barça tadbirlari xronologik tartibda.', 'ja' => '最初の集まりから今日まで、UAC Japanのすべての例会を時系列でご紹介します。'],
+            'back' => ['en' => '← About UAC', 'uz' => '← UAC haqida', 'ja' => '← UACについて'],
+            'stats_meetings' => ['en' => 'Meetings', 'uz' => 'Uçraşuvlar', 'ja' => '例会'],
+            'stats_years' => ['en' => 'Years', 'uz' => 'Yil', 'ja' => '年'],
+            'about_teaser_cta' => ['en' => 'Read our full history →', 'uz' => 'Tariximizni töliq oqiş →', 'ja' => '私たちの歩みを詳しく見る →'],
+        ],
+
         'activities' => [
             'title' => ['en' => 'Activities', 'uz' => 'Tadbirlar', 'ja' => '活動'],
             'meta' => ['en' => 'Explore UAC Japan seminars, workshops, forums, research collaboration, and community events.', 'uz' => 'UAC Japan seminarlari, treninglari, forumlari, tadqiqot hamkorligi va hamjamiyat tadbirlari bilan tanişing.', 'ja' => 'UAC Japanのセミナー、ワークショップ、フォーラム、研究協力、コミュニティイベントをご覧ください。'],

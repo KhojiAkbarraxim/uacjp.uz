@@ -220,4 +220,27 @@ ready(() => {
     langButtons.forEach((button) => {
         button.addEventListener('click', () => setLanguage(button.dataset.langButton, true));
     });
+
+    // Tariximiz timeline: fade/slide each entry in once it scrolls into view.
+    // Falls back to everything already visible (the CSS default) if
+    // IntersectionObserver isn't available.
+    const historyItems = document.querySelectorAll('[data-history-item]');
+    if (historyItems.length && 'IntersectionObserver' in window) {
+        const revealObserver = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (!entry.isIntersecting) {
+                        return;
+                    }
+                    entry.target.classList.add('is-visible');
+                    revealObserver.unobserve(entry.target);
+                });
+            },
+            { threshold: 0.15, rootMargin: '0px 0px -10% 0px' },
+        );
+
+        historyItems.forEach((item) => revealObserver.observe(item));
+    } else {
+        historyItems.forEach((item) => item.classList.add('is-visible'));
+    }
 });
