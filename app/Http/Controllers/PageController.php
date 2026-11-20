@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Support\Content;
 use Carbon\Carbon;
-use Illuminate\Support\Collection;
 
 class PageController extends Controller
 {
@@ -28,13 +27,9 @@ class PageController extends Controller
 
     public function activities()
     {
-        /** @var Collection $grouped */
-        $grouped = collect(config('uac.activities'))->groupBy(fn (array $activity) => $activity['category']['en']);
-
         return view('pages.activities', [
             'pageTitle' => ui('pages.activities.title'),
             'metaDescription' => ui('pages.activities.meta'),
-            'activityGroups' => $grouped,
         ]);
     }
 
