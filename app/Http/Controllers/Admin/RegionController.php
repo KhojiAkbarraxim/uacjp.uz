@@ -126,7 +126,7 @@ class RegionController extends Controller
     private function zipLines(RegionRequest $request, string $field): array
     {
         $lines = collect(Locales::ORDER)->mapWithKeys(fn (string $locale) => [
-            $locale => preg_split('/\R/', trim((string) $request->input("{$field}_{$locale}"))),
+            $locale => preg_split('/\R/u', trim((string) $request->input("{$field}_{$locale}"))),
         ]);
 
         return collect($lines[Locales::SOURCE])

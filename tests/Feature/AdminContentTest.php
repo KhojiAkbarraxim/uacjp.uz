@@ -90,6 +90,23 @@ class AdminContentTest extends TestCase
         ])->assertSessionHasErrors(['slug', 'gallery']);
     }
 
+    public function test_region_lists_keep_japanese_characters_whole(): void
+    {
+        $region = Region::create(['slug' => 'kanto', 'name_uz' => 'UAC Kanto', 'short_name_uz' => 'Kanto']);
+
+        // 慶 is E6 85 B6: a byte-mode \R split treats the 0x85 as a line break
+        // and leaves malformed UTF-8 that cannot be saved as JSON.
+        $this->put(route('admin.regions.update', $region), [
+            'slug' => 'kanto',
+            'name_uz' => 'UAC Kanto',
+            'short_name_uz' => 'Kanto',
+            'universities_uz' => "Keyo universiteti\nTokio universiteti",
+            'universities_ja' => "慶應義塾大学\n東京大学",
+        ])->assertRedirect(route('admin.regions.index'));
+
+        $this->assertSame(['慶應義塾大学', '東京大学'], array_column($region->fresh()->universities, 'ja'));
+    }
+
     public function test_region_update_replaces_secretaries_and_delete_cascades(): void
     {
         $region = Region::create(['slug' => 'kansai', 'name_uz' => 'UAC Kansai', 'short_name_uz' => 'Kansai']);
