@@ -224,8 +224,6 @@ return [
             'executive_description' => ['en' => 'Advisors guiding the strategy, academic direction, and partnerships of the club.', 'uz' => 'Klubning strategiyasi, ilmiy yönalişi va hamkorliklariga yöl körsatuvçi maslahatçilar.', 'ja' => 'クラブの戦略・学術的方向性・連携を導く顧問陣。'],
             'ambassadors_heading' => ['en' => 'Regional Ambassadors', 'uz' => 'Hududiy ambassadorlar', 'ja' => '地域アンバサダー'],
             'ambassadors_description' => ['en' => 'Ambassadors represent the club in their region and organise local meetings.', 'uz' => 'Ambassadorlar öz hududida klubni ifodalaydi va mahalliy uçraşuvlarni taşkil etadi.', 'ja' => 'アンバサダーは各地域でクラブを代表し、現地の例会を運営します。'],
-            'kansai_vacant_role' => ['en' => 'Kansai Region Ambassador', 'uz' => 'Kansai hududi ambassadori', 'ja' => '関西地域アンバサダー'],
-            'kansai_vacant_note' => ['en' => 'Being appointed', 'uz' => 'Aniqlaştirilmoqda', 'ja' => '選任中'],
             'bio_toggle' => ['en' => 'Read biography', 'uz' => 'Tarjimai holni öqiş', 'ja' => '略歴を読む'],
             'staff_heading' => ['en' => 'Officers', 'uz' => 'Masʼul şaxslar', 'ja' => '担当者'],
             'staff_description' => ['en' => 'Day-to-day roles: records, the website, and relations with partner organizations.', 'uz' => 'Kundalik vazifalar: hujjatlar, sayt va hamkor taşkilotlar bilan aloqalar.', 'ja' => '日々の運営を担う役割：記録、ウェブサイト、関係団体との連絡。'],
